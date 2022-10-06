@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.User;
-import com.imperium.imperium.service.UserService;
+import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class PageController {

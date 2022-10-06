@@ -202,13 +202,32 @@
               excepturi, voluptas, mollitia quo. Ullam.
             </li>
           </ul>
-          <h4>Tout les utilisateurs :</h2>
+          <h4>Tout les utilisateurs :</h4>
           <ul data-th-each="u : ${allUsers}">
             <li data-th-text="${u.toString()}"></li>
           </ul>
+          <h4>Project</h4>
+          <form method="POST" data-th-action="@{/create}">
+            <div class="mb-3">
+              <label for="project" class="form-label">Project name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                placeholder="Project name"
+                id="project"
+              />
+            </div>
+            <!-- <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="canRead" />
+              <label class="form-check-label" for="canRead">Can read</label>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Create</button>
+          </form>
         </div>
       </div>
     </div>
+
     <!-- Bootstrap script -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
