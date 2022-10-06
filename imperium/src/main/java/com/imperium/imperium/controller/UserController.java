@@ -32,7 +32,7 @@ public class UserController {
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
-            setUserId(u.getId());
+            setUserId(service.findByUsername(u.getUsername()).getId());
             return "redirect:/home?username=" + u.getUsername();
         }
 

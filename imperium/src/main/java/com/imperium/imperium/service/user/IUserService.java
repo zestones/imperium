@@ -11,4 +11,7 @@ public interface IUserService {
     User findByUsername(String username);
 
     ArrayList<User> findAll();
+
+    User findById(Long id);
+
 }

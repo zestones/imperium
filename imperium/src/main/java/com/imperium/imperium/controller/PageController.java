@@ -7,13 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.User;
+import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class PageController {
 
     @Autowired
-    UserService service;
+    UserService userService;
+
+    @Autowired
+    ProjectService projectService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
@@ -33,10 +37,24 @@ public class PageController {
         return "authentification/logIn";
     }
 
+    @GetMapping(value = "/create-project")
+    private String createProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
+        model.addAttribute("name", name);
+
+        return "project";
+    }
+
     @GetMapping(value = "/home")
-    private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username) {
+    private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
         model.addAttribute("username", username);
-        model.addAttribute("allUsers", service.findAll());
+        model.addAttribute("allUsers", userService.findAll());
+
+        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUserId()));
+
+        if (!error.equals("no-error"))
+            model.addAttribute("error", "You Already have a project with the same name");
+
         return "home";
     }
 }

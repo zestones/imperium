@@ -21,12 +21,17 @@ public class ProjectService implements IProjectService {
 
     public Boolean canCreateProject(Project p, Long userId) {
         ArrayList<Project> myProjects = pRepo.findProjectByUserId(userId);
-        return myProjects.stream().anyMatch(val -> p.getName().equals(val.getName()));
+        return !myProjects.stream().anyMatch(val -> p.getName().equals(val.getName()));
     }
 
     @Override
     public ArrayList<Project> findProjectByUserId(Long id) {
         return pRepo.findProjectByUserId(id);
+    }
+
+    @Override
+    public ArrayList<Project> findAll() {
+        return (ArrayList<Project>) pRepo.findAll();
     }
 
 }

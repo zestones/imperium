@@ -9,4 +9,7 @@ public interface IProjectService {
     void save(Project p);
 
     ArrayList<Project> findProjectByUserId(Long id);
+
+    ArrayList<Project> findAll();
+
 }

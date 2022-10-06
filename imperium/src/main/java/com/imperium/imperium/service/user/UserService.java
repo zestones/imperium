@@ -36,6 +36,11 @@ public class UserService implements IUserService {
         uRepo.save(u);
     }
 
+    @Override
+    public User findById(Long id) {
+        return uRepo.findUserById(id);
+    }
+
     private String encodePassword(String rawPwd) {
         return encoder.encode(rawPwd);
     }
