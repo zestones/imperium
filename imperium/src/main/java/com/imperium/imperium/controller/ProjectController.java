@@ -7,27 +7,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imperium.imperium.model.Project;
 import com.imperium.imperium.service.project.ProjectService;
-import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class ProjectController {
     @Autowired
     ProjectService service;
-    @Autowired
-    UserService userService;
 
     @PostMapping(value = "/create")
     public String creatProject(Model model, Project p) {
 
-        if (service.canCreateProject(p, UserController.getUserId())) {
+        if (service.canCreateProject(p, UserController.getUser().getId())) {
 
-            p.setUser(userService.findById(UserController.getUserId()));
+            p.setUser(UserController.getUser());
             service.save(p);
 
             return "redirect:/create-project?name=" + p.getName();
         }
 
-        return "redirect:/home?username=" + userService.findById(UserController.getUserId()).getUsername()
+        return "redirect:/home?username=" + UserController.getUser().getUsername()
                 + "&error=name";
     }
 

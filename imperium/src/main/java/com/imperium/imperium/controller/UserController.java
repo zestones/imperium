@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    private static Long userId;
+    private static User user;
 
     @PostMapping(value = "/signIn")
     public String signIn(Model model, User u) {
@@ -23,7 +23,7 @@ public class UserController {
         }
 
         service.save(u);
-        setUserId(u.getId());
+        setUser(u);
 
         return "redirect:/home?username=" + u.getUsername();
     }
@@ -32,7 +32,7 @@ public class UserController {
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
-            setUserId(service.findByUsername(u.getUsername()).getId());
+            setUser(service.findByUsername(u.getUsername()));
             return "redirect:/home?username=" + u.getUsername();
         }
 
@@ -40,12 +40,12 @@ public class UserController {
         return "authentification/logIn";
     }
 
-    public static void setUserId(Long id) {
-        userId = id;
+    public static void setUser(User u) {
+        user = u;
     }
 
-    public static Long getUserId() {
-        return userId;
+    public static User getUser() {
+        return user;
     }
 
 }

@@ -40,6 +40,7 @@ public class PageController {
     @GetMapping(value = "/create-project")
     private String createProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
         model.addAttribute("name", name);
+        model.addAttribute("username", UserController.getUser().getUsername());
 
         return "project";
     }
@@ -47,10 +48,11 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
         model.addAttribute("username", username);
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUserId()));
+        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
