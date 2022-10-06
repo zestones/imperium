@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap sign-in example -->
+    <link
+      href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/authentification.css" />
+
+    <title>Imperium</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Imperium</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/logIn">Connexion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signIn">Inscritpion</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" id="form-container">
+      <form class="form-signin" method="post" data-th-action="@{/logIn}">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div data-th-if="${error != null}">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            data-th-text="${error}"
+          ></div>
+        </div>
+        <p>
+          <label for="username" class="sr-only">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Username"
+            required
+            autofocus
+          />
+        </p>
+        <p>
+          <label for="password" class="sr-only">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+        </p>
+        <input
+          name="_csrf"
+          type="hidden"
+          value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
+        />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Log in
+        </button>
+        <br />
+        <div class="toogle-wrapper">
+          <a class="toogle-form" href="/signIn">Sign - In </a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
