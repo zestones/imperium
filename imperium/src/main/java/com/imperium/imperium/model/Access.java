@@ -33,4 +33,5 @@ public class Access {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_project", referencedColumnName = "id", nullable = false)
     private Project projects;
+
 }

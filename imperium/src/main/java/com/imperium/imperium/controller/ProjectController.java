@@ -15,7 +15,7 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create-project")
     private String creatProject(Model model, Project p) {
 
         if (service.canCreateProject(p, UserController.getUser().getId())) {

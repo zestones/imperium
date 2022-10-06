@@ -13,4 +13,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     ArrayList<Project> findAll();
 
     Project findProjectByUserIdAndName(Long id, String name);
+
+    Project findProjectById(Long id);
 }

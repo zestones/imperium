@@ -15,4 +15,6 @@ public interface IProjectService {
     void delete(Project p);
 
     Project findProjectByUserIdAndName(Long id, String name);
+
+    Project findProjectById(Long id);
 }

@@ -50,4 +50,9 @@ public class ProjectService implements IProjectService {
         return pRepo.findProjectByUserIdAndName(id, name);
     }
 
+    @Override
+    public Project findProjectById(Long id) {
+        return pRepo.findProjectById(id);
+    }
+
 }

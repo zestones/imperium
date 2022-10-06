@@ -54,10 +54,14 @@ public class PageController {
 
     @GetMapping(value = { "/create-project", "/open-project" })
     private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
-        model.addAttribute("name", name);
+        Long userId = UserController.getUser().getId();
+
         model.addAttribute("username", UserController.getUser().getUsername());
 
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("name", name);
+        model.addAttribute("id", projectService.findProjectByUserIdAndName(userId, name).getId());
+
+        model.addAttribute("projects", projectService.findProjectByUserId(userId));
         return "project";
     }
 }
