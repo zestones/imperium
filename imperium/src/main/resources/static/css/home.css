@@ -2,9 +2,11 @@
     width: 50%;
     margin: 0 auto;
 }
+
 .cards {
     display: flex;
 }
+
 #card {
     margin: 10px;
 }

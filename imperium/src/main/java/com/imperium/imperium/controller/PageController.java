@@ -37,24 +37,6 @@ public class PageController {
         return "authentification/logIn";
     }
 
-    @GetMapping(value = "/create-project")
-    private String createProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
-        model.addAttribute("name", name);
-        model.addAttribute("username", UserController.getUser().getUsername());
-
-        return "project";
-    }
-
-    @GetMapping(value = "/open-project")
-    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
-        model.addAttribute("name", name);
-        model.addAttribute("username", UserController.getUser().getUsername());
-
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
-
-        return "project";
-    }
-
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
@@ -68,5 +50,14 @@ public class PageController {
             model.addAttribute("error", "You Already have a project with the same name");
 
         return "home";
+    }
+
+    @GetMapping(value = { "/create-project", "/open-project" })
+    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
+        model.addAttribute("name", name);
+        model.addAttribute("username", UserController.getUser().getUsername());
+
+        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        return "project";
     }
 }
