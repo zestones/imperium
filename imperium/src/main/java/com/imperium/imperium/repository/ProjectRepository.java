@@ -10,7 +10,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     ArrayList<Project> findProjectByUserId(Long id);
 
-    // Project findProjectById(Long id);
-
     ArrayList<Project> findAll();
+
+    Project findProjectByUserIdAndName(Long id, String name);
 }

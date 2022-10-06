@@ -45,6 +45,16 @@ public class PageController {
         return "project";
     }
 
+    @GetMapping(value = "/open-project")
+    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
+        model.addAttribute("name", name);
+        model.addAttribute("username", UserController.getUser().getUsername());
+
+        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+
+        return "project";
+    }
+
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {

@@ -12,4 +12,7 @@ public interface IProjectService {
 
     ArrayList<Project> findAll();
 
+    void delete(Project p);
+
+    Project findProjectByUserIdAndName(Long id, String name);
 }

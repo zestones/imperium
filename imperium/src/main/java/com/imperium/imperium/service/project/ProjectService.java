@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.imperium.imperium.model.Project;
+import com.imperium.imperium.model.User;
 import com.imperium.imperium.repository.ProjectRepository;
 
 @Service
@@ -24,6 +25,11 @@ public class ProjectService implements IProjectService {
         return !myProjects.stream().anyMatch(val -> p.getName().equals(val.getName()));
     }
 
+    public Boolean canDeleteProject(User u, String name) {
+        Project p = findProjectByUserIdAndName(u.getId(), name);
+        return (p != null);
+    }
+
     @Override
     public ArrayList<Project> findProjectByUserId(Long id) {
         return pRepo.findProjectByUserId(id);
@@ -32,6 +38,16 @@ public class ProjectService implements IProjectService {
     @Override
     public ArrayList<Project> findAll() {
         return (ArrayList<Project>) pRepo.findAll();
+    }
+
+    @Override
+    public void delete(Project p) {
+        pRepo.delete(p);
+    }
+
+    @Override
+    public Project findProjectByUserIdAndName(Long id, String name) {
+        return pRepo.findProjectByUserIdAndName(id, name);
     }
 
 }

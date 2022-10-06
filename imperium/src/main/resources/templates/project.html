@@ -63,15 +63,17 @@
                   class="collapse show nav flex-column ms-1"
                   id="submenu1"
                   data-bs-parent="#menu"
+                  data-th-each="p : ${projects}"
                 >
                   <li class="w-100">
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 1
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 2
+                    <a
+                      data-th-href="@{/open-project/{name} (name=${p.name})}"
+                      class="nav-link px-0"
+                    >
+                      <span
+                        class="d-none d-sm-inline"
+                        data-th-text="${p.name}"
+                      ></span>
                     </a>
                   </li>
                 </ul>

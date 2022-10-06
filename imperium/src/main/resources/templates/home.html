@@ -60,15 +60,17 @@
                   class="collapse show nav flex-column ms-1"
                   id="submenu1"
                   data-bs-parent="#menu"
+                  data-th-each="p : ${projects}"
                 >
                   <li class="w-100">
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 1
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 2
+                    <a
+                      data-th-href="@{/open-project/{name} (name=${p.name})}"
+                      class="nav-link px-0"
+                    >
+                      <span
+                        class="d-none d-sm-inline"
+                        data-th-text="${p.name}"
+                      ></span>
                     </a>
                   </li>
                 </ul>
@@ -200,36 +202,39 @@
               data-th-text="${error}"
             ></div>
           </div>
-          <h3>Left Sidebar with Submenus</h3>
-          <p class="lead">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
-            dolor sequi tempora reprehenderit dolorum amet harum consequatur est
-            possimus laboriosam sunt iure eius natus doloribus iusto consectetur
-            rem, commodi aliquid quaerat! Fuga sed ipsam consectetur sunt, sit
-            odio? Vero vel doloribus cum tenetur rem molestias? Vero distinctio
-            facilis libero deleniti itaque officia explicabo labore dolore.
-          </p>
-          <ul class="list-unstyled">
-            <li>
-              <h5>Responsive</h5>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Consectetur in molestiae, voluptatibus debitis autem perspiciatis
-              eos quisquam itaque, a libero magnam similique, consequatur
-              dolorum ullam! Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Inventore consequatur, ut facilis dolore in molestiae omnis
-              praesentium libero pariatur et laudantium enim quod quidem eveniet
-              excepturi, voluptas, mollitia quo. Ullam.
-            </li>
-          </ul>
+          <h3>My Projects</h3>
+          <div class="container cards">
+            <div
+              class="card"
+              id="card"
+              style="width: 15rem"
+              data-th-each="p : ${projects} "
+            >
+              <img
+                src="/img/default.png"
+                class="card-img-top"
+                alt="image project"
+              />
+              <div class="card-body">
+                <h5 class="card-title" data-th-text="${p.name}"></h5>
+                <a
+                  data-th-href="@{/delete-project/{name} (name=${p.name})}"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
+                <a
+                  data-th-href="@{/open-project/{name} (name=${p.name})}"
+                  class="btn btn-primary"
+                  >Open</a
+                >
+              </div>
+            </div>
+          </div>
 
           <!-- displays users -->
           <h4>Tout les utilisateurs :</h4>
           <ul data-th-each="u : ${allUsers}">
             <li data-th-text="${u.toString()}"></li>
-          </ul>
-          <h4>Project</h4>
-          <ul data-th-each="p : ${projects}">
-            <li data-th-text="${p}"></li>
           </ul>
 
           <!-- new project Modal -->
