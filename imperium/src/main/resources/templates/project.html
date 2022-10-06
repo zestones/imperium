@@ -42,7 +42,10 @@
               id="menu"
             >
               <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a
+                  data-th-href="@{/home?username=} + ${username}"
+                  class="nav-link align-middle px-0"
+                >
                   <i class="fs-4 bi-house"></i>
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
@@ -201,26 +204,7 @@
             ></div>
           </div>
           <h3>[[ ${name} ]]</h3>
-          <p class="lead">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
-            dolor sequi tempora reprehenderit dolorum amet harum consequatur est
-            possimus laboriosam sunt iure eius natus doloribus iusto consectetur
-            rem, commodi aliquid quaerat! Fuga sed ipsam consectetur sunt, sit
-            odio? Vero vel doloribus cum tenetur rem molestias? Vero distinctio
-            facilis libero deleniti itaque officia explicabo labore dolore.
-          </p>
-          <ul class="list-unstyled">
-            <li>
-              <h5>Responsive</h5>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Consectetur in molestiae, voluptatibus debitis autem perspiciatis
-              eos quisquam itaque, a libero magnam similique, consequatur
-              dolorum ullam! Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Inventore consequatur, ut facilis dolore in molestiae omnis
-              praesentium libero pariatur et laudantium enim quod quidem eveniet
-              excepturi, voluptas, mollitia quo. Ullam.
-            </li>
-          </ul>
+          <p class="lead">tableau projet</p>
 
           <!-- new project Modal -->
           <div
