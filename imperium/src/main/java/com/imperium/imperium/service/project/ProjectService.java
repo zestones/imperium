@@ -30,6 +30,10 @@ public class ProjectService implements IProjectService {
         return (p != null);
     }
 
+    public User getProjectOwner(Long id) {
+        return pRepo.findProjectById(id).getUser();
+    }
+
     @Override
     public ArrayList<Project> findProjectByUserId(Long id) {
         return pRepo.findProjectByUserId(id);
@@ -50,4 +54,17 @@ public class ProjectService implements IProjectService {
         return pRepo.findProjectByUserIdAndName(id, name);
     }
 
+    @Override
+    public Project findById(Long id) {
+        return pRepo.findProjectById(id);
+    }
+
+    public ArrayList<Project> getArrayProjectByArrayidProject(ArrayList<Long> arrId) {
+        ArrayList<Project> arrProj = new ArrayList<>();
+
+        for (Long id : arrId)
+            arrProj.add(findById(id));
+
+        return arrProj;
+    }
 }

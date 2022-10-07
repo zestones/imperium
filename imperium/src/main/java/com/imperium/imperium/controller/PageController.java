@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.imperium.imperium.model.User;
+import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
@@ -18,6 +18,9 @@ public class PageController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    AccessService accessService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
@@ -31,9 +34,6 @@ public class PageController {
 
     @GetMapping(value = "/logIn")
     private String logInPage(Model model) {
-
-        model.addAttribute("userForm", new User());
-
         return "authentification/logIn";
     }
 
@@ -44,7 +44,10 @@ public class PageController {
         model.addAttribute("username", username);
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("sharedProjects",
+                projectService.getArrayProjectByArrayidProject(
+                        accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -53,11 +56,28 @@ public class PageController {
     }
 
     @GetMapping(value = { "/create-project", "/open-project" })
-    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
-        model.addAttribute("name", name);
+    private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
+        Long userId = UserController.getUser().getId();
+        final String name = projectService.findById((Long) id).getName();
+
+        model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
+
         model.addAttribute("username", UserController.getUser().getUsername());
 
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("name", name);
+        model.addAttribute("id", id);
+
+        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+
+        model.addAttribute("access",
+                userService.getArrayUserByArrayidUser(
+                        accessService.findIdContributorByIdProject(id)));
+
+        if (!error.equals("no-error"))
+            model.addAttribute("error", "Error : Unable share the project !");
+
         return "project";
     }
 }

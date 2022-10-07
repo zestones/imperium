@@ -1,0 +1,12 @@
+#modal-body-share-project {
+    display: flex;
+}
+
+#form-option {
+    width: 25%; 
+   margin-left: 10px;
+}
+
+#input-username {
+    width: 75%;
+}

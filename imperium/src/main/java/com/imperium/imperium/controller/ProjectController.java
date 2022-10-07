@@ -15,7 +15,7 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create-project")
     private String creatProject(Model model, Project p) {
 
         if (service.canCreateProject(p, UserController.getUser().getId())) {
@@ -23,22 +23,23 @@ public class ProjectController {
             p.setUser(UserController.getUser());
             service.save(p);
 
-            return "redirect:/create-project?name=" + p.getName();
+            return "redirect:/create-project?id=" + p.getId();
         }
 
         return "redirect:/home?username=" + UserController.getUser().getUsername()
                 + "&error=name";
     }
 
-    @GetMapping(value = "/open-project/{name}")
-    private String openProject(@PathVariable String name) {
-        return "redirect:/open-project?name=" + name;
+    @GetMapping(value = "/open-project/{id}")
+    private String openProject(@PathVariable Long id) {
+
+        return "redirect:/open-project?id=" + id;
     }
 
     @GetMapping(value = "/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
-        // TODO : check if user can delete project (only owner can delete project)
+        // TODO : only owner can delete project && Check if has access to projects
         if (service.canDeleteProject(UserController.getUser(), name)) {
             service.delete(service.findProjectByUserIdAndName(UserController.getUser().getId(), name));
         }

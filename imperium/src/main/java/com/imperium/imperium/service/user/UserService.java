@@ -30,6 +30,15 @@ public class UserService implements IUserService {
         return (uRepo.findByUsername(u.getUsername()) != null);
     }
 
+    public ArrayList<User> getArrayUserByArrayidUser(ArrayList<Long> arrId) {
+        ArrayList<User> arrUser = new ArrayList<>();
+
+        for (Long id : arrId)
+            arrUser.add(findById(id));
+
+        return arrUser;
+    }
+
     @Override
     public void save(User u) {
         u.setPassword(encodePassword(u.getPassword()));
