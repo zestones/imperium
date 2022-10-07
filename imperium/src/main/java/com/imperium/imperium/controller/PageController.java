@@ -73,10 +73,6 @@ public class PageController {
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
 
-        // TODO : display object users - create in service method to get
-
-        model.addAttribute("access", accessService.findIdContributorByIdProject(projectId));
-
         model.addAttribute("access",
                 userService.getArrayUserByArrayidUser(
                         accessService.findIdContributorByIdProject(projectId)));
@@ -100,10 +96,6 @@ public class PageController {
         model.addAttribute("id", id);
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-
-        // TODO : display object users - create in service method to get
-
-        model.addAttribute("access", accessService.findIdContributorByIdProject(id));
 
         model.addAttribute("access",
                 userService.getArrayUserByArrayidUser(

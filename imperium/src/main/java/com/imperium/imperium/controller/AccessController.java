@@ -21,8 +21,8 @@ public class AccessController {
     @Autowired
     ProjectService projectService;
 
-    @PostMapping(value = "/share-project/{id}/{name}")
-    private String shareProject(@PathVariable Long id, @PathVariable String name, Access a, String username) {
+    @PostMapping(value = "/share-project/{id}")
+    private String shareProject(@PathVariable Long id, Access a, String username) {
 
         if (service.canShareProject(username, id)) {
 
@@ -31,11 +31,11 @@ public class AccessController {
             a.setAccess(a.getCanRead());
 
             service.save(a);
-            return "redirect:/open-project?name=" + name;
+            return "redirect:/open-project?id=" + id;
         }
 
         // TODO : check if user exist + add user to project + give access
-        return "redirect:/open-project?name=" + name + "&error=username";
+        return "redirect:/open-project?id=" + id + "&error=username";
 
     }
 
