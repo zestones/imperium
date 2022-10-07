@@ -35,9 +35,6 @@ public class PageController {
 
     @GetMapping(value = "/logIn")
     private String logInPage(Model model) {
-
-        model.addAttribute("userForm", new User());
-
         return "authentification/logIn";
     }
 
@@ -59,31 +56,7 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = "/create-project")
-    private String createProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
-
-        Long userId = UserController.getUser().getId();
-        Long projectId = projectService.findProjectByUserIdAndName(userId, name).getId();
-
-        model.addAttribute("username", UserController.getUser().getUsername());
-
-        model.addAttribute("name", name);
-        model.addAttribute("id", projectId);
-
-        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-
-        model.addAttribute("access",
-                userService.getArrayUserByArrayidUser(
-                        accessService.findIdContributorByIdProject(projectId)));
-
-        if (!error.equals("no-error"))
-            model.addAttribute("error", "Username not found !");
-
-        return "project";
-    }
-
-    @GetMapping(value = "/open-project")
+    @GetMapping(value = { "/create-project", "/open-project" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 

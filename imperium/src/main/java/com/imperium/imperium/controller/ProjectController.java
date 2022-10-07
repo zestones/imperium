@@ -23,7 +23,7 @@ public class ProjectController {
             p.setUser(UserController.getUser());
             service.save(p);
 
-            return "redirect:/create-project?name=" + p.getName();
+            return "redirect:/create-project?id=" + p.getId();
         }
 
         return "redirect:/home?username=" + UserController.getUser().getUsername()
