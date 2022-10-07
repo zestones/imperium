@@ -24,7 +24,7 @@ public class AccessController {
     @PostMapping(value = "/share-project/{id}")
     private String shareProject(@PathVariable Long id, Access a, String username) {
 
-        if (service.canShareProject(username, id)) {
+        if (service.canShareProject(userService.findByUsername(username), projectService.getProjectOwner(id), id)) {
 
             a.setUser(userService.findByUsername(username));
             a.setProjects(projectService.findById(id));

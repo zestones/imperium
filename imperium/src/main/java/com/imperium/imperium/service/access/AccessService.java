@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.imperium.imperium.model.Access;
+import com.imperium.imperium.model.User;
 import com.imperium.imperium.repository.AccessRepository;
+import com.imperium.imperium.repository.ProjectRepository;
 import com.imperium.imperium.repository.UserRepository;
 
 @Service
@@ -17,8 +19,12 @@ public class AccessService implements IAccessService {
     @Autowired
     UserRepository uRepo;
 
-    public Boolean canShareProject(String username, Long id) {
-        return (uRepo.findByUsername(username) != null);
+    @Autowired
+    ProjectRepository pRepo;
+
+    public Boolean canShareProject(User u, User owner, Long id) {
+        return (u != null && !u.equals(owner)
+                && !aRepo.findIdContributorByIdProject(id).stream().anyMatch(i -> i.equals(u.getId())));
     }
 
     @Override

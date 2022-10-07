@@ -30,6 +30,10 @@ public class ProjectService implements IProjectService {
         return (p != null);
     }
 
+    public User getProjectOwner(Long id) {
+        return pRepo.findProjectById(id).getUser();
+    }
+
     @Override
     public ArrayList<Project> findProjectByUserId(Long id) {
         return pRepo.findProjectByUserId(id);

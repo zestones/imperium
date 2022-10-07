@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@Deprecated
 @Configuration
 public class DatabaseConsoleSecurity extends WebSecurityConfigurerAdapter {
     @Override

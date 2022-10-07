@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
@@ -75,7 +74,7 @@ public class PageController {
                         accessService.findIdContributorByIdProject(id)));
 
         if (!error.equals("no-error"))
-            model.addAttribute("error", "Username not found !");
+            model.addAttribute("error", "Error : Unable share the project !");
 
         return "project";
     }
