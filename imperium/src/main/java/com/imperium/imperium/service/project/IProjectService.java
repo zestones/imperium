@@ -8,11 +8,11 @@ public interface IProjectService {
 
     void save(Project p);
 
+    void delete(Project p);
+
     ArrayList<Project> findProjectByUserId(Long id);
 
     ArrayList<Project> findAll();
-
-    void delete(Project p);
 
     Project findProjectByUserIdAndName(Long id, String name);
 

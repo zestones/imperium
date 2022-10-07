@@ -8,19 +8,11 @@ import org.springframework.stereotype.Service;
 import com.imperium.imperium.model.Access;
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.repository.AccessRepository;
-import com.imperium.imperium.repository.ProjectRepository;
-import com.imperium.imperium.repository.UserRepository;
 
 @Service
 public class AccessService implements IAccessService {
     @Autowired
     AccessRepository aRepo;
-
-    @Autowired
-    UserRepository uRepo;
-
-    @Autowired
-    ProjectRepository pRepo;
 
     public Boolean canShareProject(User u, User owner, Long id) {
         return (u != null && !u.equals(owner)

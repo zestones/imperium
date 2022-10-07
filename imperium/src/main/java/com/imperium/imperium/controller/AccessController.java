@@ -34,9 +34,6 @@ public class AccessController {
             return "redirect:/open-project?id=" + id;
         }
 
-        // TODO : check if user exist + add user to project + give access
         return "redirect:/open-project?id=" + id + "&error=username";
-
     }
-
 }

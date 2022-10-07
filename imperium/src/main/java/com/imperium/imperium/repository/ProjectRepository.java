@@ -8,11 +8,11 @@ import com.imperium.imperium.model.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-    ArrayList<Project> findProjectByUserId(Long id);
-
     ArrayList<Project> findAll();
 
-    Project findProjectByUserIdAndName(Long id, String name);
-
     Project findProjectById(Long id);
+
+    ArrayList<Project> findProjectByUserId(Long id);
+
+    Project findProjectByUserIdAndName(Long id, String name);
 }
