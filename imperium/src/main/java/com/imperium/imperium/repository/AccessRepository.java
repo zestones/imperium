@@ -1,9 +1,18 @@
 package com.imperium.imperium.repository;
 
+import java.util.ArrayList;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.imperium.imperium.model.Access;
 
 public interface AccessRepository extends CrudRepository<Access, Long> {
-
+    @Query(value = "SELECT u.id FROM USERS u, ACCESS a, PROJECTS p WHERE " +
+            "a.id_project = :projectId " +
+            "AND u.id = a.id_user " +
+            "AND a.id_project = p.id " +
+            "AND a.CAN_READ = true", nativeQuery = true)
+    ArrayList<Long> findIdContributorByIdProject(@Param("projectId") Long projectId);
 }

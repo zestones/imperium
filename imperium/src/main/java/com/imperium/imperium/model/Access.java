@@ -34,4 +34,8 @@ public class Access {
     @JoinColumn(name = "id_project", referencedColumnName = "id", nullable = false)
     private Project projects;
 
+    public void setAccess(Boolean read) {
+        setCanEdit(!read);
+        setCanRead(true);
+    }
 }

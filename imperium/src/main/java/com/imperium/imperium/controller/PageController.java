@@ -1,5 +1,7 @@
 package com.imperium.imperium.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.User;
+import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
@@ -18,6 +21,9 @@ public class PageController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    AccessService accessService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
@@ -53,15 +59,27 @@ public class PageController {
     }
 
     @GetMapping(value = { "/create-project", "/open-project" })
-    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name) {
+    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
         Long userId = UserController.getUser().getId();
+        Long projectId = projectService.findProjectByUserIdAndName(userId, name).getId();
 
         model.addAttribute("username", UserController.getUser().getUsername());
 
         model.addAttribute("name", name);
-        model.addAttribute("id", projectService.findProjectByUserIdAndName(userId, name).getId());
+        model.addAttribute("id", projectId);
 
         model.addAttribute("projects", projectService.findProjectByUserId(userId));
+
+        // TODO : display object users - create in service method to get
+        ArrayList<Long> list = accessService.findIdContributorByIdProject(projectId);
+
+        model.addAttribute("access", list);
+
+        if (!error.equals("no-error"))
+            model.addAttribute("error", "Username not found !");
+
         return "project";
     }
 }

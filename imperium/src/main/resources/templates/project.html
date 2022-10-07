@@ -208,6 +208,10 @@
           <div class="container">
             <h3>[[ ${name} ]]</h3>
             <p class="lead">tableau projet</p>
+            <h3>User Access</h3>
+            <ul data-th-each="u : ${access}">
+              <li data-th-text="${u}"></li>
+            </ul>
 
             <!-- Button trigger modal -->
             <button
@@ -244,10 +248,10 @@
                     ></button>
                   </div>
                   <form
-                    data-th-action="@{/share-project/{id} (id=${id})}"
+                    data-th-action="@{/share-project/{id}/{name} (id=${id}, name=${name})}"
                     method="POST"
                   >
-                    <div class="modal-body">
+                    <div class="modal-body" id="modal-body-share-project">
                       <input
                         type="text"
                         class="form-control"
@@ -268,7 +272,7 @@
                       <button
                         type="button"
                         class="btn btn-secondary"
-                        data-dismiss="modal"
+                        data-bs-dismiss="modal"
                       >
                         Close
                       </button>
