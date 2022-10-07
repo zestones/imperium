@@ -51,8 +51,16 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public Project findProjectById(Long id) {
+    public Project findById(Long id) {
         return pRepo.findProjectById(id);
     }
 
+    public ArrayList<Project> getArrayProjectByArrayidProject(ArrayList<Long> arrId) {
+        ArrayList<Project> arrProj = new ArrayList<>();
+
+        for (Long id : arrId)
+            arrProj.add(findById(id));
+
+        return arrProj;
+    }
 }

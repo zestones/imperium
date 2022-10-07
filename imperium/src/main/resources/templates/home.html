@@ -60,11 +60,10 @@
                   class="collapse show nav flex-column ms-1"
                   id="submenu1"
                   data-bs-parent="#menu"
-                  data-th-each="p : ${projects}"
                 >
-                  <li class="w-100">
+                  <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/open-project/{name} (name=${p.name})}"
+                      data-th-href="@{/open-project/{id} (id=${p.id})}"
                       class="nav-link px-0"
                     >
                       <span
@@ -103,6 +102,11 @@
                   <li>
                     <a href="#" class="nav-link px-0">
                       <span class="d-none d-sm-inline">Item</span> 2</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link px-0">
+                      <span class="d-none d-sm-inline">Item</span> 3</a
                     >
                   </li>
                 </ul>
@@ -208,7 +212,7 @@
               class="card"
               id="card"
               style="width: 15rem"
-              data-th-each="p : ${projects} "
+              data-th-each="p : ${myProjects} "
             >
               <img
                 src="/img/default.png"
@@ -223,14 +227,36 @@
                   >Delete</a
                 >
                 <a
-                  data-th-href="@{/open-project/{name} (name=${p.name})}"
+                  data-th-href="@{/open-project/{id} (id=${p.id})}"
                   class="btn btn-primary"
                   >Open</a
                 >
               </div>
             </div>
           </div>
-
+          <h3>Project shared with me</h3>
+          <div class="container cards">
+            <div
+              class="card"
+              id="card"
+              style="width: 15rem"
+              data-th-each="p : ${sharedProjects} "
+            >
+              <img
+                src="/img/default.png"
+                class="card-img-top"
+                alt="image project"
+              />
+              <div class="card-body">
+                <h5 class="card-title" data-th-text="${p.name}"></h5>
+                <a
+                  data-th-href="@{/open-project/{id} (id=${p.id})}"
+                  class="btn btn-primary"
+                  >Open</a
+                >
+              </div>
+            </div>
+          </div>
           <!-- displays users -->
           <h4>Tout les utilisateurs :</h4>
           <ul data-th-each="u : ${allUsers}">

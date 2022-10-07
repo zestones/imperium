@@ -30,4 +30,10 @@ public class AccessService implements IAccessService {
     public ArrayList<Long> findIdContributorByIdProject(Long id) {
         return aRepo.findIdContributorByIdProject(id);
     }
+
+    @Override
+    public ArrayList<Long> findIdProjectSharedWithUserId(Long userId) {
+        return aRepo.findIdProjectSharedWithUserId(userId);
+    }
+
 }

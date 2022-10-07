@@ -10,4 +10,5 @@ public interface IAccessService {
 
     ArrayList<Long> findIdContributorByIdProject(Long id);
 
+    ArrayList<Long> findIdProjectSharedWithUserId(Long userId);
 }

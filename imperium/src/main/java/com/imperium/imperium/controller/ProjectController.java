@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.imperium.imperium.model.Project;
 import com.imperium.imperium.service.project.ProjectService;
@@ -30,15 +31,16 @@ public class ProjectController {
                 + "&error=name";
     }
 
-    @GetMapping(value = "/open-project/{name}")
-    private String openProject(@PathVariable String name) {
-        return "redirect:/open-project?name=" + name;
+    @GetMapping(value = "/open-project/{id}")
+    private String openProject(@PathVariable Long id) {
+
+        return "redirect:/open-project?id=" + id;
     }
 
     @GetMapping(value = "/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
-        // TODO : check if user can delete project (only owner can delete project)
+        // TODO : only owner can delete project && Check if has access to projects
         if (service.canDeleteProject(UserController.getUser(), name)) {
             service.delete(service.findProjectByUserIdAndName(UserController.getUser().getId(), name));
         }

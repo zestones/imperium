@@ -27,7 +27,7 @@ public class AccessController {
         if (service.canShareProject(username, id)) {
 
             a.setUser(userService.findByUsername(username));
-            a.setProjects(projectService.findProjectById(id));
+            a.setProjects(projectService.findById(id));
             a.setAccess(a.getCanRead());
 
             service.save(a);

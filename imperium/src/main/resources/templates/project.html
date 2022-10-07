@@ -63,11 +63,11 @@
                   class="collapse show nav flex-column ms-1"
                   id="submenu1"
                   data-bs-parent="#menu"
-                  data-th-each="p : ${projects}"
+                  data-th-each="p : ${myProjects}"
                 >
                   <li class="w-100">
                     <a
-                      data-th-href="@{/open-project/{name} (name=${p.name})}"
+                      data-th-href="@{/open-project/{id} (id=${p.id})}"
                       class="nav-link px-0"
                     >
                       <span

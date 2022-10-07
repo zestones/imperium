@@ -16,5 +16,5 @@ public interface IProjectService {
 
     Project findProjectByUserIdAndName(Long id, String name);
 
-    Project findProjectById(Long id);
+    Project findById(Long id);
 }

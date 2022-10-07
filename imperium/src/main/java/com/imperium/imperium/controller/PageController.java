@@ -1,7 +1,5 @@
 package com.imperium.imperium.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +48,10 @@ public class PageController {
         model.addAttribute("username", username);
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("projects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("sharedProjects",
+                projectService.getArrayProjectByArrayidProject(
+                        accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -58,8 +59,8 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/create-project", "/open-project" })
-    private String openProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name,
+    @GetMapping(value = "/create-project")
+    private String createProject(Model model, @RequestParam(value = "name", defaultValue = "error") String name,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getUser().getId();
@@ -70,12 +71,43 @@ public class PageController {
         model.addAttribute("name", name);
         model.addAttribute("id", projectId);
 
-        model.addAttribute("projects", projectService.findProjectByUserId(userId));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
 
         // TODO : display object users - create in service method to get
-        ArrayList<Long> list = accessService.findIdContributorByIdProject(projectId);
 
-        model.addAttribute("access", list);
+        model.addAttribute("access", accessService.findIdContributorByIdProject(projectId));
+
+        model.addAttribute("access",
+                userService.getArrayUserByArrayidUser(
+                        accessService.findIdContributorByIdProject(projectId)));
+
+        if (!error.equals("no-error"))
+            model.addAttribute("error", "Username not found !");
+
+        return "project";
+    }
+
+    @GetMapping(value = "/open-project")
+    private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
+        Long userId = UserController.getUser().getId();
+        final String name = projectService.findById((Long) id).getName();
+
+        model.addAttribute("username", UserController.getUser().getUsername());
+
+        model.addAttribute("name", name);
+        model.addAttribute("id", id);
+
+        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+
+        // TODO : display object users - create in service method to get
+
+        model.addAttribute("access", accessService.findIdContributorByIdProject(id));
+
+        model.addAttribute("access",
+                userService.getArrayUserByArrayidUser(
+                        accessService.findIdContributorByIdProject(id)));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "Username not found !");
