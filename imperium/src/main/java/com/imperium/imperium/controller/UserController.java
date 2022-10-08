@@ -25,18 +25,17 @@ public class UserController {
         service.save(u);
         setUser(u);
 
-        return "redirect:/home?username=" + u.getUsername();
+        return "redirect:/home";
     }
 
-    @PostMapping(value = "/logIn")
+    @PostMapping(value = "/process-logIn")
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
             setUser(service.findByUsername(u.getUsername()));
-            return "redirect:/home?username=" + u.getUsername();
+            return "redirect:/home";
         }
 
-        model.addAttribute("error", "Username and password invalid.");
         return "authentification/logIn";
     }
 

@@ -33,15 +33,17 @@ public class PageController {
     }
 
     @GetMapping(value = "/logIn")
-    private String logInPage(Model model) {
+    private String logInPage(Model model, @RequestParam(value = "error", defaultValue = "false") Boolean error) {
+        if (error)
+            model.addAttribute("error", "Username and password invalid.");
+
         return "authentification/logIn";
     }
 
     @GetMapping(value = "/home")
-    private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+    private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        model.addAttribute("username", username);
+        model.addAttribute("username", UserController.getUser().getUsername());
         model.addAttribute("allUsers", userService.findAll());
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));

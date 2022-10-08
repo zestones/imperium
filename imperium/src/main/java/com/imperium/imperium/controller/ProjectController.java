@@ -26,8 +26,7 @@ public class ProjectController {
             return "redirect:/create-project?id=" + p.getId();
         }
 
-        return "redirect:/home?username=" + UserController.getUser().getUsername()
-                + "&error=name";
+        return "redirect:/home?error=name";
     }
 
     @GetMapping(value = "/open-project/{id}")
@@ -39,11 +38,10 @@ public class ProjectController {
     @GetMapping(value = "/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
-        // TODO : only owner can delete project && Check if has access to projects
         if (service.canDeleteProject(UserController.getUser(), name)) {
             service.delete(service.findProjectByUserIdAndName(UserController.getUser().getId(), name));
         }
 
-        return "redirect:/home?username=" + UserController.getUser().getUsername();
+        return "redirect:/home";
     }
 }
