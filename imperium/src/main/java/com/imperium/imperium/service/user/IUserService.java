@@ -14,4 +14,5 @@ public interface IUserService {
 
     User findById(Long id);
 
+    void autologin(String username, String password);
 }

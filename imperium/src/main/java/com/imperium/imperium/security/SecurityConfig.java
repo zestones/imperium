@@ -2,7 +2,9 @@ package com.imperium.imperium.security;
 
 import javax.inject.Inject;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/home", "/home/**").authenticated()
         .and()
-        // TODO : After signIn automatically connect
         .formLogin()
         .loginPage("/logIn")
         .loginProcessingUrl("/process-logIn")
@@ -44,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.headers().frameOptions().sameOrigin();
 
     http.authorizeRequests().anyRequest().denyAll();
+  }
+
+  @Bean
+  public AuthenticationManager authManager() throws Exception {
+    return this.authenticationManager();
   }
 
   @Override

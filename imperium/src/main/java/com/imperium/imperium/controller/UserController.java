@@ -17,6 +17,8 @@ public class UserController {
 
     @PostMapping(value = "/signIn")
     public String signIn(Model model, User u) {
+        String pwd = u.getPassword();
+
         if (service.isUserRegistered(u)) {
             model.addAttribute("error", "Username already used.");
             return "authentification/signIn";
@@ -24,6 +26,8 @@ public class UserController {
 
         service.save(u);
         setUser(u);
+
+        service.autologin(u.getUsername(), pwd);
 
         return "redirect:/home";
     }
