@@ -28,7 +28,13 @@ public class PageController {
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {
         userService.autologout(request, response);
+
         return "index";
+    }
+
+    @GetMapping(value = "/home/logout")
+    private String logoutPage() {
+        return "redirect:/";
     }
 
     @GetMapping(value = "/signIn")
@@ -42,13 +48,6 @@ public class PageController {
             model.addAttribute("error", "Username and password invalid.");
 
         return "authentification/logIn";
-    }
-
-    @GetMapping(value = "/home/logout")
-    private String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        userService.autologout(request, response);
-
-        return "redirect:/index";
     }
 
     @GetMapping(value = "/home")

@@ -98,7 +98,6 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-
     public void autologout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
