@@ -4,9 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +26,8 @@ public class PageController {
     AccessService accessService;
 
     @GetMapping(value = { "/", "/index" })
-    public String indexPage() {
+    public String indexPage(HttpServletRequest request, HttpServletResponse response) {
+        userService.autologout(request, response);
         return "index";
     }
 
@@ -48,10 +46,7 @@ public class PageController {
 
     @GetMapping(value = "/home/logout")
     private String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null)
-            new SecurityContextLogoutHandler().logout(request, response, auth);
+        userService.autologout(request, response);
 
         return "redirect:/index";
     }

@@ -2,6 +2,9 @@ package com.imperium.imperium.service.user;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -14,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
 import com.imperium.imperium.model.User;
@@ -91,6 +95,15 @@ public class UserService implements IUserService, UserDetailsService {
             SecurityContextHolder.getContext().setAuthentication(auth);
             logger.debug(String.format("Auto login %s successfully!", username));
         }
+    }
+
+    @Override
+
+    public void autologout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null)
+            new SecurityContextLogoutHandler().logout(request, response, auth);
     }
 
     @Override
