@@ -10,6 +10,7 @@ import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class UserController {
+
     @Autowired
     private UserService service;
 
