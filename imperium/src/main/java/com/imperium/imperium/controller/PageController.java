@@ -1,6 +1,12 @@
 package com.imperium.imperium.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,15 +39,27 @@ public class PageController {
     }
 
     @GetMapping(value = "/logIn")
-    private String logInPage(Model model) {
+    private String logInPage(Model model, @RequestParam(value = "error", defaultValue = "false") Boolean error) {
+        if (error)
+            model.addAttribute("error", "Username and password invalid.");
+
         return "authentification/logIn";
     }
 
-    @GetMapping(value = "/home")
-    private String homePage(Model model, @RequestParam(value = "username", defaultValue = "error") String username,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+    @GetMapping(value = "/home/logout")
+    private String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        model.addAttribute("username", username);
+        if (auth != null)
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+
+        return "redirect:/index";
+    }
+
+    @GetMapping(value = "/home")
+    private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
+        model.addAttribute("username", UserController.getUser().getUsername());
         model.addAttribute("allUsers", userService.findAll());
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
@@ -55,7 +73,7 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/create-project", "/open-project" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 

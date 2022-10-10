@@ -10,6 +10,7 @@ import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class UserController {
+
     @Autowired
     private UserService service;
 
@@ -17,6 +18,8 @@ public class UserController {
 
     @PostMapping(value = "/signIn")
     public String signIn(Model model, User u) {
+        String pwd = u.getPassword();
+
         if (service.isUserRegistered(u)) {
             model.addAttribute("error", "Username already used.");
             return "authentification/signIn";
@@ -25,18 +28,19 @@ public class UserController {
         service.save(u);
         setUser(u);
 
-        return "redirect:/home?username=" + u.getUsername();
+        service.autologin(u.getUsername(), pwd);
+
+        return "redirect:/home";
     }
 
-    @PostMapping(value = "/logIn")
+    @PostMapping(value = "/process-logIn")
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
             setUser(service.findByUsername(u.getUsername()));
-            return "redirect:/home?username=" + u.getUsername();
+            return "redirect:/home";
         }
 
-        model.addAttribute("error", "Username and password invalid.");
         return "authentification/logIn";
     }
 

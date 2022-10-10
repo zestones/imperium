@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -66,7 +71,7 @@
                 >
                   <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                       class="nav-link px-0"
                     >
                       <span
@@ -189,7 +194,9 @@
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" data-th-href="@{/index}">Sign out</a>
+                  <a class="dropdown-item" data-th-href="@{/home/logout}"
+                    >Sign out</a
+                  >
                 </li>
               </ul>
             </div>
@@ -247,7 +254,7 @@
                     ></button>
                   </div>
                   <form
-                    data-th-action="@{/share-project/{id}/ (id=${id})}"
+                    data-th-action="@{/home/share-project/{id}/ (id=${id})}"
                     method="POST"
                   >
                     <div class="modal-body" id="modal-body-share-project">
@@ -309,7 +316,7 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" data-th-action="@{/create-project}">
+                  <form method="POST" data-th-action="@{/home/create-project}">
                     <div class="mb-3">
                       <label for="project" class="form-label"
                         >Project name</label

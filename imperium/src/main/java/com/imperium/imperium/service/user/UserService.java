@@ -2,7 +2,16 @@ package com.imperium.imperium.service.user;
 
 import java.util.ArrayList;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,11 +20,17 @@ import com.imperium.imperium.model.User;
 import com.imperium.imperium.repository.UserRepository;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, UserDetailsService {
     @Autowired
     private UserRepository uRepo;
 
-    private static final PasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Lazy
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    public final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public Boolean canConnect(User u) {
         User cmp = uRepo.findByUsername(u.getUsername());
@@ -62,5 +77,29 @@ public class UserService implements IUserService {
     @Override
     public ArrayList<User> findAll() {
         return (ArrayList<User>) uRepo.findAll();
+    }
+
+    @Override
+    public void autologin(String username, String password) {
+        UserDetails userDetails = loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                userDetails, password, userDetails.getAuthorities());
+
+        Authentication auth = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+        if (auth.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            logger.debug(String.format("Auto login %s successfully!", username));
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User u = uRepo.findByUsername(username);
+        if (u == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), u.getRoles());
     }
 }
