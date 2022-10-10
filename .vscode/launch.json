@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ImperiumApplication<imperium>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.imperium.imperium.ImperiumApplication",
+            "projectName": "imperium",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
