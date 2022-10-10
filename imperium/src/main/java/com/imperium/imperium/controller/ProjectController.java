@@ -15,7 +15,7 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-    @PostMapping(value = "/create-project")
+    @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
 
         if (service.canCreateProject(p, UserController.getUser().getId())) {
@@ -23,19 +23,19 @@ public class ProjectController {
             p.setUser(UserController.getUser());
             service.save(p);
 
-            return "redirect:/create-project?id=" + p.getId();
+            return "redirect:/home/create-project?id=" + p.getId();
         }
 
         return "redirect:/home?error=name";
     }
 
-    @GetMapping(value = "/open-project/{id}")
+    @GetMapping(value = "/home/open-project/{id}")
     private String openProject(@PathVariable Long id) {
 
-        return "redirect:/open-project?id=" + id;
+        return "redirect:/home/open-project?id=" + id;
     }
 
-    @GetMapping(value = "/delete-project/{name}")
+    @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
         if (service.canDeleteProject(UserController.getUser(), name)) {

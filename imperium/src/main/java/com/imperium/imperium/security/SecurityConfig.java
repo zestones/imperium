@@ -21,12 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        // .antMatchers("/SETUP/**", "/public", "/public/**").permitAll()
         .antMatchers("/", "/index", "/css/**", "/img/**", "/img/icon/**", "/signIn",
             "/h2-console/**")
         .permitAll()
-        // TODO : change URL GET - POST to : /home/something..
-        .antMatchers("/home", "/create-project", "/open-project").authenticated()
+        .antMatchers("/home", "/home/**").authenticated()
         .and()
         // TODO : After signIn automatically connect
         .formLogin()

@@ -71,7 +71,7 @@
                 >
                   <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                       class="nav-link px-0"
                     >
                       <span
@@ -252,7 +252,7 @@
                     ></button>
                   </div>
                   <form
-                    data-th-action="@{/share-project/{id}/ (id=${id})}"
+                    data-th-action="@{/home/share-project/{id}/ (id=${id})}"
                     method="POST"
                   >
                     <div class="modal-body" id="modal-body-share-project">
@@ -314,7 +314,7 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" data-th-action="@{/create-project}">
+                  <form method="POST" data-th-action="@{/home/create-project}">
                     <div class="mb-3">
                       <label for="project" class="form-label"
                         >Project name</label

@@ -57,7 +57,7 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/create-project", "/open-project" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 

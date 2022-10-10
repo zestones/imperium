@@ -68,7 +68,7 @@
                 >
                   <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                       class="nav-link px-0"
                     >
                       <span
@@ -227,12 +227,12 @@
               <div class="card-body">
                 <h5 class="card-title" data-th-text="${p.name}"></h5>
                 <a
-                  data-th-href="@{/delete-project/{name} (name=${p.name})}"
+                  data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
                   class="btn btn-danger"
                   >Delete</a
                 >
                 <a
-                  data-th-href="@{/open-project/{id} (id=${p.id})}"
+                  data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                   class="btn btn-primary"
                   >Open</a
                 >
@@ -255,7 +255,7 @@
               <div class="card-body">
                 <h5 class="card-title" data-th-text="${p.name}"></h5>
                 <a
-                  data-th-href="@{/open-project/{id} (id=${p.id})}"
+                  data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                   class="btn btn-primary"
                   >Open</a
                 >
@@ -292,7 +292,7 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" data-th-action="@{/create-project}">
+                  <form method="POST" data-th-action="@{/home/create-project}">
                     <div class="mb-3">
                       <label for="project" class="form-label"
                         >Project name</label
