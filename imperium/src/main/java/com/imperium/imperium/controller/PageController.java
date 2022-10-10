@@ -98,4 +98,10 @@ public class PageController {
 
         return "project";
     }
+
+    @GetMapping(value = "/home/profile")
+    private String profile(Model model) {
+        model.addAttribute("user", UserController.getUser());
+        return "profile";
+    }
 }
