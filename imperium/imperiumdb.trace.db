@@ -1,0 +1,4 @@
+2022-10-10 16:06:45 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PROJECTLIST" non trouvée
+Table "PROJECTLIST" not found; SQL statement:
+SELECT * FROM PROJECTLIST l  WHERE l.id_project = 1 [42102-214]
