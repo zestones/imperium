@@ -28,6 +28,17 @@
     <link rel="stylesheet" href="/css/project.css" />
 
     <title>Imperium</title>
+
+    <script>
+      function showTask() {
+        var x = document.getElementById("click");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      </script>
   </head>
   <body>
     <div class="container-fluid">
@@ -213,7 +224,24 @@
           </div>
           <div class="container">
             <h3>[[ ${name} ]]</h3>
-            <p class="lead">tableau projet</p>
+          
+
+            <div class="card" style="width: 25rem; display: inline-block;" th:each="pl : ${listOfProjectList}">
+              <div class="card-body">
+                <h5 class="card-title" th:text="${pl.title}">Card title</h5>  
+              </div>
+              <button onclick="showTask()" class="btn btn-primary">Add Task</button>
+              <div id="click"> 
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <p>test</p>
+                    <a href="#" class="card-link">Add Contributors</a>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          
             <h3>User Access</h3>
             <ul data-th-each="u : ${access}">
               <li data-th-text="${u}"></li>

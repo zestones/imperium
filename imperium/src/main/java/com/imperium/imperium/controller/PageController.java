@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
@@ -27,6 +28,9 @@ public class PageController {
 
     @Autowired
     AccessService accessService;
+
+    @Autowired
+    ProjectListService projectListService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
@@ -83,6 +87,9 @@ public class PageController {
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
 
         model.addAttribute("username", UserController.getUser().getUsername());
+
+        //List des List of Projects
+        model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
 
         model.addAttribute("name", name);
         model.addAttribute("id", id);
