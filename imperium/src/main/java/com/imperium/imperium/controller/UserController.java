@@ -27,11 +27,11 @@ public class UserController {
 
         service.save(u);
         setUser(u);
-
         service.autologin(u.getUsername(), pwd);
 
         return "redirect:/home";
     }
+    
 
     @PostMapping(value = "/process-logIn")
     public String logIn(Model model, User u) {

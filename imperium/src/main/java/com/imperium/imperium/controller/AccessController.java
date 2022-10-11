@@ -12,6 +12,7 @@ import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class AccessController {
+
     @Autowired
     AccessService service;
 
@@ -29,7 +30,6 @@ public class AccessController {
             a.setUser(userService.findByUsername(username));
             a.setProjects(projectService.findById(id));
             a.setAccess(a.getCanRead());
-
             service.save(a);
             return "redirect:/home/open-project?id=" + id;
         }

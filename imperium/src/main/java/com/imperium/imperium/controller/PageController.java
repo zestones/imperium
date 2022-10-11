@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
@@ -28,10 +28,17 @@ public class PageController {
     @Autowired
     AccessService accessService;
 
+    @Autowired
+    ProjectListService projectListService;
+
+    
+
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
         return "index";
     }
+
+    /**** Start of :Authentification Redirections ******/
 
     @GetMapping(value = "/signIn")
     private String signInPage() {
@@ -45,7 +52,7 @@ public class PageController {
 
         return "authentification/logIn";
     }
-
+   
     @GetMapping(value = "/home/logout")
     private String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -56,13 +63,19 @@ public class PageController {
         return "redirect:/index";
     }
 
+     /*****End of :Authentification Redirections****/
+
+
+
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         model.addAttribute("username", UserController.getUser().getUsername());
+
         model.addAttribute("allUsers", userService.findAll());
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
+
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
@@ -75,16 +88,21 @@ public class PageController {
 
     @GetMapping(value = { "/home/create-project", "/home/open-project" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+       @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getUser().getId();
+
         final String name = projectService.findById((Long) id).getName();
 
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
 
         model.addAttribute("username", UserController.getUser().getUsername());
 
+        //List des List of Projects
+        model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
+
         model.addAttribute("name", name);
+
         model.addAttribute("id", id);
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));

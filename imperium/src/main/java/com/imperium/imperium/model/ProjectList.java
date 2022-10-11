@@ -10,24 +10,32 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Entity
+@Table(name = "ProjectList")
+@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "projects")
-public class Project {
+public class ProjectList {
 
+    //This class representes the List where user can add tasks, it can be "Upcoming", "In progress", "Done", ...etc. 
+    
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
-    private String name;
+    //title which is "Upcoming","Done",...etc.
+    String title;
 
-    //Each project has one or many users, the user that creates the project is the "Admin". 
+    
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_user", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "id_project", referencedColumnName = "id")
+    private Project project;
+
 }
+
