@@ -27,24 +27,189 @@
   <body>
     <section style="background-color: #eee">
       <div class="container py-5">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a data-th-href="@{/home}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Profil</li>
-          </ol>
-        </nav>
-      </div>
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                  <a data-th-href="@{/home}">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Profil
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
 
-      <div class="card-body text-center">
-        <img
-          src="/img/icon/user.png"
-          alt="avatar"
-          class="rounded-circle img-fluid"
-          style="width: 150px"
-        />
-        <h5 class="my-3" data-th-text="${user.firstname}+${user.lastname}"></h5>
-        <p class="text-muted mb-1">Ajouter Job</p>
-        <p class="text-muted mb-4">Adresse, postal code, pays</p>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <img
+                  src="/img/icon/user.png"
+                  alt="avatar"
+                  class="rounded-circle img-fluid"
+                  style="width: 150px"
+                />
+                <h5 class="my-3" data-th-text="${user.username}"></h5>
+                <div class="d-flex justify-content-center mb-2">
+                  <button type="button" class="btn btn-primary">Upload</button>
+                  <button type="button" class="btn btn-outline-primary ms-1">
+                    Message
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-4 mb-lg-0">
+              <div class="card-body p-0">
+                <textarea>
+Zone de text quand click sur bouton message a faire</textarea
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <div class="card-body">
+                <form data-th-action="@{/process-profile}">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">FullName</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p
+                        class="text-muted mb-0"
+                        data-th-text="${user.firstname}+' '+${user.lastname}"
+                      ></p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">FirstName</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        id="border-input"
+                        type="text"
+                        data-th-field="${user.firstname}"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">LastName</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        data-th-field="${user.lastname}"
+                        id="user"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        data-th-field="${user.email}"
+                        id="user"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        data-th-field="${user.phonenumber}"
+                        id="user"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <!-- <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Password</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        data-th-field="${user.Password}"
+                        id="user"
+                      />
+                    </div>
+                  </div>
+                  <hr /> -->
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        data-th-field="${user.zipcode}"
+                        id="user"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <button class="btn btn-outline-primary ms-1" type="submit">
+                    submit
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-4 mb-md-0">
+                  <div class="card-body">
+                    <p class="mb-4">
+                      <span class="text-primary font-italic me-1"
+                        >assigment</span
+                      >
+                      Project Status
+                    </p>
+                    <div data-th-each="p : ${myProjectsprofil}">
+                      <div>
+                        <p
+                          class="mt-4 mb-1"
+                          style="font-size: 0.77rem"
+                          data-th-text="${p.name}"
+                        ></p>
+                      </div>
+                      <div class="progress rounded" style="height: 5px">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 72%"
+                          aria-valuenow="72"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </body>

@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private String lastname, firstname, username, password;
+    private String lastname, firstname, username, password, job, zipcode, email, phonenumber;
 
     @Id
     @GeneratedValue
