@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imperium.imperium.model.Project;
+import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.project.ProjectService;
 
 @Controller
@@ -15,7 +16,10 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-    @PostMapping(value = "/create-project")
+    @Autowired
+    ProjectListService projectListService;
+
+    @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
 
         if (service.canCreateProject(p, UserController.getUser().getId())) {
@@ -23,27 +27,25 @@ public class ProjectController {
             p.setUser(UserController.getUser());
             service.save(p);
 
-            return "redirect:/create-project?id=" + p.getId();
+            return "redirect:/home/create-project?id=" + p.getId();
         }
 
-        return "redirect:/home?username=" + UserController.getUser().getUsername()
-                + "&error=name";
+        return "redirect:/home?error=name";
     }
 
-    @GetMapping(value = "/open-project/{id}")
-    private String openProject(@PathVariable Long id) {
-
-        return "redirect:/open-project?id=" + id;
+    @GetMapping(value = "/home/open-project/{id}")
+    private String openProject(@PathVariable Long id, Model model) {
+        model.addAttribute("listOfProjectList", projectListService.findAll());
+        return "redirect:/home/open-project?id=" + id;
     }
 
-    @GetMapping(value = "/delete-project/{name}")
+    @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
-        // TODO : only owner can delete project && Check if has access to projects
         if (service.canDeleteProject(UserController.getUser(), name)) {
             service.delete(service.findProjectByUserIdAndName(UserController.getUser().getId(), name));
         }
 
-        return "redirect:/home?username=" + UserController.getUser().getUsername();
+        return "redirect:/home";
     }
 }

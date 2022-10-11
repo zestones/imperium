@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -57,7 +62,11 @@
     </nav>
 
     <div class="container" id="form-container">
-      <form class="form-signin" method="post" data-th-action="@{/logIn}">
+      <form
+        class="form-signin"
+        method="post"
+        data-th-action="@{/process-logIn}"
+      >
         <h2 class="form-signin-heading">Please sign in</h2>
         <div data-th-if="${error != null}">
           <div

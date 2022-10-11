@@ -34,3 +34,4 @@ public class Task {
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private List<User> user;
 }
+

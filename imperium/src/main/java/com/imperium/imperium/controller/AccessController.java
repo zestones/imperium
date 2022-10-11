@@ -21,7 +21,7 @@ public class AccessController {
     @Autowired
     ProjectService projectService;
 
-    @PostMapping(value = "/share-project/{id}")
+    @PostMapping(value = "/home/share-project/{id}")
     private String shareProject(@PathVariable Long id, Access a, String username) {
 
         if (service.canShareProject(userService.findByUsername(username), projectService.getProjectOwner(id), id)) {
@@ -31,9 +31,9 @@ public class AccessController {
             a.setAccess(a.getCanRead());
 
             service.save(a);
-            return "redirect:/open-project?id=" + id;
+            return "redirect:/home/open-project?id=" + id;
         }
 
-        return "redirect:/open-project?id=" + id + "&error=username";
+        return "redirect:/home/open-project?id=" + id + "&error=username";
     }
 }
