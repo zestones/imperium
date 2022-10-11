@@ -17,6 +17,8 @@ public interface AccessRepository extends CrudRepository<Access, Long> {
                         "AND a.CAN_READ = true", nativeQuery = true)
         ArrayList<Long> findIdContributorByIdProject( Long projectId);
 
+        
+
         @Query(value = "SELECT p.id FROM PROJECTS p, USERS u, ACCESS a WHERE " +
                         "p.id = a.id_project " +
                         "AND u.id = a.id_user " +

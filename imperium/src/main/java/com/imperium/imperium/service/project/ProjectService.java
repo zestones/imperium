@@ -12,6 +12,7 @@ import com.imperium.imperium.repository.ProjectRepository;
 @Service
 public class ProjectService implements IProjectService {
 
+    //Injecting the Project Repository
     @Autowired
     ProjectRepository pRepo;
 
@@ -20,6 +21,8 @@ public class ProjectService implements IProjectService {
         pRepo.save(p);
     }
 
+
+    //??
     public Boolean canCreateProject(Project p, Long userId) {
         ArrayList<Project> myProjects = pRepo.findProjectByUserId(userId);
         return !myProjects.stream().anyMatch(val -> p.getName().equals(val.getName()));
@@ -59,6 +62,8 @@ public class ProjectService implements IProjectService {
         return pRepo.findProjectById(id);
     }
 
+
+    //??
     public ArrayList<Project> getArrayProjectByArrayidProject(ArrayList<Long> arrId) {
         ArrayList<Project> arrProj = new ArrayList<>();
 
