@@ -225,16 +225,25 @@
           <div class="container">
             <h3>[[ ${name} ]]</h3>
           
-
+            <!-- Button add task -->
             <div class="card" style="width: 25rem; display: inline-block;" th:each="pl : ${listOfProjectList}">
               <div class="card-body">
                 <h5 class="card-title" th:text="${pl.title}">Card title</h5>  
               </div>
-              <button onclick="showTask()" class="btn btn-primary">Add Task</button>
+              <div data-th-if="${isOwner == true}">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#taskModal"
+                >
+                    Add a task
+                </button>
+              </div>
               <div id="click"> 
                 <div class="card" style="width: 18rem;">
                   <div class="card-body">
-                    <p>test</p>
+                    <p></p>
                     <a href="#" class="card-link">Add Contributors</a>
                   </div>
                 </div>
@@ -247,7 +256,7 @@
               <li data-th-text="${u}"></li>
             </ul>
 
-            <!-- Button trigger modal -->
+            <!-- Button Share -->
             <div data-th-if="${isOwner == true}">
               <button
                 type="button"
@@ -259,48 +268,57 @@
                 Share
               </button>
             </div>
-            <!-- Modal -->
-            <div
-              class="modal fade"
-              id="shareModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalCenterTitle"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                      Share the board
-                    </h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <form
-                    data-th-action="@{/home/share-project/{id}/ (id=${id})}"
-                    method="POST"
-                  >
-                    <div class="modal-body" id="modal-body-share-project">
+          
+            <br>
+
+            <!-- Button List -->
+            <div data-th-if="${isOwner == true}">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#listModal"
+              >
+                  Add a list
+              </button>
+            </div>
+          
+          <!-- new task Modal -->
+          <div
+            class="modal fade"
+            id="taskModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Create a task
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" data-th-action="@{/home/create-task/{id} (id=${id})}">
+                    <div class="mb-3">
+                      <label for="task" class="form-label">Task name</label
+                      >
                       <input
                         type="text"
                         class="form-control"
-                        id="input-username"
-                        name="username"
-                        placeholder="username or e-mail"
+                        name="title"
+                        placeholder="Task title"
+                        id="list"
                       />
-                      <select
-                        name="canRead"
-                        id="form-option"
-                        class="form-control"
-                      >
-                        <option value="true" selected>can read</option>
-                        <option value="false">can edit</option>
-                      </select>
+                    
                     </div>
                     <div class="modal-footer">
                       <button
@@ -311,14 +329,70 @@
                         Close
                       </button>
                       <button type="submit" class="btn btn-primary">
-                        Share
+                        Create
                       </button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+
+            <!-- new list Modal -->
+            <div
+            class="modal fade"
+            id="listModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Create a list
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" data-th-action="@{/home/create-list/{id} (id=${id})}">
+                    <div class="mb-3">
+                      <label for="list" class="form-label">List name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="title"
+                        placeholder="List title"
+                        id="list"
+                      />
+                    
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Create
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+          
 
           <!-- new project Modal -->
           <div

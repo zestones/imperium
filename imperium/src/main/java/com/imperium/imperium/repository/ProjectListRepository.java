@@ -12,7 +12,6 @@ import com.imperium.imperium.model.ProjectList;
 
 @Repository
 public interface ProjectListRepository extends JpaRepository<ProjectList, Long> {
-
     ArrayList<ProjectList> findProjectListByProjectId(Long id);
     ArrayList<ProjectList> findAll();
     ArrayList<ProjectList> findByTitle(String name);
