@@ -42,13 +42,10 @@ public class TaskController {
         return "redirect:/home/create-task?id="+id;
     }
 
-    @GetMapping(value="/home/create-task/{title}/{id}")
-    public String showTasks(Model model, @PathVariable String title,@PathVariable Long id){
-        ArrayList<Task> list= service.findAll();
-        model.addAttribute("listofTasks", list);
-        return "redirect:/home/create-task?id="+id;
+    @GetMapping("/home/open-task/{id}")
+    public String getTask(@PathVariable( value="title") String title, Model model){
+        model.addAttribute("listTask", service.findAll());
+        return "task";
     }
-
-
 
 }
