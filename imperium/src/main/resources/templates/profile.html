@@ -68,14 +68,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="card mb-4 mb-lg-0">
-              <div class="card-body p-0">
-                <textarea>
-                Zone de text quand click sur bouton message a faire
-</textarea
-                >
-              </div>
-            </div> -->
           </div>
           <div class="col-lg-8">
             <div class="card mb-4">
@@ -107,6 +99,7 @@
                         class="form-control text-muted mb-0 border-input"
                         id="user"
                         type="text"
+                        name="firstname"
                         data-th-field="${user.firstname}"
                       />
                     </div>
@@ -114,12 +107,13 @@
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">LastName</p>
+                      <p class="mb-0">Lastname</p>
                     </div>
                     <div class="col-sm-9">
                       <input
                         class="form-control text-muted mb-0 border-input"
                         type="text"
+                        name="lastname"
                         data-th-field="${user.lastname}"
                         id="user"
                       />
@@ -135,6 +129,7 @@
                         class="form-control text-muted mb-0 border-input"
                         id="user"
                         type="text"
+                        name="username"
                         data-th-field="${user.username}"
                       />
                     </div>
@@ -142,56 +137,42 @@
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Email</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <input
-                        class="form-control text-muted mb-0 border-input"
-                        type="text"
-                        id="user"
-                        data-th-field="${user.email}"
-                      />
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Phone</p>
-                    </div>
-                    <div class="col-sm-9">
-                      <input
-                        class="form-control text-muted mb-0 border-input"
-                        type="text"
-                        id="user"
-                        data-th-field="${user.phonenumber}"
-                      />
-                    </div>
-                  </div>
-                  <hr />
-                  <!-- <div class="row">
-                    <div class="col-sm-3">
-                      <p class="mb-0">Password</p>
+                      <p class="mb-0">Previous Password</p>
                     </div>
                     <div class="col-sm-9">
                       <input
                         class="text-muted mb-0 border-input"
                         type="text"
-                        data-th-field="${user.Password}"
+                        name="password"
                         id="user"
                       />
                     </div>
                   </div>
-                  <hr /> -->
+                  <hr />
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Address</p>
+                      <p class="mb-0">New Password</p>
                     </div>
                     <div class="col-sm-9">
                       <input
-                        class="form-control text-muted mb-0 border-input"
+                        class="text-muted mb-0 border-input"
                         type="text"
+                        name="pwd1"
                         id="user"
-                        data-th-field="${user.zipcode}"
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Confirm Password</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="text-muted mb-0 border-input"
+                        type="text"
+                        name="pwd2"
+                        id="user"
                       />
                     </div>
                   </div>

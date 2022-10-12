@@ -27,7 +27,7 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    private String lastname, firstname, username, password, email, phonenumber, zipcode;
+    private String lastname, firstname, username, password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

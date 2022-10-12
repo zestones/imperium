@@ -26,7 +26,7 @@ public class UserController {
         }
 
         service.save(u);
-        setUser(u);
+        setCurrentUser(u);
 
         service.autologin(u.getUsername(), pwd);
 
@@ -37,34 +37,37 @@ public class UserController {
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
-            setUser(service.findByUsername(u.getUsername()));
+            setCurrentUser(service.findByUsername(u.getUsername()));
             return "redirect:/home";
         }
 
         return "authentification/logIn";
     }
 
-    public static void setUser(User u) {
-        user = u;
-    }
-
-    public static User getUser() {
-        return user;
-    }
-
     @PostMapping(value = "/home/profile/process-profil")
-    public String saveUser(Model model, User u) {
+    public String updateUser(Model model, User u, String pwd1, String pwd2) {
 
-        if (service.isUserRegistered(u)) {
-            model.addAttribute("error", "Username already used.");
-            return "profile";
-        }
+        if (!service.canUpdate(u, getCurrentUser()))
+            return "redirect:/home/profile?error=username";
 
-        u.setId(getUser().getId());
+        u.setId(getCurrentUser().getId());
+        if (service.canUpdatePassword(u, pwd1, pwd2))
+            u.setPassword(service.encodePassword(pwd2));
+        else
+            return "redirect:/home/profile?error=password";
+
         service.update(u);
-
-        setUser(service.findById(u.getId()));
+        setCurrentUser(service.findById(u.getId()));
 
         return "redirect:/home/profile";
     }
+
+    public static void setCurrentUser(User u) {
+        user = u;
+    }
+
+    public static User getCurrentUser() {
+        return user;
+    }
+
 }

@@ -41,6 +41,15 @@ public class UserService implements IUserService, UserDetailsService {
         return (isUserRegistered(u) && arePasswordMatching(u.getPassword(), cmp.getPassword()));
     }
 
+    public Boolean canUpdate(User u, User current) {
+        return u.getUsername().equals(current.getUsername()) || !isUserRegistered(u);
+    }
+
+    public Boolean canUpdatePassword(User u, String pwd1, String pwd2) {
+        return !u.getPassword().equals("") && pwd1.equals(pwd2)
+                && arePasswordMatching(u.getPassword(), findById(u.getId()).getPassword());
+    }
+
     private Boolean arePasswordMatching(String pwd1, String pwd2) {
         return encoder.matches(pwd1, pwd2);
     }
@@ -69,7 +78,7 @@ public class UserService implements IUserService, UserDetailsService {
         return uRepo.findUserById(id);
     }
 
-    private String encodePassword(String rawPwd) {
+    public String encodePassword(String rawPwd) {
         return encoder.encode(rawPwd);
     }
 
@@ -108,9 +117,8 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User u = uRepo.findByUsername(username);
-        if (u == null) {
+        if (u == null)
             throw new UsernameNotFoundException(username);
-        }
 
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), u.getRoles());
     }

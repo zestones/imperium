@@ -54,13 +54,13 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        model.addAttribute("username", UserController.getUser().getUsername());
+        model.addAttribute("username", UserController.getCurrentUser().getUsername());
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
-                        accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
+                        accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -72,12 +72,12 @@ public class PageController {
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        Long userId = UserController.getUser().getId();
+        Long userId = UserController.getCurrentUser().getId();
         final String name = projectService.findById((Long) id).getName();
 
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
 
-        model.addAttribute("username", UserController.getUser().getUsername());
+        model.addAttribute("username", UserController.getCurrentUser().getUsername());
 
         model.addAttribute("name", name);
         model.addAttribute("id", id);
@@ -95,12 +95,19 @@ public class PageController {
     }
 
     @GetMapping(value = "/home/profile")
-    private String profile(Model model, User u) {
-        Long userId = UserController.getUser().getId();
+    private String profile(Model model, User u,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+        Long userId = UserController.getCurrentUser().getId();
 
-        model.addAttribute("user", UserController.getUser());
+        model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
 
+        if (error.equals("password")) {
+            model.addAttribute("user", UserController.getCurrentUser());
+            model.addAttribute("error", "Passwords are not matching or Wrong previous password!");
+        } else if (error.equals("username")) {
+            model.addAttribute("error", "Username already used.");
+        }
         return "profile";
     }
 }
