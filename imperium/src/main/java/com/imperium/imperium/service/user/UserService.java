@@ -65,6 +65,11 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
+    public void save_bis(User u) {
+        uRepo.save(u);
+    }
+
+    @Override
     public User findById(Long id) {
         return uRepo.findUserById(id);
     }
@@ -114,4 +119,17 @@ public class UserService implements IUserService, UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), u.getRoles());
     }
+
+    @Override
+    public User update(User u, Long id) {
+        User user_retrieved = uRepo.findUserById(id);
+        if (user_retrieved == null)
+            try {
+                throw new Exception("User not found");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        return uRepo.save(u);
+    }
+
 }

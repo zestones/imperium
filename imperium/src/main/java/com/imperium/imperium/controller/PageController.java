@@ -97,9 +97,15 @@ public class PageController {
     @GetMapping(value = "/home/profile")
     private String profile(Model model, User u) {
         Long userId = UserController.getUser().getId();
-
+        // model.addAttribute("userid", u);
         model.addAttribute("user", UserController.getUser());
         model.addAttribute("myProjectsprofil", projectService.findProjectByUserId(userId));
         return "profile";
     }
+
+    // @GetMapping(value = "/home/profile")
+    // private String formProfileInPage(Model model, User user) {
+
+    // return "profile";
+    // }
 }
