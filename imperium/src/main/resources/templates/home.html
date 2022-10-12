@@ -25,308 +25,85 @@
     />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet/less" type="text/css" href="/css/home.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
 
     <title>Imperium</title>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-          <div
-            class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
-          >
-            <a
-              data-th-href="@{/home?username=} + ${username}"
-              class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-            >
-              <span class="fs-5 d-none d-sm-inline">Menu</span>
-            </a>
-            <ul
-              class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-              id="menu"
-            >
-              <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
-                  <i class="fs-4 bi-house"></i>
-                  <span class="ms-1 d-none d-sm-inline">Home</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#submenu1"
-                  data-bs-toggle="collapse"
-                  class="nav-link px-0 align-middle"
-                >
-                  <i class="fs-4 bi-speedometer2"></i>
-                  <span class="ms-1 d-none d-sm-inline">Projects</span>
-                </a>
-                <ul
-                  class="collapse show nav flex-column ms-1"
-                  id="submenu1"
-                  data-bs-parent="#menu"
-                >
-                  <li data-th-each="p : ${myProjects}" class="w-100">
-                    <a
-                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
-                      class="nav-link px-0"
-                    >
-                      <span
-                        class="d-none d-sm-inline"
-                        data-th-text="${p.name}"
-                      ></span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-table"></i>
-                  <span class="ms-1 d-none d-sm-inline">Calendar</span></a
-                >
-              </li>
-              <li>
-                <a
-                  href="#submenu2"
-                  data-bs-toggle="collapse"
-                  class="nav-link px-0 align-middle"
-                >
-                  <i class="fs-4 bi-bootstrap"></i>
-                  <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a
-                >
-                <ul
-                  class="collapse nav flex-column ms-1"
-                  id="submenu2"
-                  data-bs-parent="#menu"
-                >
-                  <li class="w-100">
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 1</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 2</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Item</span> 3</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a
-                  href="#submenu3"
-                  data-bs-toggle="collapse"
-                  class="nav-link px-0 align-middle"
-                >
-                  <i class="fs-4 bi-grid"></i>
-                  <span class="ms-1 d-none d-sm-inline">Products</span>
-                </a>
-                <ul
-                  class="collapse nav flex-column ms-1"
-                  id="submenu3"
-                  data-bs-parent="#menu"
-                >
-                  <li class="w-100">
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Product</span> 1</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Product</span> 2</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Product</span> 3</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#" class="nav-link px-0">
-                      <span class="d-none d-sm-inline">Product</span> 4</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-people"></i>
-                  <span class="ms-1 d-none d-sm-inline">Customers</span>
-                </a>
-              </li>
-            </ul>
-            <hr />
-            <div class="dropdown pb-4">
-              <a
-                href="#"
-                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src="/img/icon/user.png"
-                  alt="hugenerd"
-                  width="30"
-                  height="30"
-                  class="rounded-circle"
-                />
-                <span class="d-none d-sm-inline mx-1"> [[ ${username} ]] </span>
+    <html>
+      <head> </head>
+      <body>
+        <div class="area"></div>
+        <nav class="main-menu">
+          <ul>
+            <li>
+              <a href="http://justinfarrow.com">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text"> Dashboard </span>
               </a>
-              <ul
-                class="dropdown-menu dropdown-menu-dark text-small shadow"
-                aria-labelledby="dropdownUser1"
-              >
-                <li>
-                  <a
-                    class="dropdown-item"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                    href="#"
-                    >New project...</a
-                  >
-                </li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                  <hr class="dropdown-divider" />
-                </li>
-                <li>
-                  <a class="dropdown-item" data-th-href="@{/home/logout}"
-                    >Sign out</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col py-3">
-          <div class="header-error" data-th-if="${error != null}">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              data-th-text="${error}"
-            ></div>
-          </div>
-          <h3>My Projects</h3>
-          <div class="container cards">
-            <div
-              class="card"
-              id="card"
-              style="width: 15rem"
-              data-th-each="p : ${myProjects} "
-            >
-              <img
-                src="/img/default.png"
-                class="card-img-top"
-                alt="image project"
-              />
-              <div class="card-body">
-                <h5 class="card-title" data-th-text="${p.name}"></h5>
-                <a
-                  data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
-                  class="btn btn-danger"
-                  >Delete</a
-                >
-                <a
-                  data-th-href="@{/home/open-project/{id} (id=${p.id})}"
-                  class="btn btn-primary"
-                  >Open</a
-                >
-              </div>
-            </div>
-          </div>
-          <h3>Project shared with me</h3>
-          <div class="container cards">
-            <div
-              class="card"
-              id="card"
-              style="width: 15rem"
-              data-th-each="p : ${sharedProjects} "
-            >
-              <img
-                src="/img/default.png"
-                class="card-img-top"
-                alt="image project"
-              />
-              <div class="card-body">
-                <h5 class="card-title" data-th-text="${p.name}"></h5>
-                <a
-                  data-th-href="@{/home/open-project/{id} (id=${p.id})}"
-                  class="btn btn-primary"
-                  >Open</a
-                >
-              </div>
-            </div>
-          </div>
-          <!-- displays users -->
-          <h4>Tout les utilisateurs :</h4>
-          <ul data-th-each="u : ${allUsers}">
-            <li data-th-text="${u.toString()}"></li>
+            </li>
+            <li class="has-subnav">
+              <a href="#">
+                <i class="fa fa-laptop fa-2x"></i>
+                <span class="nav-text"> Stars Components </span>
+              </a>
+            </li>
+            <li class="has-subnav">
+              <a href="#">
+                <i class="fa fa-list fa-2x"></i>
+                <span class="nav-text"> Forms </span>
+              </a>
+            </li>
+            <li class="has-subnav">
+              <a href="#">
+                <i class="fa fa-folder-open fa-2x"></i>
+                <span class="nav-text"> Pages </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-bar-chart-o fa-2x"></i>
+                <span class="nav-text"> Graphs and Statistics </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-font fa-2x"></i>
+                <span class="nav-text"> Quotes </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-table fa-2x"></i>
+                <span class="nav-text"> Tables </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span class="nav-text"> Maps </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-info fa-2x"></i>
+                <span class="nav-text"> Documentation </span>
+              </a>
+            </li>
           </ul>
 
-          <!-- new project Modal -->
-          <div
-            class="modal fade"
-            id="staticBackdrop"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">
-                    Create Project
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <form method="POST" data-th-action="@{/home/create-project}">
-                    <div class="mb-3">
-                      <label for="project" class="form-label"
-                        >Project name</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        placeholder="Project name"
-                        id="project"
-                      />
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button type="submit" class="btn btn-primary">
-                        Create
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <ul class="logout">
+            <li>
+              <a href="#">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text"> Logout </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </body>
+    </html>
 
     <!-- Bootstrap script -->
     <script
