@@ -77,7 +77,7 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-list" ,"/home/create-task" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-list", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
@@ -88,7 +88,7 @@ public class PageController {
 
         model.addAttribute("username", UserController.getUser().getUsername());
 
-        //List des List of Projects
+        // List des List of Projects
         model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
 
         model.addAttribute("name", name);

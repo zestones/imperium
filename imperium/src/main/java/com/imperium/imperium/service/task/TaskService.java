@@ -15,31 +15,39 @@ public class TaskService implements ITaskService {
     TaskRepository taskRepo;
 
     @Override
-    public void save(Task t){
+    public void save(Task t) {
         taskRepo.save(t);
     }
+
     @Override
-    public void delete(Task t){
+    public void delete(Task t) {
         taskRepo.delete(t);
     }
-    /*@Override
-    public ArrayList<Task> findTaskByProjectListId(Long id){
-        return taskRepo.findTaskByProjectListId()
-    }*/
+
+    /*
+     * @Override
+     * public ArrayList<Task> findTaskByProjectListId(Long id){
+     * return taskRepo.findTaskByProjectListId()
+     * }
+     */
     @Override
-    public ArrayList<Task> findAll(){
+    public ArrayList<Task> findAll() {
         return taskRepo.findAll();
     }
-     @Override
-    public ArrayList<Task>findByTitle(String name){
+
+    @Override
+    public ArrayList<Task> findByTitle(String name) {
         return taskRepo.findByTitle(name);
     }
-   /*  @Override
-    public ArrayList<Task> findByTitleAndProjectListId(String Title,  Long id){
 
-    }*/
+    /*
+     * @Override
+     * public ArrayList<Task> findByTitleAndProjectListId(String Title, Long id){
+     * 
+     * }
+     */
     @Override
-    public Optional<Task> findById(Long id){
+    public Optional<Task> findById(Long id) {
         return taskRepo.findById(id);
     }
 }

@@ -1,7 +1,6 @@
 package com.imperium.imperium.model;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @NoArgsConstructor
@@ -40,4 +37,3 @@ public class Task {
     private List<User> user;
 
 }
-
