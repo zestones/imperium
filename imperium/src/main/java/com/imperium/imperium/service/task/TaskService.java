@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.imperium.imperium.model.Task;
 import com.imperium.imperium.repository.TaskRepository;
 
+@Service
 public class TaskService implements ITaskService {
     @Autowired
     TaskRepository taskRepo;

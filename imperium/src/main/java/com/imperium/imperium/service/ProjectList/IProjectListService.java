@@ -1,7 +1,6 @@
 package com.imperium.imperium.service.ProjectList;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import com.imperium.imperium.model.ProjectList;
 
@@ -15,11 +14,11 @@ public interface IProjectListService {
 
     ArrayList<ProjectList> findAll();
 
-    ArrayList<ProjectList>findByTitle(String Name);
+    ProjectList findByTitle(String Name);
     
     ArrayList<ProjectList> findByTitleAndProjectId(String Title,  Long id);
 
-    Optional<ProjectList> findById(Long Id);
+    ProjectList findById(Long Id);
    
 
 

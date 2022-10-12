@@ -1,7 +1,6 @@
 package com.imperium.imperium.service.ProjectList;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class ProjectListService implements IProjectListService{
     }
 
     @Override
-    public ArrayList<ProjectList> findByTitle(String Name) {
+    public ProjectList findByTitle(String Name) {
         return projectListRepo.findByTitle(Name);
     }
 
@@ -48,11 +47,8 @@ public class ProjectListService implements IProjectListService{
 
     
     @Override
-    public  Optional<ProjectList> findById(Long id) {
-       return projectListRepo.findById(id);
+    public  ProjectList findById(Long id) {
+       return projectListRepo.findProjectListById(id);
     }
 
- 
-
-   
 }

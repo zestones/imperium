@@ -307,7 +307,7 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" data-th-action="@{/home/create-task/{id} (id=${id})}">
+                  <form method="POST" data-th-action="@{/home/create-task/{title} (title=${pl.title})}">
                     <div class="mb-3">
                       <label for="task" class="form-label">Task name</label
                       >
