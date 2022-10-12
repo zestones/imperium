@@ -26,6 +26,13 @@
   </head>
   <body>
     <section style="background-color: #eee">
+      <div class="header-error" data-th-if="${error != null}">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          data-th-text="${error}"
+        ></div>
+      </div>
       <div class="container py-5">
         <div class="row">
           <div class="col">
@@ -61,13 +68,14 @@
                 </div>
               </div>
             </div>
-            <div class="card mb-4 mb-lg-0">
+            <!-- <div class="card mb-4 mb-lg-0">
               <div class="card-body p-0">
                 <textarea>
-Zone de text quand click sur bouton message a faire</textarea
+                Zone de text quand click sur bouton message a faire
+</textarea
                 >
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="col-lg-8">
             <div class="card mb-4">
@@ -76,7 +84,7 @@ Zone de text quand click sur bouton message a faire</textarea
                   action="#"
                   data-th-action="@{/home/profile/process-profil}"
                   data-th-object="${user}"
-                  method="put"
+                  method="POST"
                 >
                   <div class="row">
                     <div class="col-sm-3">
@@ -85,7 +93,7 @@ Zone de text quand click sur bouton message a faire</textarea
                     <div class="col-sm-9">
                       <p
                         class="text-muted mb-0"
-                        data-th-text="${user.firstname}+' '+${user.lastname}"
+                        data-th-text="${user.firstname} +' '+ ${user.lastname}"
                       ></p>
                     </div>
                   </div>
@@ -120,18 +128,30 @@ Zone de text quand click sur bouton message a faire</textarea
                   <hr />
                   <div class="row">
                     <div class="col-sm-3">
+                      <p class="mb-0">Username</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <input
+                        class="form-control text-muted mb-0 border-input"
+                        id="user"
+                        type="text"
+                        data-th-field="${user.username}"
+                      />
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col-sm-3">
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
                       <input
                         class="form-control text-muted mb-0 border-input"
                         type="text"
-                        data-th-field="${user.email}"
                         id="user"
                       />
                     </div>
-                  </div>
-                  <hr />
+                  </div> -->
+                  <!-- <hr />
                   <div class="row">
                     <div class="col-sm-3">
                       <p class="mb-0">Phone</p>
@@ -140,12 +160,11 @@ Zone de text quand click sur bouton message a faire</textarea
                       <input
                         class="form-control text-muted mb-0 border-input"
                         type="text"
-                        data-th-field="${user.phonenumber}"
                         id="user"
                       />
                     </div>
                   </div>
-                  <hr />
+                  <hr /> -->
                   <!-- <div class="row">
                     <div class="col-sm-3">
                       <p class="mb-0">Password</p>
@@ -160,7 +179,7 @@ Zone de text quand click sur bouton message a faire</textarea
                     </div>
                   </div>
                   <hr /> -->
-                  <div class="row">
+                  <!-- <div class="row">
                     <div class="col-sm-3">
                       <p class="mb-0">Address</p>
                     </div>
@@ -168,13 +187,12 @@ Zone de text quand click sur bouton message a faire</textarea
                       <input
                         class="form-control text-muted mb-0 border-input"
                         type="text"
-                        data-th-field="${user.zipcode}"
                         id="user"
                       />
                     </div>
-                  </div>
-                  <hr />
-                  <input type="submit" value="submit" />
+                  </div> -->
+                  <!-- <hr /> -->
+                  <button type="submit" class="btn btn-primary">Update</button>
                 </form>
               </div>
             </div>
@@ -188,7 +206,7 @@ Zone de text quand click sur bouton message a faire</textarea
                       >
                       Project Status
                     </p>
-                    <div data-th-each="p : ${myProjectsprofil}">
+                    <div data-th-each="p : ${myProjects}">
                       <div>
                         <p
                           class="mt-4 mb-1"

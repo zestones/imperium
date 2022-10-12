@@ -3,9 +3,7 @@ package com.imperium.imperium.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.user.UserService;
@@ -54,11 +52,19 @@ public class UserController {
         return user;
     }
 
-    @PutMapping(value = "/home/profile/process-profil")
-    public String saveUser(@ModelAttribute("user") User userB) {
-        userB.setId(userB.getId());
-        service.update(userB, userB.getId());
-        return "redirect:/home/profile";
+    @PostMapping(value = "/home/profile/process-profil")
+    public String saveUser(Model model, User u) {
 
+        if (service.isUserRegistered(u)) {
+            model.addAttribute("error", "Username already used.");
+            return "profile";
+        }
+
+        u.setId(getUser().getId());
+        service.update(u);
+
+        setUser(service.findById(u.getId()));
+
+        return "redirect:/home/profile";
     }
 }
