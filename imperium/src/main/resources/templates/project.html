@@ -266,7 +266,7 @@
                       <div class="modal-body">
                         <form
                           method="POST"
-                          data-th-action="@{/home/create-task/{title} (title=${pl.title})}"
+                          data-th-action="@{/home/create-task/{title}/{id} (title=${pl.title}, id=${id})}"
                         >
                           <div class="mb-3">
                             <label for="task" class="form-label"

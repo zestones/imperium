@@ -1,5 +1,7 @@
 package com.imperium.imperium.controller;
 
+import javax.persistence.Id;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +27,13 @@ public class TaskController {
      * }
      */
 
-    @PostMapping(value = "/home/create-task/{title}")
-    private String createTask(Model model, Task t, @PathVariable String title) {
+    @PostMapping(value = "/home/create-task/{title}/{id}")
+    private String createTask(Model model, Task t, @PathVariable String title, @PathVariable Long id) {
 
         System.out.println("BONJOUR VOICI LA REQUEETE: " + projectListService.findByTitle(title));
         t.setList(projectListService.findByTitle(title));
         service.save(t);
         System.out.println("BONJOUR VOICI LA TASK : " + t);
-        return "redirect:/home/create-task?id=";
+        return "redirect:/home/create-task?id="+id;
     }
 }
