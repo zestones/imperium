@@ -220,26 +220,47 @@
             ></div>
           </div>
           <div class="container">
-            <h3>[[ ${name} ]]</h3>
+            <div class="card" id="myNavBar">
+              <div class="card-body">
+                <h3> Project "[[ ${name} ]]"</h3> 
+
+               <!-- Button trigger modal -->
+              <div data-th-if="${isOwner == true}" class="shareButton">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#shareModal"
+              >
+                <i class="bi bi-share"></i>
+                 Share
+              </button>
+              </div>
+          
+             <!-- Modal -->
+              </div>
+            </div>
 
             <!-- Button add task -->
             <div
               class="card"
-              style="width: 25rem; display: inline-block"
+              style="width: 25rem; display: inline-block";
+
               data-th-each="pl : ${listOfProjectList}"
             >
               <div class="card-body">
                 <h5 class="card-title" th:text="${pl.title}">Card title</h5>
               </div>
+              test[[ ${listTask}]]
+              <div class="card-body" data-th-each="task :${listTask}">
+                <p data-th-text="${task.title}"></p>
+              </div>
+            
               <div data-th-if="${isOwner == true}">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#taskModal"
-                >
-                  Add a task
-                </button>
+            
+                <div class="buttonPosition">
+                  <div class="plus-button" data-bs-toggle="modal" data-bs-target="#taskModal"></div>
+                </div>
                 <!-- new task Modal -->
                 <div
                   class="modal fade"
@@ -298,38 +319,15 @@
                   </div>
                 </div>
               </div>
-              <div id="click">
-                <div class="card" style="width: 18rem">
-                  <div class="card-body">
-                    <p></p>
-                    <a href="#" class="card-link">Add Contributors</a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
-          <h3>User Access</h3>
+          <!--<h3>User Access</h3>
           <ul data-th-each="u : ${access}">
             <li data-th-text="${u}"></li>
-          </ul>
+          </ul>-->
 
-          <!-- Button Share -->
-          <div data-th-if="${isOwner == true}">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#shareModal"
-            >
-              <i class="bi bi-share"></i>
-              Share
-            </button>
-          </div>
-
-          <br />
-
-          <!-- Button List -->
+         
           <div data-th-if="${isOwner == true}">
             <button
               type="button"
