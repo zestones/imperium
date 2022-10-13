@@ -7,19 +7,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
-import com.imperium.imperium.model.ProjectList;
+import com.imperium.imperium.model.Board;
 
 @Repository
-public interface ProjectListRepository extends JpaRepository<ProjectList, Long> {
+public interface ProjectListRepository extends JpaRepository<Board, Long> {
 
-    ArrayList<ProjectList> findProjectListByProjectId(Long id);
+    ArrayList<Board> findProjectListByProjectId(Long id);
 
-    ArrayList<ProjectList> findAll();
+    ArrayList<Board> findAll();
 
-    ArrayList<ProjectList> findByTitle(String name);
+    ArrayList<Board> findByTitle(String name);
 
-    Optional<ProjectList> findById(Long Id);
-    
-    ArrayList<ProjectList> findByTitleAndProjectId(String Title,  Long id);
+    Optional<Board> findById(Long Id);
+
+    ArrayList<Board> findByTitleAndProjectId(String Title, Long id);
 }
-

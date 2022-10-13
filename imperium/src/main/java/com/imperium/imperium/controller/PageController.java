@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.User;
-import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.access.AccessService;
+import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
@@ -28,7 +28,7 @@ public class PageController {
     AccessService accessService;
 
     @Autowired
-    ProjectListService projectListService;
+    BoardService projectListService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {

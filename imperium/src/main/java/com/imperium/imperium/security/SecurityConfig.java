@@ -45,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.formLogin()
         .successHandler(handler);
     // * Custom failure handler
-    http.formLogin()
-        .failureHandler(handler);
+    // http.formLogin()
+    // .failureHandler(handler);
 
     // ! Allow access to the h2-console
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");

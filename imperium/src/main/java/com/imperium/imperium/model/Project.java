@@ -25,7 +25,9 @@ public class Project {
 
     private String name;
 
-    //Each project has one or many users, the user that creates the project is the "Admin". 
+    // Each project has one or many users, the user that creates the project is the
+    // "Admin".
+
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id")

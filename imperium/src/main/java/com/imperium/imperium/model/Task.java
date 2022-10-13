@@ -1,7 +1,5 @@
 package com.imperium.imperium.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,11 +25,10 @@ public class Task {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_list", referencedColumnName = "id")
-    private ProjectList list;
+    private Board list;
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
-    private List<User> user;
+    private java.util.List<User> user;
 }
-
