@@ -50,19 +50,18 @@ public class UserController {
             return "redirect:/home/profile?error=username";
 
         u.setId(getCurrentUser().getId());
+
         String pwd;
-        if (service.canUpdatePassword(u, pwd1, pwd2)) {
+        if (service.canUpdatePassword(u, pwd1, pwd2))
             pwd = service.encodePassword(pwd2);
-            u.setPassword(pwd);
-            service.update(u);
-            setCurrentUser(service.findById(u.getId()));
-        } else if (u.getPassword().equals("")) {
+        else if (u.getPassword().equals(""))
             pwd = getCurrentUser().getPassword();
-            u.setPassword(pwd);
-            service.update(u);
-            setCurrentUser(service.findById(u.getId()));
-        } else
+        else
             return "redirect:/home/profile?error=password";
+
+        u.setPassword(pwd);
+        service.update(u);
+        setCurrentUser(service.findById(u.getId()));
 
         return "redirect:/home/profile";
     }
