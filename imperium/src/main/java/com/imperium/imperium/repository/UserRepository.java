@@ -7,7 +7,6 @@ import com.imperium.imperium.model.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
-    
-    User findUserById(Long id);
 
+    User findUserById(Long id);
 }
