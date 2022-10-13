@@ -35,7 +35,6 @@ public class UserController {
 
     @PostMapping(value = "/process-logIn")
     public String logIn(Model model, User u) {
-
         if (service.canConnect(u)) {
             setCurrentUser(service.findByUsername(u.getUsername()));
             return "redirect:/home";
@@ -51,13 +50,19 @@ public class UserController {
             return "redirect:/home/profile?error=username";
 
         u.setId(getCurrentUser().getId());
-        if (service.canUpdatePassword(u, pwd1, pwd2))
-            u.setPassword(service.encodePassword(pwd2));
-        else
+        String pwd;
+        if (service.canUpdatePassword(u, pwd1, pwd2)) {
+            pwd = service.encodePassword(pwd2);
+            u.setPassword(pwd);
+            service.update(u);
+            setCurrentUser(service.findById(u.getId()));
+        } else if (u.getPassword().equals("")) {
+            pwd = getCurrentUser().getPassword();
+            u.setPassword(pwd);
+            service.update(u);
+            setCurrentUser(service.findById(u.getId()));
+        } else
             return "redirect:/home/profile?error=password";
-
-        service.update(u);
-        setCurrentUser(service.findById(u.getId()));
 
         return "redirect:/home/profile";
     }

@@ -61,10 +61,11 @@
                 />
                 <h5 class="my-3" data-th-text="${user.username}"></h5>
                 <div class="d-flex justify-content-center mb-2">
-                  <button type="button" class="btn btn-primary">Upload</button>
-                  <button type="button" class="btn btn-outline-primary ms-1">
-                    Message
-                  </button>
+                  <a data-th-href="@{/home/logout}">
+                    <button type="button" class="btn btn-danger">
+                      Sign Out
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>

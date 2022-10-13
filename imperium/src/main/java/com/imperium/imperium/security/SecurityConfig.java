@@ -20,6 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Inject
   UserService userDetailsService;
 
+  @Inject
+  SecurityHandler handler;
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
@@ -38,6 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and().logout()
         .invalidateHttpSession(true)
         .deleteCookies("JSESSIONID");
+    // * Custom success handler
+    http.formLogin()
+        .successHandler(handler);
+    // * Custom failure handler
+    http.formLogin()
+        .failureHandler(handler);
 
     // ! Allow access to the h2-console
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");
