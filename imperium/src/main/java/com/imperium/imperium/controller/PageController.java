@@ -116,6 +116,7 @@ public class PageController {
         } else if (error.equals("username")) {
             model.addAttribute("error", "Username already used.");
         }
+
         return "profile";
     }
 }
