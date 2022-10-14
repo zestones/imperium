@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
+import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
@@ -31,6 +32,9 @@ public class PageController {
 
     @Autowired
     ProjectListService projectListService;
+
+    @Autowired
+    TaskService taskService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage() {
@@ -78,7 +82,7 @@ public class PageController {
     }
 
     @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-list", "/home/create-task" })
-    private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
+    private String openProject(Model model,@RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getUser().getId();
@@ -90,6 +94,9 @@ public class PageController {
 
         // List des List of Projects
         model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
+        model.addAttribute("listOfTasks", taskService.findAll());
+        
+       
 
         model.addAttribute("name", name);
         model.addAttribute("id", id);

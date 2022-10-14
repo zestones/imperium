@@ -28,17 +28,14 @@
     <link rel="stylesheet" href="/css/project.css" />
 
     <title>Imperium</title>
-
-    <!-- <script>
-      function showTask() {
-        var x = document.getElementById("click");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
+     <script>function myFunction() {
+      var x = document.getElementById("hideshowinput");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
       }
-      </script> -->
+    }</script>
   </head>
   <body>
     <div class="container-fluid">
@@ -236,96 +233,54 @@
                  Share
               </button>
               </div>
-          
-             <!-- Modal -->
+        
               </div>
             </div>
 
-            <!-- Button add task -->
-            <div
-              class="card"
-              style="width: 25rem; display: inline-block";
 
-              data-th-each="pl : ${listOfProjectList}"
-            >
-              <div class="card-body">
-                <h5 class="card-title" th:text="${pl.title}">Card title</h5>
-              </div>
+             
+            
+  
 
-              <div class="card-body" data-th-each="task :${listTask}">
-                <p data-th-text="${task.title}"></p>
-              </div>
-            
-              <div data-th-if="${isOwner == true}">
-            
-                <div class="buttonPosition">
-                  <div class="plus-button" data-bs-toggle="modal" data-bs-target="#taskModal"></div>
-                </div>
-                <!-- new task Modal -->
-                <div
-                  class="modal fade"
-                  id="taskModal"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">
-                          Create a task
-                        </h5>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
+              <table>
+                <td th:each="pl : ${listOfProjectList}">
+                    <div
+                    class="card"
+                    style="width: 25rem; display: inline-block";>
+                    <div class="card-body">
+                      <h5 class="card-title" th:text="${pl.title}">Card title</h5>  
+                      
+                      <div
+                      class="card"
+                      style="width: 20rem; display: inline-block";
+                      th:each="task :${listOfTasks}">
+                      <div class="card-body">
+                         <p th:text="${task.title}">Task Title</p>
+
                       </div>
-                      <div class="modal-body">
-                        <form
-                          method="POST"
-                          data-th-action="@{/home/create-task/{title}/{id} (title=${pl.title}, id=${id})}"
-                        >
-                          <div class="mb-3">
-                            <label for="task" class="form-label"
-                              >Task name</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="title"
-                              placeholder="Task title"
-                              id="list"
-                            />
-                          </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                              Create
-                            </button>
-                          </div>
-                        </form>
                       </div>
-                    </div>
+
+
+
+                       <form th:action="@{/home/createNewTask}" th:object="${task}" method="post">
+                        <input type="text" placeholder="Task Name" name="tasktitle" required> 
+                        <input type="hidden" name="listid" th:value="${pl.id}">
+                        <input type="hidden" name="idproject" th:value="${id}">
+                       
+                        <button class="btn  btn-primary">Create task</button>
+                       </form>
+               
+
+                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--<h3>User Access</h3>
-          <ul data-th-each="u : ${access}">
-            <li data-th-text="${u}"></li>
-          </ul>-->
+                </td>     
+                   
+              </table>
+           
+             
+            
+            
+        
 
          
           <div data-th-if="${isOwner == true}">

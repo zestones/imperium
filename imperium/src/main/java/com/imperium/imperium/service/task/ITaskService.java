@@ -16,7 +16,7 @@ public interface ITaskService {
 
     ArrayList<Task>findByTitle(String name);
     
-   // ArrayList<Task> findByTitleAndProjectListId(String title,  Long id);
+    ArrayList<Task> findByProjectListId(Long id);
 
     Optional<Task> findById(Long id);
 }

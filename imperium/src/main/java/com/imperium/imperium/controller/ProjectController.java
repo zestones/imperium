@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.imperium.imperium.model.Project;
 import com.imperium.imperium.service.ProjectList.ProjectListService;
 import com.imperium.imperium.service.project.ProjectService;
+import com.imperium.imperium.service.task.TaskService;
 
 @Controller
 public class ProjectController {
     @Autowired
     ProjectService service;
+
+    @Autowired 
+    TaskService  taskservice;
 
     @Autowired
     ProjectListService projectListService;
@@ -33,11 +37,8 @@ public class ProjectController {
         return "redirect:/home?error=name";
     }
 
-    @GetMapping(value = "/home/open-project/{id}")
-    private String openProject(@PathVariable Long id, Model model) {
-        model.addAttribute("listOfProjectList", projectListService.findAll());
-        return "redirect:/home/open-project?id=" + id;
-    }
+  
+
 
     @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
