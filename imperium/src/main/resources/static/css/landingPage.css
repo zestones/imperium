@@ -45,21 +45,20 @@ body {
 /*------------------------------------------
 Index Corps
 -----------------------------------------*/
-.header-area {
+.header-area {}
+
+.sub-header-area {
   position: fixed;
   top: 40px;
   left: 30%;
   right: 30%;
   z-index: 1;
-  height: 100px;
-}
-
-.sub-header-area {
+  height: 60px;
   background-color: beige;
   border-radius: 20px 20px 20px 20px;
 }
 
-.background-area {
+body {
   overflow: hidden;
   position: relative;
   display: flex;
@@ -69,7 +68,7 @@ Index Corps
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  height: 100vh;
+  height: 80vh;
 }
 
 .text-hoover {

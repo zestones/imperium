@@ -40,103 +40,99 @@
   </head>
 
   <body>
-    <section class="background-area">
-      <!-- Header begining -->
-      <header class="header-area">
-        <nav class="navbar navbar-expand-lg navbar-light sub-header-area">
-          <a class="navbar-brand" href="/index">Imperium</a>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logIn">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/signIn">Sign-In</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!-- Header end -->
-      <!-- Landing Page Begining -->
-      <div class="welcome-area">
-        <form class="form-signin" method="post" data-th-action="@{/signIn}">
-          <hr />
-          <h2 class="form-signin-h2">Registration</h2>
-          <hr />
-          <div data-th-if="${error != null}">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              data-th-text="${error}"
-            ></div>
-          </div>
-          <p>
-            <!-- <label for="lastname" class="sr-only">lastname</label> -->
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              class="form-control"
-              placeholder="lastname"
-              required
-              autofocus
-            />
-          </p>
-          <p>
-            <!-- <label for="firstname" class="sr-only">firstname</label> -->
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              class="form-control"
-              placeholder="firstname"
-              required
-              autofocus
-            />
-          </p>
-          <p>
-            <!-- <label for="username" class="sr-only">Username</label> -->
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="form-control"
-              placeholder="Username"
-              required
-              autofocus
-            />
-          </p>
-          <p>
-            <!-- <label for="password" class="sr-only">Password</label> -->
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              placeholder="Password"
-              required
-            />
-          </p>
-          <input
-            name="_csrf"
-            type="hidden"
-            value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
-          />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign In
-          </button>
-          <br />
-          <div class="toogle-wrapper">
-            <a class="toogle-form" href="/logIn"> Log - In </a>
-          </div>
-        </form>
-        <hr />
+    <!-- Header begining -->
+    <nav class="navbar navbar-expand-lg navbar-light sub-header-area">
+      <a class="navbar-brand" href="/index">Imperium</a>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logIn">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signIn">Sign-In</a>
+          </li>
+        </ul>
       </div>
-      <!-- Landing Page End -->
-    </section>
+    </nav>
+    <!-- Header end -->
+    <!-- Landing Page Begining -->
+    <div>
+      <form class="form-signin" method="post" data-th-action="@{/signIn}">
+        <hr />
+        <h2 class="form-signin-h2">Registration</h2>
+        <hr />
+        <div data-th-if="${error != null}">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            data-th-text="${error}"
+          ></div>
+        </div>
+        <p>
+          <!-- <label for="lastname" class="sr-only">lastname</label> -->
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            class="form-control"
+            placeholder="lastname"
+            required
+            autofocus
+          />
+        </p>
+        <p>
+          <!-- <label for="firstname" class="sr-only">firstname</label> -->
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            class="form-control"
+            placeholder="firstname"
+            required
+            autofocus
+          />
+        </p>
+        <p>
+          <!-- <label for="username" class="sr-only">Username</label> -->
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Username"
+            required
+            autofocus
+          />
+        </p>
+        <p>
+          <!-- <label for="password" class="sr-only">Password</label> -->
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+        </p>
+        <input
+          name="_csrf"
+          type="hidden"
+          value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
+        />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Sign In
+        </button>
+        <br />
+        <div class="toogle-wrapper">
+          <a class="toogle-form" href="/logIn"> Log - In </a>
+        </div>
+      </form>
+      <hr />
+    </div>
+    <!-- Landing Page End -->
   </body>
 </html>
