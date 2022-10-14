@@ -59,7 +59,7 @@ Index Corps
   border-radius: 20px 20px 20px 20px;
 }
 
-.welcome-area {
+.background-area {
   overflow: hidden;
   position: relative;
   display: flex;
@@ -70,4 +70,51 @@ Index Corps
   background-position: center center;
   background-size: cover;
   height: 100vh;
+}
+
+.text-hoover {
+  position: relative;
+}
+
+h1 {
+  display: flex;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  color: hsl(0, 0%, 28%);
+  font-size: 50px;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: 7px;
+  cursor: pointer;
+  height: 10vh;
+}
+
+h1 span {
+  transition: 0.5s ease-out;
+}
+
+h1:hover span:nth-child(1) {
+  margin-right: 5px;
+}
+
+h1:hover span:nth-child(1):after {
+  content: "MPERIUM";
+}
+
+h1:hover span:nth-child(2) {
+  margin-left: 30px;
+}
+
+h1:hover span:nth-child(2):after {
+  content: "AKE IT"
+}
+
+h1:hover span:nth-child(3) {
+  margin-left: 30px;
+}
+
+h1:hover span {
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
 }
