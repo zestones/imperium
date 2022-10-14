@@ -11,23 +11,8 @@ Table of contents
 /*------------------------------------------
 Login styles
 -----------------------------------------*/
-body {
-  padding-top: 0 !important;
-}
 
-/*
-#form-container {
-  padding-top: 40px;
-}
 
-/* .img-logo-border{
-    border-image: url(../img/landing/logo.png);
-} */
-
-/* form {
-  background-color: #dddd;
-  border: 1px solid white;
-} */
 .toogle-wrapper {
   text-align: right;
 }
@@ -45,7 +30,6 @@ body {
 /*------------------------------------------
 Index Corps
 -----------------------------------------*/
-.header-area {}
 
 .sub-header-area {
   position: fixed;
@@ -71,13 +55,9 @@ body {
   height: 80vh;
 }
 
-.text-hoover {
-  position: relative;
-}
 
 h1 {
   display: flex;
-  /* text-align: center; */
   align-items: center;
   justify-content: center;
   color: hsl(0, 0%, 28%);
