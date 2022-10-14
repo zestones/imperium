@@ -14,7 +14,7 @@
 	<name>imperium</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<spring.version>5.2.0.RELEASE</spring.version>
 	</properties>
@@ -94,7 +94,7 @@
 				<artifactId>heroku-maven-plugin</artifactId>
 				<version>3.0.3</version>
 				<configuration>
-					<jdkVersion>11</jdkVersion>
+					<jdkVersion>17</jdkVersion>
 					<appName>imperiums</appName>
 					<logProgress>true</logProgress>
 				</configuration>
