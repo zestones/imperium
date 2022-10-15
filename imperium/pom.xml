@@ -15,13 +15,17 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<spring.version>5.2.0.RELEASE</spring.version>
 	</properties>
 	<dependencies>
-		<dependency>
+			<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		
+		<!-- Spring Security Starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -83,6 +87,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<jdkVersion>17</jdkVersion>
+					<appName>imperiums</appName>
+					<logProgress>true</logProgress>
 				</configuration>
 			</plugin>
 		</plugins>
