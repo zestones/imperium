@@ -12,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.imperium.imperium.service.ProjectList.BoardService;
 import com.imperium.imperium.service.access.AccessService;
+import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
@@ -31,7 +31,7 @@ public class PageController {
     AccessService accessService;
 
     @Autowired
-    BoardService projectListService;
+    BoardService boardService;
 
     @Autowired
     TaskService taskService;
@@ -86,25 +86,25 @@ public class PageController {
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getUser().getId();
-        final String name = projectService.findById((Long) id).getName();
+        String projectName = projectService.findById((Long) id).getName();
 
+        // USER DATA
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
-
         model.addAttribute("username", UserController.getUser().getUsername());
 
-        // List des List of Projects
-        model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
-        model.addAttribute("listOfTasks", taskService.findAll());
+        // BOARD DATA
+        model.addAttribute("boards", boardService.findBoardsByProjectId(id));
+        model.addAttribute("tasks", taskService.findTaskByProjectId(id));
 
-        model.addAttribute("name", name);
+        // PROJECT DATA
+        model.addAttribute("projectName", projectName);
         model.addAttribute("id", id);
-
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-
         model.addAttribute("access",
                 userService.getArrayUserByArrayidUser(
                         accessService.findIdContributorByIdProject(id)));
 
+        // PROCESS ERROR
         if (!error.equals("no-error"))
             model.addAttribute("error", "Error : Unable share the project !");
 

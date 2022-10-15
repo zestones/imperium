@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -19,17 +18,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "Task")
 public class Task {
-    String title;
+
+    private String title;
+
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_list", referencedColumnName = "id")
-    private Board list;
+    @JoinColumn(name = "id_board", referencedColumnName = "id")
+    private Board board;
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)

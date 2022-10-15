@@ -1,22 +1,11 @@
 package com.imperium.imperium.service.task;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import com.imperium.imperium.model.Task;
 
 public interface ITaskService {
-    void save(Task t);
+  void save(Task t);
 
-    void delete(Task t);
-
-  // ArrayList<Task> findTaskByProjectListId(Long id);
-
-    ArrayList<Task> findAll();
-
-    ArrayList<Task>findByTitle(String name);
-    
-    ArrayList<Task> findByProjectListId(Long id);
-
-    Optional<Task> findById(Long id);
+  ArrayList<Task> findTaskByProjectId(Long id);
 }

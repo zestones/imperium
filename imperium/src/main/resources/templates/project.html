@@ -28,20 +28,11 @@
     <link rel="stylesheet" href="/css/project.css" />
 
     <title>Imperium</title>
-    <script>
-      function myFunction() {
-        var x = document.getElementById("hideshowinput");
-        if (x.style.display === "block") {
-          x.style.display = "none";
-        } else {
-          x.style.display = "block";
-        }
-      }
-    </script>
   </head>
   <body>
     <div class="container-fluid">
       <div class="row flex-nowrap">
+        <!-- SIDE NAV BAR -->
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
           <div
             class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
@@ -52,16 +43,19 @@
             >
               <span class="fs-5 d-none d-sm-inline">Menu</span>
             </a>
+            <!-- NAV BAR ITEM  -->
             <ul
               class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
             >
+              <!-- HOME -->
               <li class="nav-item">
                 <a data-th-href="@{/home}" class="nav-link align-middle px-0">
                   <i class="fs-4 bi-house"></i>
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
               </li>
+              <!-- PROJECTS -->
               <li>
                 <a
                   href="#submenu1"
@@ -89,6 +83,7 @@
                   </li>
                 </ul>
               </li>
+              <!-- CALENDAR -->
               <li>
                 <a href="#" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-table"></i>
@@ -165,6 +160,7 @@
               </li>
             </ul>
             <hr />
+            <!-- USER INFOS DROPDOWN -->
             <div class="dropdown pb-4">
               <a
                 href="#"
@@ -211,6 +207,7 @@
         </div>
 
         <div class="col py-3">
+          <!-- DISPLAY ERROR MSG -->
           <div class="header-error" data-th-if="${error != null}">
             <div
               class="alert alert-danger"
@@ -221,9 +218,9 @@
           <div class="container">
             <div class="card" id="myNavBar">
               <div class="card-body">
-                <h3>Project "[[ ${name} ]]"</h3>
+                <h3>Project "[[ ${projectName} ]]"</h3>
 
-                <!-- Button trigger modal -->
+                <!-- TRIGGER SHARE MODAL -->
                 <div data-th-if="${isOwner == true}" class="shareButton">
                   <button
                     type="button"
@@ -238,38 +235,39 @@
               </div>
             </div>
           </div>
-
+          <!-- DISPLAY BOARDS -->
           <table>
-            <td th:each="pl : ${listOfProjectList}">
+            <td data-th-each="b : ${boards}">
               <div class="card" style="width: 25rem; display: inline-block" ;>
                 <div class="card-body">
-                  <h5 class="card-title" th:text="${pl.title}">Card title</h5>
+                  <h5 class="card-title" data-th-text="${b.title}">
+                    Card title
+                  </h5>
 
+                  <!-- DISPLAY TASK -->
                   <div
                     class="card"
                     style="width: 20rem; display: inline-block"
-                    ;
-                    th:each="task :${listOfTasks}"
+                    data-th-each="t :${tasks}"
+                    data-th-if="${t.board.id == b.id}"
                   >
                     <div class="card-body">
-                      <p th:text="${task.title}">Task Title</p>
+                      <p data-th-text="${t.title}"></p>
                     </div>
                   </div>
 
-                  <form
-                    th:action="@{/home/createNewTask}"
-                    th:object="${task}"
-                    method="post"
-                  >
+                  <form data-th-action="@{/home/create-task}" method="post">
                     <input
                       type="text"
                       placeholder="Task Name"
-                      name="tasktitle"
+                      name="title"
                       required
                     />
-                    <input type="hidden" name="listid" th:value="${pl.id}" />
-                    <input type="hidden" name="idproject" th:value="${id}" />
-
+                    <input
+                      type="hidden"
+                      name="idBoard"
+                      data-th-value="${b.id}"
+                    />
                     <button class="btn btn-primary">Create task</button>
                   </form>
                 </div>
@@ -288,7 +286,7 @@
             </button>
           </div>
 
-          <!-- new list Modal -->
+          <!-- NEW LIST MODAL -->
           <div
             class="modal fade"
             id="listModal"
@@ -344,6 +342,7 @@
             </div>
           </div>
 
+          <!-- SHARE BOARD MODAL -->
           <div
             class="modal fade"
             id="shareModal"
@@ -401,7 +400,7 @@
             </div>
           </div>
 
-          <!-- new project Modal -->
+          <!-- NEW PROJECT MODAL -->
           <div
             class="modal fade"
             id="staticBackdrop"
