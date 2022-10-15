@@ -26,60 +26,29 @@ public class UserController {
         }
 
         service.save(u);
-        setCurrentUser(u);
+        setUser(u);
 
         service.autologin(u.getUsername(), pwd);
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/UserController.java
-        service.autologin(u.getUsername(), pwd);
-
-=======
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/UserController.java
         return "redirect:/home";
     }
 
     @PostMapping(value = "/process-logIn")
     public String logIn(Model model, User u) {
+
         if (service.canConnect(u)) {
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/UserController.java
             setUser(service.findByUsername(u.getUsername()));
-=======
-            setCurrentUser(service.findByUsername(u.getUsername()));
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/UserController.java
             return "redirect:/home";
         }
 
         return "authentification/logIn";
     }
 
-    @PostMapping(value = "/home/profile/process-profil")
-    public String updateUser(Model model, User u, String pwd1, String pwd2) {
-
-        if (!service.canUpdate(u, getCurrentUser()))
-            return "redirect:/home/profile?error=username";
-
-        u.setId(getCurrentUser().getId());
-
-        String pwd;
-        if (service.canUpdatePassword(u, pwd1, pwd2))
-            pwd = service.encodePassword(pwd2);
-        else if (u.getPassword().equals(""))
-            pwd = getCurrentUser().getPassword();
-        else
-            return "redirect:/home/profile?error=password";
-
-        u.setPassword(pwd);
-        service.update(u);
-        setCurrentUser(service.findById(u.getId()));
-
-        return "redirect:/home/profile";
-    }
-
-    public static void setCurrentUser(User u) {
+    public static void setUser(User u) {
         user = u;
     }
 
-    public static User getCurrentUser() {
+    public static User getUser() {
         return user;
     }
 

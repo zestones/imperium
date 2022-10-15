@@ -12,13 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
 import com.imperium.imperium.service.ProjectList.ProjectListService;
-=======
-import com.imperium.imperium.model.User;
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
 import com.imperium.imperium.service.access.AccessService;
-import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
@@ -36,25 +31,14 @@ public class PageController {
     AccessService accessService;
 
     @Autowired
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
     ProjectListService projectListService;
 
     @Autowired
     TaskService taskService;
-=======
-    BoardService projectListService;
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
 
     @GetMapping(value = { "/", "/index" })
-    public String indexPage(HttpServletRequest request, HttpServletResponse response) {
-        userService.autologout(request, response);
-
+    public String indexPage() {
         return "index";
-    }
-
-    @GetMapping(value = "/home/logout")
-    private String logoutPage() {
-        return "redirect:/";
     }
 
     @GetMapping(value = "/signIn")
@@ -83,17 +67,13 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("username", UserController.getUser().getUsername());
-=======
-        model.addAttribute("username", UserController.getCurrentUser().getUsername());
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
-                        accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
+                        accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -101,24 +81,16 @@ public class PageController {
         return "home";
     }
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
     @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-list", "/home/create-task" })
     private String openProject(Model model,@RequestParam(value = "id", defaultValue = "error") Long id,
-=======
-    @GetMapping(value = { "/home/create-project", "/home/open-project" })
-    private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        Long userId = UserController.getCurrentUser().getId();
+        Long userId = UserController.getUser().getId();
         final String name = projectService.findById((Long) id).getName();
 
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
 
-        model.addAttribute("username", UserController.getCurrentUser().getUsername());
-
-        // List des List of Projects
-        model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
+        model.addAttribute("username", UserController.getUser().getUsername());
 
         // List des List of Projects
         model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
@@ -127,7 +99,6 @@ public class PageController {
        
 
         model.addAttribute("name", name);
-
         model.addAttribute("id", id);
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
@@ -140,23 +111,5 @@ public class PageController {
             model.addAttribute("error", "Error : Unable share the project !");
 
         return "project";
-    }
-
-    @GetMapping(value = "/home/profile")
-    private String profile(Model model, User u,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
-        Long userId = UserController.getCurrentUser().getId();
-
-        model.addAttribute("user", UserController.getCurrentUser());
-        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-
-        if (error.equals("password")) {
-            model.addAttribute("user", UserController.getCurrentUser());
-            model.addAttribute("error", "Passwords are not matching or Wrong previous password!");
-        } else if (error.equals("username")) {
-            model.addAttribute("error", "Username already used.");
-        }
-
-        return "profile";
     }
 }

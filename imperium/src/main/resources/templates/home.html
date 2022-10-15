@@ -37,7 +37,7 @@
             class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
           >
             <a
-              data-th-href="@{/home}"
+              data-th-href="@{/home?username=} + ${username}"
               class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
               <span class="fs-5 d-none d-sm-inline">Menu</span>
@@ -191,20 +191,12 @@
                   >
                 </li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li>
-                  <a class="dropdown-item" data-th-href="@{/home/profile}"
-                    >Profile</a
-                  >
-                </li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-<<<<<<< imperium/src/main/resources/templates/home.html
                   <a class="dropdown-item" data-th-href="@{/home/logout}"
-=======
-                  <a class="dropdown-item" data-th-href="@{home/logout}"
->>>>>>> imperium/src/main/resources/templates/home.html
                     >Sign out</a
                   >
                 </li>
@@ -247,18 +239,11 @@
                   >Open</a
                 >
                 <!--<a
-<<<<<<< imperium/src/main/resources/templates/home.html
                   data-th-href="@{/home/projectList/{id} (id=${p.id})}"
                   class="btn btn-primary"
                   >See Project Lists</a
                 >-->
                 
-=======
-                  data-th-href="@{/home/project-list/{id} (id=${p.id})}"
-                  class="btn btn-primary"
-                  >See Project Lists</a
-                >-->
->>>>>>> imperium/src/main/resources/templates/home.html
               </div>
             </div>
           </div>
