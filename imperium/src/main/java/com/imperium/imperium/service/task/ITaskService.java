@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.imperium.imperium.model.Task;
 
 public interface ITaskService {
+
   void save(Task t);
 
   ArrayList<Task> findTaskByProjectId(Long id);

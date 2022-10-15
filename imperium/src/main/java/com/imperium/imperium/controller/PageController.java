@@ -4,14 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
@@ -37,8 +35,15 @@ public class PageController {
     TaskService taskService;
 
     @GetMapping(value = { "/", "/index" })
-    public String indexPage() {
+    public String indexPage(HttpServletRequest request, HttpServletResponse response) {
+        userService.autologout(request, response);
+
         return "index";
+    }
+
+    @GetMapping(value = "/home/logout")
+    private String logoutPage() {
+        return "redirect:/";
     }
 
     @GetMapping(value = "/signIn")
@@ -52,16 +57,6 @@ public class PageController {
             model.addAttribute("error", "Username and password invalid.");
 
         return "authentification/logIn";
-    }
-
-    @GetMapping(value = "/home/logout")
-    private String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null)
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-
-        return "redirect:/index";
     }
 
     @GetMapping(value = "/home")
@@ -110,4 +105,23 @@ public class PageController {
 
         return "project";
     }
+
+    @GetMapping(value = "/home/profile")
+    private String profile(Model model, User u,
+            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+        Long userId = UserController.getCurrentUser().getId();
+
+        model.addAttribute("user", UserController.getCurrentUser());
+        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+
+        if (error.equals("password")) {
+            model.addAttribute("user", UserController.getCurrentUser());
+            model.addAttribute("error", "Passwords are not matching or Wrong previous password!");
+        } else if (error.equals("username")) {
+            model.addAttribute("error", "Username already used.");
+        }
+
+        return "profile";
+    }
+
 }

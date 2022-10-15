@@ -8,20 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imperium.imperium.model.Project;
-import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
-import com.imperium.imperium.service.task.TaskService;
 
 @Controller
 public class ProjectController {
+
     @Autowired
     ProjectService service;
-
-    @Autowired
-    TaskService taskservice;
-
-    @Autowired
-    BoardService projectListService;
 
     @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {

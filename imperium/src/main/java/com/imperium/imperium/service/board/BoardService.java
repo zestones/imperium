@@ -10,6 +10,7 @@ import com.imperium.imperium.repository.BoardRepository;
 
 @Service
 public class BoardService implements IBoardService {
+
     @Autowired
     BoardRepository bRepo;
 

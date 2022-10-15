@@ -15,9 +15,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @Entity
 @NoArgsConstructor
-@Data
 public class Task {
 
     private String title;
