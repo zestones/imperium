@@ -24,6 +24,8 @@ public class Access {
     @GeneratedValue
     private Long id;
 
+    // One user has one and only one access method. If he is the "Admin" he can give
+    // canRead or canEdit permissions to other users.
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)

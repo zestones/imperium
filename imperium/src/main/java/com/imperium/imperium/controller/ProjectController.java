@@ -26,9 +26,9 @@ public class ProjectController {
     @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
 
-        if (service.canCreateProject(p, UserController.getUser().getId())) {
+        if (service.canCreateProject(p, UserController.getCurrentUser().getId())) {
 
-            p.setUser(UserController.getUser());
+            p.setUser(UserController.getCurrentUser());
             service.save(p);
 
             return "redirect:/home/create-project?id=" + p.getId();
@@ -37,16 +37,20 @@ public class ProjectController {
         return "redirect:/home?error=name";
     }
 
-  
-
+    @GetMapping(value = "/home/open-project/{id}")
+    private String openProject(@PathVariable Long id, Model model) {
+        model.addAttribute("listOfProjectList", projectListService.findAll());
+        return "redirect:/home/open-project?id=" + id;
+    }
 
     @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 
-        if (service.canDeleteProject(UserController.getUser(), name)) {
-            service.delete(service.findProjectByUserIdAndName(UserController.getUser().getId(), name));
+        if (service.canDeleteProject(UserController.getCurrentUser(), name)) {
+            service.delete(service.findProjectByUserIdAndName(UserController.getCurrentUser().getId(), name));
         }
 
         return "redirect:/home";
     }
+
 }
