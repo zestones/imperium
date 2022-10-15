@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.imperium.imperium.service.ProjectList.ProjectListService;
+import com.imperium.imperium.service.ProjectList.BoardService;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
@@ -31,7 +31,7 @@ public class PageController {
     AccessService accessService;
 
     @Autowired
-    ProjectListService projectListService;
+    BoardService projectListService;
 
     @Autowired
     TaskService taskService;
@@ -81,8 +81,8 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-list", "/home/create-task" })
-    private String openProject(Model model,@RequestParam(value = "id", defaultValue = "error") Long id,
+    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-bord", "/home/create-task" })
+    private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getUser().getId();
@@ -95,8 +95,6 @@ public class PageController {
         // List des List of Projects
         model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
         model.addAttribute("listOfTasks", taskService.findAll());
-        
-       
 
         model.addAttribute("name", name);
         model.addAttribute("id", id);

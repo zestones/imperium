@@ -29,7 +29,7 @@ public class Task {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_list", referencedColumnName = "id")
-    private ProjectList list;
+    private Board list;
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)

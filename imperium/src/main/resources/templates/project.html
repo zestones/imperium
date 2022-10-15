@@ -28,14 +28,16 @@
     <link rel="stylesheet" href="/css/project.css" />
 
     <title>Imperium</title>
-     <script>function myFunction() {
-      var x = document.getElementById("hideshowinput");
-      if (x.style.display === "block") {
-        x.style.display = "none";
-      } else {
-        x.style.display = "block";
+    <script>
+      function myFunction() {
+        var x = document.getElementById("hideshowinput");
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        } else {
+          x.style.display = "block";
+        }
       }
-    }</script>
+    </script>
   </head>
   <body>
     <div class="container-fluid">
@@ -219,70 +221,62 @@
           <div class="container">
             <div class="card" id="myNavBar">
               <div class="card-body">
-                <h3> Project "[[ ${name} ]]"</h3> 
+                <h3>Project "[[ ${name} ]]"</h3>
 
-               <!-- Button trigger modal -->
-              <div data-th-if="${isOwner == true}" class="shareButton">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#shareModal"
-              >
-                <i class="bi bi-share"></i>
-                 Share
-              </button>
-              </div>
-        
+                <!-- Button trigger modal -->
+                <div data-th-if="${isOwner == true}" class="shareButton">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#shareModal"
+                  >
+                    <i class="bi bi-share"></i>
+                    Share
+                  </button>
+                </div>
               </div>
             </div>
+          </div>
 
+          <table>
+            <td th:each="pl : ${listOfProjectList}">
+              <div class="card" style="width: 25rem; display: inline-block" ;>
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${pl.title}">Card title</h5>
 
-             
-            
-  
-
-              <table>
-                <td th:each="pl : ${listOfProjectList}">
-                    <div
+                  <div
                     class="card"
-                    style="width: 25rem; display: inline-block";>
+                    style="width: 20rem; display: inline-block"
+                    ;
+                    th:each="task :${listOfTasks}"
+                  >
                     <div class="card-body">
-                      <h5 class="card-title" th:text="${pl.title}">Card title</h5>  
-                      
-                      <div
-                      class="card"
-                      style="width: 20rem; display: inline-block";
-                      th:each="task :${listOfTasks}">
-                      <div class="card-body">
-                         <p th:text="${task.title}">Task Title</p>
-
-                      </div>
-                      </div>
-
-
-
-                       <form th:action="@{/home/createNewTask}" th:object="${task}" method="post">
-                        <input type="text" placeholder="Task Name" name="tasktitle" required> 
-                        <input type="hidden" name="listid" th:value="${pl.id}">
-                        <input type="hidden" name="idproject" th:value="${id}">
-                       
-                        <button class="btn  btn-primary">Create task</button>
-                       </form>
-               
-
-                     </div>
+                      <p th:text="${task.title}">Task Title</p>
+                    </div>
                   </div>
-                </td>     
-                   
-              </table>
-           
-             
-            
-            
-        
 
-         
+                  <form
+                    th:action="@{/home/createNewTask}"
+                    th:object="${task}"
+                    method="post"
+                  >
+                    <input
+                      type="text"
+                      placeholder="Task Name"
+                      name="tasktitle"
+                      required
+                    />
+                    <input type="hidden" name="listid" th:value="${pl.id}" />
+                    <input type="hidden" name="idproject" th:value="${id}" />
+
+                    <button class="btn btn-primary">Create task</button>
+                  </form>
+                </div>
+              </div>
+            </td>
+          </table>
+
           <div data-th-if="${isOwner == true}">
             <button
               type="button"
@@ -320,7 +314,7 @@
                 <div class="modal-body">
                   <form
                     method="POST"
-                    data-th-action="@{/home/create-list/{id} (id=${id})}"
+                    data-th-action="@{/home/create-bord/{id} (id=${id})}"
                   >
                     <div class="mb-3">
                       <label for="list" class="form-label">List name</label>
