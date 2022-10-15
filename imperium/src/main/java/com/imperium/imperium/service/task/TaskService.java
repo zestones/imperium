@@ -20,6 +20,11 @@ public class TaskService implements ITaskService {
     }
 
     @Override
+    public void delete(Task t) {
+        tRepo.delete(t);
+    }
+
+    @Override
     public ArrayList<Task> findTaskByProjectId(Long id) {
         return tRepo.findTaskByProjectId(id);
     }

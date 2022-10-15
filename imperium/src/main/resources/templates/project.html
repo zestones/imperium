@@ -258,6 +258,15 @@
                     <div class="card-body">
                       <p data-th-text="${t.title}"></p>
                     </div>
+
+                    <button
+                      type="submit"
+                      class="btn btn-danger"
+                      id="deleteTask"
+                      data-th-href="@{/home/delete-task/{title} (title=${t.title})}"
+                    >
+                      <span class="bi bi-trash"></span>
+                    </button>
                   </div>
 
                   <form data-th-action="@{/home/create-task}" method="post">
