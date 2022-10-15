@@ -9,4 +9,5 @@ public class ImperiumApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ImperiumApplication.class, args);
 	}
+
 }

@@ -34,3 +34,4 @@ build/
 
 ### DATABASE ###
 imperiumdb.*
+imperium/imperiumdb.*
