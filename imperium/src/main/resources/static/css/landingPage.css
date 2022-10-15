@@ -42,7 +42,7 @@ Index Corps
   border-radius: 20px 20px 20px 20px;
 }
 
-body {
+.main-container {
   overflow: hidden;
   position: relative;
   display: flex;
