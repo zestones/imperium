@@ -50,4 +50,10 @@ public class TaskService implements ITaskService {
     public Optional<Task> findById(Long id) {
         return taskRepo.findById(id);
     }
+
+    @Override
+    public ArrayList<Task> findByProjectListId(Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
