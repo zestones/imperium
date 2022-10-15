@@ -13,14 +13,14 @@ public interface IUserService {
 
     void update(User u);
 
-    User findByUsername(String username);
+    User findById(Long id);
 
     ArrayList<User> findAll();
 
-    User findById(Long id);
+    User findByUsername(String username);
 
     void autologin(String username, String password);
 
-    public void autologout(HttpServletRequest request, HttpServletResponse response);
+    void autologout(HttpServletRequest request, HttpServletResponse response);
 
 }

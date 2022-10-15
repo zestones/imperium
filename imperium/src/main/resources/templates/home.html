@@ -37,7 +37,7 @@
             class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
           >
             <a
-              data-th-href="@{/home}"
+              data-th-href="@{/home?username=} + ${username}"
               class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
               <span class="fs-5 d-none d-sm-inline">Menu</span>
@@ -200,7 +200,7 @@
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" data-th-href="@{home/logout}"
+                  <a class="dropdown-item" data-th-href="@{/home/logout}"
                     >Sign out</a
                   >
                 </li>
@@ -243,7 +243,7 @@
                   >Open</a
                 >
                 <!--<a
-                  data-th-href="@{/home/project-list/{id} (id=${p.id})}"
+                  data-th-href="@{/home/projectList/{id} (id=${p.id})}"
                   class="btn btn-primary"
                   >See Project Lists</a
                 >-->

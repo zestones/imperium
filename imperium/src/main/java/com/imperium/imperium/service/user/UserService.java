@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +32,8 @@ public class UserService implements IUserService, UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(UserService.class);
+    // private final org.slf4j.Logger logger =
+    // LoggerFactory.getLogger(UserService.class);
     public final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     /************************
@@ -69,10 +69,8 @@ public class UserService implements IUserService, UserDetailsService {
 
         Authentication auth = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-        if (auth.isAuthenticated()) {
+        if (auth.isAuthenticated())
             SecurityContextHolder.getContext().setAuthentication(auth);
-            logger.debug(String.format("Auto login %s successfully!", username));
-        }
     }
 
     @Override

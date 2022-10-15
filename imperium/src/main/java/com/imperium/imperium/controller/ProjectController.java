@@ -8,16 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imperium.imperium.model.Project;
-import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
 
 @Controller
 public class ProjectController {
-    @Autowired
-    ProjectService service;
 
     @Autowired
-    BoardService projectListService;
+    ProjectService service;
 
     @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
@@ -35,7 +32,6 @@ public class ProjectController {
 
     @GetMapping(value = "/home/open-project/{id}")
     private String openProject(@PathVariable Long id, Model model) {
-        model.addAttribute("listOfProjectList", projectListService.findAll());
         return "redirect:/home/open-project?id=" + id;
     }
 
@@ -48,5 +44,4 @@ public class ProjectController {
 
         return "redirect:/home";
     }
-
 }

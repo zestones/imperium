@@ -9,25 +9,19 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 public class Board {
 
-    // This class representes the List where user can add tasks, it can be
-    // "Upcoming", "In progress", "Done", ...etc.
+    private String title;
 
     @Id
     @GeneratedValue
     private Long id;
-
-    // title which is "Upcoming","Done",...etc.
-    String title;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

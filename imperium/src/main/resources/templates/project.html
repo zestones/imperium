@@ -23,55 +23,39 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/project.css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Imperium</title>
-
-    <script>
-      function showTask() {
-        var x = document.getElementById("click");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-    </script>
   </head>
   <body>
     <div class="container-fluid">
       <div class="row flex-nowrap">
+        <!-- SIDE NAV BAR -->
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
           <div
             class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
           >
             <a
-              data-th-href="@{/home} + ${username}"
+              data-th-href="@{/home}"
               class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
               <span class="fs-5 d-none d-sm-inline">Menu</span>
             </a>
+            <!-- NAV BAR ITEM  -->
             <ul
               class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
             >
+              <!-- HOME -->
               <li class="nav-item">
-                <a
-                  data-th-href="@{/home} + ${username}"
-                  class="nav-link align-middle px-0"
-                >
+                <a data-th-href="@{/home}" class="nav-link align-middle px-0">
                   <i class="fs-4 bi-house"></i>
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
               </li>
+              <!-- PROJECTS -->
               <li>
                 <a
                   href="#submenu1"
@@ -99,6 +83,7 @@
                   </li>
                 </ul>
               </li>
+              <!-- CALENDAR -->
               <li>
                 <a href="#" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-table"></i>
@@ -175,6 +160,7 @@
               </li>
             </ul>
             <hr />
+            <!-- USER INFOS DROPDOWN -->
             <div class="dropdown pb-4">
               <a
                 href="#"
@@ -225,6 +211,7 @@
         </div>
 
         <div class="col py-3">
+          <!-- DISPLAY ERROR MSG -->
           <div class="header-error" data-th-if="${error != null}">
             <div
               class="alert alert-danger"
@@ -235,9 +222,9 @@
           <div class="container">
             <div class="card" id="myNavBar">
               <div class="card-body">
-                <h3>Project "[[ ${name} ]]"</h3>
+                <h3>Project "[[ ${projectName} ]]"</h3>
 
-                <!-- Button trigger modal -->
+                <!-- TRIGGER SHARE MODAL -->
                 <div data-th-if="${isOwner == true}" class="shareButton">
                   <button
                     type="button"
@@ -249,72 +236,117 @@
                     Share
                   </button>
                 </div>
-
-                <!-- Modal -->
               </div>
             </div>
+          </div>
+          <!-- DISPLAY BOARDS -->
+          <table>
+            <td data-th-each="b : ${boards}">
+              <div class="card" style="width: 25rem; display: inline-block" ;>
+                <div class="card-body">
+                  <h5 class="card-title" data-th-text="${b.title}">
+                    Card title
+                  </h5>
 
-            <div class="card" id="myList" th:each="pl:${listOfProjectList}">
-              <div class="cardText">
-                <h4 class="h4" th:text="${pl.title}">List Name</h4>
-                <div class="buttonPosition">
-                  <div class="plus-button"></div>
-                </div>
-              </div>
-            </div>
-            <div class="container">
-              <!-- Trigger the modal with a button -->
-
-              <div data-th-if="${isOwner == true}" class="addListButton">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#addListModal"
-                >
-                  <i class="bi bi-plus"></i>
-                  Add another List
-                </button>
-              </div>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="addListModal"
-                role="dialog"
-                tabindex="-1"
-              >
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Add a new list</h4>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <input
-                        class="form-control"
-                        type="text"
-                        placeholder="Insert list name..."
-                      />
+                  <!-- DISPLAY TASK -->
+                  <div
+                    class="card"
+                    style="width: 20rem; display: inline-block"
+                    data-th-each="t :${tasks}"
+                    data-th-if="${t.board.id == b.id}"
+                  >
+                    <div class="card-body">
+                      <p data-th-text="${t.title}"></p>
                     </div>
                   </div>
+
+                  <form data-th-action="@{/home/create-task}" method="post">
+                    <input
+                      type="text"
+                      placeholder="Task Name"
+                      name="title"
+                      required
+                    />
+                    <input
+                      type="hidden"
+                      name="idBoard"
+                      data-th-value="${b.id}"
+                    />
+                    <button class="btn btn-primary">Create task</button>
+                  </form>
+                </div>
+              </div>
+            </td>
+          </table>
+
+          <div data-th-if="${isOwner == true}">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#listModal"
+            >
+              Add a list
+            </button>
+          </div>
+
+          <!-- NEW LIST MODAL -->
+          <div
+            class="modal fade"
+            id="listModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Create a list
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    method="POST"
+                    data-th-action="@{/home/create-board/{id} (id=${id})}"
+                  >
+                    <div class="mb-3">
+                      <label for="list" class="form-label">List name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="title"
+                        placeholder="List title"
+                        id="list"
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Create
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- <h3>User Access</h3>
-            <ul data-th-each="u : ${access}">
-              <li data-th-text="${u}"></li>
-            </ul>
-          -->
-
+          <!-- SHARE BOARD MODAL -->
           <div
             class="modal fade"
             id="shareModal"
@@ -371,62 +403,65 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- new project Modal -->
-        <div
-          class="modal fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                  Create Project
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" data-th-action="@{/home/create-project}">
-                  <div class="mb-3">
-                    <label for="project" class="form-label">Project name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="name"
-                      placeholder="Project name"
-                      id="project"
-                    />
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      Create
-                    </button>
-                  </div>
-                </form>
+          <!-- NEW PROJECT MODAL -->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Create Project
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" data-th-action="@{/home/create-project}">
+                    <div class="mb-3">
+                      <label for="project" class="form-label"
+                        >Project name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        placeholder="Project name"
+                        id="project"
+                      />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        Create
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Bootstrap script -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

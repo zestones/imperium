@@ -13,6 +13,7 @@ import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.project.ProjectService;
+import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
@@ -28,7 +29,10 @@ public class PageController {
     AccessService accessService;
 
     @Autowired
-    BoardService projectListService;
+    BoardService boardService;
+
+    @Autowired
+    TaskService taskService;
 
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {
@@ -72,30 +76,30 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/home/create-project", "/home/open-project" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getCurrentUser().getId();
-        final String name = projectService.findById((Long) id).getName();
+        String projectName = projectService.findById((Long) id).getName();
 
+        // USER DATA
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
-
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
 
-        // List des List of Projects
-        model.addAttribute("listOfProjectList", projectListService.findProjectListByProjectId(id));
+        // BOARD DATA
+        model.addAttribute("boards", boardService.findBoardsByProjectId(id));
+        model.addAttribute("tasks", taskService.findTaskByProjectId(id));
 
-        model.addAttribute("name", name);
-
+        // PROJECT DATA
+        model.addAttribute("projectName", projectName);
         model.addAttribute("id", id);
-
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-
         model.addAttribute("access",
                 userService.getArrayUserByArrayidUser(
                         accessService.findIdContributorByIdProject(id)));
 
+        // PROCESS ERROR
         if (!error.equals("no-error"))
             model.addAttribute("error", "Error : Unable share the project !");
 
@@ -119,4 +123,5 @@ public class PageController {
 
         return "profile";
     }
+
 }
