@@ -26,7 +26,7 @@ public class UserController {
         }
 
         service.save(u);
-        setUser(u);
+        setCurrentUser(u);
 
         service.autologin(u.getUsername(), pwd);
 
@@ -37,18 +37,18 @@ public class UserController {
     public String logIn(Model model, User u) {
 
         if (service.canConnect(u)) {
-            setUser(service.findByUsername(u.getUsername()));
+            setCurrentUser(service.findByUsername(u.getUsername()));
             return "redirect:/home";
         }
 
         return "authentification/logIn";
     }
 
-    public static void setUser(User u) {
+    public static void setCurrentUser(User u) {
         user = u;
     }
 
-    public static User getUser() {
+    public static User getCurrentUser() {
         return user;
     }
 

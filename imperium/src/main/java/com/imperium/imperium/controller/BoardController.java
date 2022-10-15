@@ -20,13 +20,13 @@ public class BoardController {
     @Autowired
     ProjectService projectService;
 
-    @PostMapping(value = "/home/create-bord/{id}")
+    @PostMapping(value = "/home/create-board/{id}")
     private String createList(Model model, Board b, @PathVariable Long id) {
 
         b.setProject(projectService.findById(id));
         service.save(b);
 
-        return "redirect:/home/create-bord?id=" + id;
+        return "redirect:/home/create-board?id=" + id;
     }
 
 }

@@ -67,13 +67,13 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        model.addAttribute("username", UserController.getUser().getUsername());
+        model.addAttribute("username", UserController.getCurrentUser().getUsername());
         model.addAttribute("allUsers", userService.findAll());
 
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
-                        accessService.findIdProjectSharedWithUserId(UserController.getUser().getId())));
+                        accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
 
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -81,16 +81,16 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-bord", "/home/create-task" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        Long userId = UserController.getUser().getId();
+        Long userId = UserController.getCurrentUser().getId();
         String projectName = projectService.findById((Long) id).getName();
 
         // USER DATA
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
-        model.addAttribute("username", UserController.getUser().getUsername());
+        model.addAttribute("username", UserController.getCurrentUser().getUsername());
 
         // BOARD DATA
         model.addAttribute("boards", boardService.findBoardsByProjectId(id));

@@ -24,7 +24,7 @@ public class SecurityHandler implements AuthenticationSuccessHandler, Authentica
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
-        UserController.setUser(service.findByUsername(authentication.getName()));
+        UserController.setCurrentUser(service.findByUsername(authentication.getName()));
 
         response.sendRedirect("/home");
     }
