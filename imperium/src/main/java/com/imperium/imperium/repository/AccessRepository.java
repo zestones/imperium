@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.imperium.imperium.model.Access;
 
+/* Acces interface Query call for user right read into arraylist contributors  */
 public interface AccessRepository extends CrudRepository<Access, Long> {
 
     @Query(value = "SELECT u.id FROM USERS u, ACCESS a, PROJECTS p WHERE " +

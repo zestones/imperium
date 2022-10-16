@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+/* Task Table  */
 public class Task {
 
     private String title;
@@ -25,12 +26,12 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
-
+/* Foreign Key into board table */
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_board", referencedColumnName = "id")
     private Board board;
-
+/* Foreign Key into user table */
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id")

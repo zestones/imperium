@@ -19,13 +19,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
+/* User Table */
 public class User {
     private String lastname, firstname, username, password;
 
     @Id
     @GeneratedValue
     private Long id;
-
+/* Role set for SecurityConfig need, every user it's is own ADMIN */
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();

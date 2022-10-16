@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.imperium.imperium.model.Task;
 
+/* Task interface Query call for find task by it's project Id   */
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query(value = "SELECT t.* FROM TASK t, BOARD b, PROJECTS p "
