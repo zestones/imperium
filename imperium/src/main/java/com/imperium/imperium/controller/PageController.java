@@ -1,5 +1,7 @@
 package com.imperium.imperium.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -125,8 +127,9 @@ public class PageController {
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
         Long userId = UserController.getCurrentUser().getId();
-        String projectName = projectService.findById((Long) id).getName();
+        String projectName = projectService.findById(id).getName();
 
+        model.addAttribute("allUsers", userService.findAll());
         // USER DATA
         model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
@@ -139,9 +142,10 @@ public class PageController {
         model.addAttribute("projectName", projectName);
         model.addAttribute("id", id);
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
-        model.addAttribute("access",
-                userService.getArrayUserByArrayidUser(
-                        accessService.findIdContributorByIdProject(id)));
+
+        ArrayList<User> l = userService.getArrayUserByArrayidUser(accessService.findIdContributorByIdProject(id));
+        l.add(projectService.findProjectOwner(id));
+        model.addAttribute("contributor", l);
 
         // PROCESS ERROR
         if (!error.equals("no-error"))
