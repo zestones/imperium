@@ -261,9 +261,34 @@
                     <a
                       data-th-href="@{/home/delete-task/{idTask}/{idProjet} (idTask=${t.id},idProjet=${id})}"
                       class="btn btn-danger"
+                      id="deleteTask"
                     >
                       <span class="bi bi-trash"></span>
                     </a>
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenu2"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Assign
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li data-th-each="u : ${allUsers}" class="w-100">
+                          <a
+                            data-th-href="@{/home/assignTask/{idTask}/{idUser} (idTask=${t.id},idUser=${u.id})}"
+                            class="nav-link px-0"
+                          >
+                            <span
+                              class="d-none d-sm-inline"
+                              data-th-text="${u.firstname}"
+                            ></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
 
                   <form data-th-action="@{/home/create-task}" method="post">
