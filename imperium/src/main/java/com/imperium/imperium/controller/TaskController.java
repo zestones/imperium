@@ -61,7 +61,9 @@ public class TaskController {
     public String AssignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
         List<User> listOfUsers = new ArrayList<User>();
         listOfUsers.add(userService.findById(idUser));
-        service.findById(idTask).setUser(listOfUsers);
+        Task t = service.findById(idTask);
+        t.setUser(listOfUsers);
+        service.save(t);
         return "redirect:/home/open-project?id=" + idProject;
     }
 }
