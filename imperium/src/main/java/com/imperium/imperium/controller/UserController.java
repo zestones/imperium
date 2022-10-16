@@ -1,11 +1,17 @@
 package com.imperium.imperium.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.imperium.imperium.model.User;
+import com.imperium.imperium.service.photo.FileUploadUtil;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
@@ -62,13 +68,46 @@ public class UserController {
      * @param pwd2  : the confirmation of the password
      * @return String : redirect to PageController
      */
+    /*
+     * @PostMapping(value = "/home/profile/process-profil")
+     * public String updateUser(Model model, User u, String pwd1, String pwd2) {
+     * 
+     * if (!service.canUpdate(u, getCurrentUser()))
+     * return "redirect:/home/profile?error=username";
+     * 
+     * u.setId(getCurrentUser().getId());
+     * 
+     * String pwd;
+     * if (service.canUpdatePassword(u, pwd1, pwd2))
+     * pwd = service.encodePassword(pwd2);
+     * else if (u.getPassword().equals(""))
+     * pwd = getCurrentUser().getPassword();
+     * else
+     * return "redirect:/home/profile?error=password";
+     * 
+     * u.setPassword(pwd);
+     * service.update(u);
+     * setCurrentUser(service.findById(u.getId()));
+     * 
+     * return "redirect:/home/profile";
+     * }
+     */
     @PostMapping(value = "/home/profile/process-profil")
-    public String updateUser(Model model, User u, String pwd1, String pwd2) {
+    public RedirectView updateUser(Model model, User u, String pwd1, String pwd2,
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         if (!service.canUpdate(u, getCurrentUser()))
-            return "redirect:/home/profile?error=username";
+            return new RedirectView("/home/profil/home/profile?error=username", true);
 
         u.setId(getCurrentUser().getId());
+
+        String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        u.setPhotos(fileName);
+
+        // User savedUser = urepo.save(u);
+        String uploadDir = "src/user-photos/" + getCurrentUser().getId();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         String pwd;
         if (service.canUpdatePassword(u, pwd1, pwd2))
@@ -76,13 +115,13 @@ public class UserController {
         else if (u.getPassword().equals(""))
             pwd = getCurrentUser().getPassword();
         else
-            return "redirect:/home/profile?error=password";
+            return new RedirectView("/home/profil/home/profile?error=username", true);
 
         u.setPassword(pwd);
         service.update(u);
         setCurrentUser(service.findById(u.getId()));
 
-        return "redirect:/home/profile";
+        return new RedirectView("/home/profile", true);
     }
 
     /**

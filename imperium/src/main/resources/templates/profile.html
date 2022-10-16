@@ -50,16 +50,15 @@
           </div>
         </div>
         <!-- Navigation Bar End  -->
-<!-- Main profil begining -->
+        <!-- Main profil begining -->
         <div class="row">
           <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center">
                 <img
-                  src="/img/icon/user.png"
-                  alt="avatar"
-                  class="rounded-circle img-fluid"
-                  style="width: 150px"
+                  data-th-src="@{${user.photosImagePath} } "
+                  width="190"
+                  height="190"
                 />
                 <h5 class="my-3" data-th-text="${user.username}"></h5>
                 <div class="d-flex justify-content-center mb-2">
@@ -81,6 +80,7 @@
                   data-th-action="@{/home/profile/process-profil}"
                   data-th-object="${user}"
                   method="POST"
+                  enctype="multipart/form-data"
                 >
                   <div class="row">
                     <div class="col-sm-3">
@@ -150,7 +150,6 @@
                         type="text"
                         name="jobtitle"
                         data-th-field="${user.jobtitle}"
-                       
                       />
                     </div>
                   </div>
@@ -197,12 +196,22 @@
                     </div>
                   </div>
                   <hr />
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <a>
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/png, image/jpeg"
+                    />
+                    <button type="submit" class="btn btn-primary">
+                      Update
+                    </button></a
+                  >
                 </form>
               </div>
             </div>
-             <!-- Form User detail End -->
-             <!-- Project assigment detail Begin -->
+
+            <!-- Form User detail End -->
+            <!-- Project assigment detail Begin -->
             <div class="row">
               <div class="col-md-6">
                 <div class="card mb-4 mb-md-0">
@@ -233,7 +242,7 @@
                       </div>
                     </div>
                   </div>
-                     <!-- Project assigment detail Begin -->
+                  <!-- Project assigment detail Begin -->
                 </div>
               </div>
             </div>
