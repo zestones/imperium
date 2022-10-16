@@ -20,6 +20,8 @@ import lombok.NoArgsConstructor;
 public class Project {
 
     private String name;
+    private String category;
+    private double progress;
 
     @Id
     @GeneratedValue

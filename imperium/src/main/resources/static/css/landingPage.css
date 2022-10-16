@@ -48,11 +48,25 @@ Index Corps
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(../img/landing/banner-bg.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  height: 80vh;
+	background: linear-gradient(-45deg, #f47b89, #cb5e99, #8a51a5, #004ca3);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 
@@ -60,13 +74,14 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: hsl(0, 0%, 28%);
+  color: hsl(0, 0%, 100%);
   font-size: 50px;
   font-weight: bold;
   font-family: monospace;
   letter-spacing: 7px;
   cursor: pointer;
   height: 10vh;
+
 }
 
 h1 span {
@@ -94,6 +109,16 @@ h1:hover span:nth-child(3) {
 }
 
 h1:hover span {
-  color: #fff;
+  color: rgb(219, 219, 219);
   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+}
+
+.navbar-brand{
+  text-transform: uppercase;
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-size :30px;
+  padding-left:15px;
+
 }

@@ -1,0 +1,20 @@
+body {
+    padding-top: 0 !important;
+}
+
+form {
+    background-color: #dddd;
+    border: 1px solid white;
+}
+
+#form-container {
+    padding-top: 40px;
+}
+
+.toogle-wrapper  {
+    text-align: right;
+}
+
+.toogle-form {
+    display: inline-block;
+}

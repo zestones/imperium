@@ -53,6 +53,8 @@ public class UserController {
         return "authentification/logIn";
     }
 
+    // Need to be checked: Will not need password again to update other user infos
+
     /**
      * @param model : holder for model attributes
      * @param u     : User object

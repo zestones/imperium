@@ -85,18 +85,27 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
+        String jobtitle = UserController.getCurrentUser().getJobtitle();
+        Long id = UserController.getCurrentUser().getId();
+
         // USER DATA
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
+        model.addAttribute("firstname", UserController.getCurrentUser().getFirstname());
+        model.addAttribute("lastname", UserController.getCurrentUser().getLastname());
+        model.addAttribute("jobtitle", jobtitle);
 
         // ! **** For Dev ****
         model.addAttribute("allUsers", userService.findAll());
         // ! *****************
 
         // USER PROJECTS DATA
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
+        model.addAttribute("myProjects", projectService.findProjectByUserId(id));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
+
+        if (projectService.findProjectByUserId(id).isEmpty())
+            model.addAttribute("noProjects", "No project found !");
 
         // PROCESS ERROR MSG
         if (!error.equals("no-error"))
