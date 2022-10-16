@@ -21,6 +21,12 @@ public class TaskController {
     @Autowired
     BoardService boardService;
 
+    /**
+     * @param model   : holder for model attributes
+     * @param t       : Task object
+     * @param idBoard : Board id property (RequestParam)
+     * @return String : redirect to PageController
+     */
     @PostMapping(value = "/home/create-task")
     public String createTask(Model model, Task t, @RequestParam("idBoard") Long idBoard) {
 
@@ -31,6 +37,11 @@ public class TaskController {
         return "redirect:/home/open-project?id=" + id;
     }
 
+    /**
+     * @param idTask   : Task id property (PathVariable)
+     * @param idProjet : Project id property (PathVariable)
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/delete-task/{idTask}/{idProjet}")
     public String deleteTask(@PathVariable Long idTask, @PathVariable Long idProjet) {
 

@@ -12,6 +12,7 @@ import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class AccessController {
+
     @Autowired
     AccessService service;
 
@@ -21,10 +22,16 @@ public class AccessController {
     @Autowired
     ProjectService projectService;
 
+    /**
+     * @param id       : Project id (PathVariable)
+     * @param a        : Access object
+     * @param username : User username property
+     * @return String : redirect to PageController
+     */
     @PostMapping(value = "/home/share-project/{id}")
     private String shareProject(@PathVariable Long id, Access a, String username) {
 
-        if (service.canShareProject(userService.findByUsername(username), projectService.getProjectOwner(id), id)) {
+        if (service.canShareProject(userService.findByUsername(username), projectService.findProjectOwner(id), id)) {
 
             a.setUser(userService.findByUsername(username));
             a.setProjects(projectService.findById(id));

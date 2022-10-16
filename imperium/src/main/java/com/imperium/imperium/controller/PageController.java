@@ -34,6 +34,11 @@ public class PageController {
     @Autowired
     TaskService taskService;
 
+    /**
+     * @param request  : provide request information for HTTP servlets
+     * @param response : provide HTTP-specific functionality in sending a response
+     * @return String : return the index file
+     */
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {
         userService.autologout(request, response);
@@ -41,16 +46,28 @@ public class PageController {
         return "index";
     }
 
+    /**
+     * @return String : redirect to the index page
+     */
     @GetMapping(value = "/home/logout")
     private String logoutPage() {
         return "redirect:/";
     }
 
+    /**
+     * @return String : return the signin file
+     */
     @GetMapping(value = "/signIn")
     private String signInPage() {
         return "authentification/signIn";
     }
 
+    /**
+     * @param model   : holder for model attributes
+     * @param "error" : error (RequestParam)
+     * @param error   : Boolean for error parameter
+     * @return String : return the login file
+     */
     @GetMapping(value = "/logIn")
     private String logInPage(Model model, @RequestParam(value = "error", defaultValue = "false") Boolean error) {
         if (error)
@@ -59,13 +76,26 @@ public class PageController {
         return "authentification/logIn";
     }
 
+    /**
+     * @param model   : holder for model attributes
+     * @param "error" : error (RequestParam)
+     * @param error   : Boolean for error parameter
+     * @return String : return the home file
+     */
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
+<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         String jobtitle =UserController.getCurrentUser().getJobtitle();
         Long id= UserController.getCurrentUser().getId();
+=======
+        // USER DATA
+>>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
+
+        // ! **** For Dev ****
         model.addAttribute("allUsers", userService.findAll());
+<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("firstname",UserController.getCurrentUser().getFirstname());
         model.addAttribute("lastname",UserController.getCurrentUser().getLastname());
         model.addAttribute("jobtitle", jobtitle);
@@ -76,16 +106,29 @@ public class PageController {
         }
      
    
+=======
+        // ! *****************
+
+        // USER PROJECTS DATA
+        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
+>>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
 
+        // PROCESS ERROR MSG
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
 
         return "home";
     }
 
+    /**
+     * @param model   : holder for model attributes
+     * @param "id"    : Project id (RequestParam)
+     * @param "error" : error (RequestParam)
+     * @return String : return the project file
+     */
     @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
@@ -94,7 +137,12 @@ public class PageController {
         String projectName = projectService.findById((Long) id).getName();
 
         // USER DATA
+<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
+=======
+        model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
+        model.addAttribute("username", UserController.getCurrentUser().getUsername());
+>>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
 
         // BOARD DATA
         model.addAttribute("boards", boardService.findBoardsByProjectId(id));
@@ -115,14 +163,22 @@ public class PageController {
         return "project";
     }
 
+    /**
+     * @param model : holder for model attributes
+     * @param u     : User object
+     * @param error : error (RequestParam)
+     * @return String : return the profile file
+     */
     @GetMapping(value = "/home/profile")
     private String profile(Model model, User u,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
         Long userId = UserController.getCurrentUser().getId();
 
+        // USER DATA
         model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
 
+        // PROCESS ERROR MSG
         if (error.equals("password")) {
             model.addAttribute("user", UserController.getCurrentUser());
             model.addAttribute("error", "Passwords are not matching or Wrong previous password!");

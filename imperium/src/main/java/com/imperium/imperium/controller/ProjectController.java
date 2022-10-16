@@ -16,6 +16,11 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
+    /**
+     * @param model : holder for model attributes
+     * @param p     : Project object
+     * @return String : redirect PageController
+     */
     @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
 
@@ -30,11 +35,20 @@ public class ProjectController {
         return "redirect:/home?error=name";
     }
 
+    /**
+     * @param id    : Project id (PathVariable)
+     * @param model : holder for model attributes
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/open-project/{id}")
     private String openProject(@PathVariable Long id, Model model) {
         return "redirect:/home/open-project?id=" + id;
     }
 
+    /**
+     * @param name : Project name property (PathVariable)
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 

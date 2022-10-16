@@ -3,6 +3,7 @@ package com.imperium.imperium.service.project;
 import java.util.ArrayList;
 
 import com.imperium.imperium.model.Project;
+import com.imperium.imperium.model.User;
 
 public interface IProjectService {
 
@@ -17,4 +18,6 @@ public interface IProjectService {
     Project findProjectByUserIdAndName(Long id, String name);
 
     Project findById(Long id);
+
+    User findProjectOwner(Long id);
 }
