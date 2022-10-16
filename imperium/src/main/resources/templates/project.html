@@ -257,6 +257,13 @@
                   >
                     <div class="card-body">
                       <p data-th-text="${t.title}"></p>
+                      <h6>Contributors</h6>
+
+                      <ul>
+                        <li data-th-each="c : ${t.user}" class="w-100">
+                          <p data-th-text="${c.username}"></p>
+                        </li>
+                      </ul>
                     </div>
                     <a
                       data-th-href="@{/home/delete-task/{idTask}/{idProjet} (idTask=${t.id},idProjet=${id})}"
@@ -265,6 +272,7 @@
                     >
                       <span class="bi bi-trash"></span>
                     </a>
+
                     <div class="dropdown">
                       <button
                         class="btn btn-secondary dropdown-toggle"
@@ -283,7 +291,7 @@
                           >
                             <span
                               class="d-none d-sm-inline"
-                              data-th-text="${u.firstname}"
+                              data-th-text="${u.username}"
                             ></span>
                           </a>
                         </li>
