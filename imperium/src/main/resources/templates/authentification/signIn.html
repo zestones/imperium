@@ -48,16 +48,15 @@
               <a class="nav-link" href="/logIn">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signIn">Sign-In</a>
+              <a class="nav-link" href="/signIn">Sign Up</a>
             </li>
           </ul>
         </div>
       </nav>
       <!-- Header end -->
       <!-- Landing Page Begining -->
-      <div>
+      <div class="card shadow p-3 mb-5 bg-white rounded">
         <form class="form-signin" method="post" data-th-action="@{/signIn}">
-          <hr />
           <h2 class="form-signin-h2">Registration</h2>
           <hr />
           <div data-th-if="${error != null}">
@@ -73,7 +72,7 @@
               id="lastname"
               name="lastname"
               class="form-control"
-              placeholder="lastname"
+              placeholder="Lastname"
               required
               autofocus
             />
@@ -84,7 +83,7 @@
               id="firstname"
               name="firstname"
               class="form-control"
-              placeholder="firstname"
+              placeholder="Firstname"
               required
               autofocus
             />
@@ -115,14 +114,12 @@
             type="hidden"
             value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign In
+          <button class="custom-btn btn-signIn " type="submit">
+            Get started
           </button>
-          <br />
-          <div class="toogle-wrapper">
-            <a class="toogle-form" href="/logIn"> Log - In </a>
-          </div>
+   
         </form>
+        <hr />
       </div>
       <!-- Landing Page End -->
     </div>

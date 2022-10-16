@@ -48,7 +48,7 @@
               <a class="nav-link" href="/logIn">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signIn">Sign-In</a>
+              <a class="nav-link" href="/signIn">Sign Up</a>
             </li>
           </ul>
         </div>
@@ -56,15 +56,15 @@
 
       <!-- Header end -->
       <!-- Landing Page Begining -->
-      <div>
+      <div class="card shadow p-3 mb-5 bg-white rounded">
         <form
-          class="form-signin"
+          class="form"
           method="post"
           data-th-action="@{/process-logIn}"
         >
+          <h2 class="form-login-h2">Log In</h2>
           <hr />
-          <h2 class="form-signin-h2">Please Sign-In</h2>
-          <hr />
+          <div class="alignform">
           <div data-th-if="${error != null}">
             <div
               class="alert alert-danger"
@@ -98,13 +98,14 @@
             type="hidden"
             value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <button class="custom-btn btn-LoginIn "  type="submit">
             Login
           </button>
           <br />
-          <div class="toogle-wrapper">
-            <a class="toogle-form" href="/signIn">Sign - In </a>
+          <div class="signInText">
+            Not registered ? <a class="signInLink" href="/signIn"> Create an account </a>
           </div>
+        </div>
           <hr />
         </form>
       </div>

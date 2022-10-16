@@ -66,6 +66,10 @@ public class PageController {
         model.addAttribute("allUsers", userService.findAll());
 
         model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
+        if (projectService.findProjectByUserId(UserController.getCurrentUser().getId()).isEmpty()){
+            model.addAttribute("noProjects", "No project found !");
+        }
+   
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
