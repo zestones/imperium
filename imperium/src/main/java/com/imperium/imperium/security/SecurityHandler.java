@@ -35,5 +35,4 @@ public class SecurityHandler implements AuthenticationSuccessHandler, Authentica
         // TODO : ADD CUSTOM HANDLER
 
     }
-
 }
