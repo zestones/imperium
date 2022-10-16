@@ -3,6 +3,8 @@ package com.imperium.imperium.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,6 +29,13 @@ public class TaskController {
         Long id = t.getBoard().getProject().getId();
 
         return "redirect:/home/open-project?id=" + id;
+    }
+
+    @GetMapping(value = "/home/delete-task/{idTask}/{idProjet}")
+    public String deleteTask(@PathVariable Long idTask, @PathVariable Long idProjet) {
+
+        service.deleteById(idTask);
+        return "redirect:/home/open-project?id=" + idProjet;
     }
 
 }

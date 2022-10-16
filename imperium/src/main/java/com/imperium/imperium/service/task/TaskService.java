@@ -19,9 +19,12 @@ public class TaskService implements ITaskService {
         tRepo.save(t);
     }
 
+    public void deleteById(Long id) {
+        tRepo.deleteById(id);
+    }
+
     @Override
     public ArrayList<Task> findTaskByProjectId(Long id) {
         return tRepo.findTaskByProjectId(id);
     }
-
 }

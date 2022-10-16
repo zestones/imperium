@@ -258,6 +258,12 @@
                     <div class="card-body">
                       <p data-th-text="${t.title}"></p>
                     </div>
+                    <a
+                      data-th-href="@{/home/delete-task/{idTask}/{idProjet} (idTask=${t.id},idProjet=${id})}"
+                      class="btn btn-danger"
+                    >
+                      <span class="bi bi-trash"></span>
+                    </a>
                   </div>
 
                   <form data-th-action="@{/home/create-task}" method="post">
