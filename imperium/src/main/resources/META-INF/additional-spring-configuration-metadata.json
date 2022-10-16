@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "server.http.port",
+    "type": "java.lang.String",
+    "description": "value of the HTTP port"
+  },
+  {
+    "name": "server.https.port",
+    "type": "java.lang.String",
+    "description": "value of the HTTPS port"
+  }
+]}

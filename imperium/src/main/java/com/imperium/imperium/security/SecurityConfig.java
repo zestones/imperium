@@ -2,6 +2,8 @@ package com.imperium.imperium.security;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Inject
   SecurityHandler handler;
+
+  private final int httpPort;
+  private final int httpsPort;
+
+  @Autowired
+  SecurityConfig(
+      @Value("${server.http.port}") int httpPort,
+      @Value("${server.https.port}") int httpsPort) {
+    this.httpPort = httpPort;
+    this.httpsPort = httpsPort;
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -45,8 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.formLogin()
         .successHandler(handler);
     // * Custom failure handler
-    // http.formLogin()
-    // .failureHandler(handler);
+    // http.formLogin().failureHandler(handler);
+    // * Redirect http request to https
+    http
+        .portMapper().http(httpPort).mapsTo(httpsPort)
+        .and()
+        .requiresChannel().anyRequest().requiresSecure();
 
     // ! Allow access to the h2-console
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");
