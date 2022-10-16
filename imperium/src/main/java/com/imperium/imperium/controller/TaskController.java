@@ -58,10 +58,10 @@ public class TaskController {
     }
 
     @GetMapping(value = "/home/assign-task/{idTask}/{idUser}/{idProject}")
-    public String AssignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
-        List<User> listOfUsers = new ArrayList<User>();
-        listOfUsers.add(userService.findById(idUser));
+    public String assignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
         Task t = service.findById(idTask);
+        List<User> listOfUsers = t.getUser();
+        listOfUsers.add(userService.findById(idUser));
         t.setUser(listOfUsers);
         service.save(t);
         return "redirect:/home/open-project?id=" + idProject;
