@@ -20,6 +20,12 @@ public class BoardController {
     @Autowired
     ProjectService projectService;
 
+    /**
+     * @param model : holder for model attributes
+     * @param b     : Board object
+     * @param id    : Project id (PathVariable)
+     * @return String : redirect to PageController
+     */
     @PostMapping(value = "/home/create-board/{id}")
     private String createList(Model model, Board b, @PathVariable Long id) {
 

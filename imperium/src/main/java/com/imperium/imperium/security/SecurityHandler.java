@@ -18,9 +18,18 @@ import com.imperium.imperium.service.user.UserService;
 
 @Component
 public class SecurityHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
+
     @Inject
     UserService service;
 
+    /**
+     * @param request        : provide request information for HTTP servlets
+     * @param response:      : provide HTTP-specific functionality in sending
+     *                       response
+     * @param authentication : token for an authentication request
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
@@ -29,6 +38,13 @@ public class SecurityHandler implements AuthenticationSuccessHandler, Authentica
         response.sendRedirect("/home");
     }
 
+    /**
+     * @param request   : provide request information for HTTP servlets
+     * @param response  : provide HTTP-specific functionality in sending
+     * @param exception : exceptions related to an Authentication object
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {

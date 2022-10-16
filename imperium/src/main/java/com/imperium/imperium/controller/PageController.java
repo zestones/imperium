@@ -16,8 +16,6 @@ import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
 
-
-/* Main Controller class, most of the getmapping get here */
 @Controller
 public class PageController {
 
@@ -35,24 +33,41 @@ public class PageController {
 
     @Autowired
     TaskService taskService;
-/* method for auto log-out when user is into index page call userService class method */
+
+    /**
+     * @param request  : provide request information for HTTP servlets
+     * @param response : provide HTTP-specific functionality in sending a response
+     * @return String : return the index file
+     */
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {
         userService.autologout(request, response);
 
         return "index";
     }
-/* method for after PostMapping method, redirect into index html page after click into log-out bouton */
+
+    /**
+     * @return String : redirect to the index page
+     */
     @GetMapping(value = "/home/logout")
     private String logoutPage() {
         return "redirect:/";
     }
-/* method GET redirect into authentication/signIn  */
+
+    /**
+     * @return String : return the signin file
+     */
     @GetMapping(value = "/signIn")
     private String signInPage() {
         return "authentification/signIn";
     }
 
+    /**
+     * @param model   : holder for model attributes
+     * @param "error" : error (RequestParam)
+     * @param error   : Boolean for error parameter
+     * @return String : return the login file
+     */
     @GetMapping(value = "/logIn")
     private String logInPage(Model model, @RequestParam(value = "error", defaultValue = "false") Boolean error) {
         if (error)
@@ -60,24 +75,42 @@ public class PageController {
 
         return "authentification/logIn";
     }
-/* method GET for home page get the user configuration, project name and redirect into home html page */
+
+    /**
+     * @param model   : holder for model attributes
+     * @param "error" : error (RequestParam)
+     * @param error   : Boolean for error parameter
+     * @return String : return the home file
+     */
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
+        // USER DATA
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
-        model.addAttribute("allUsers", userService.findAll());
 
+        // ! **** For Dev ****
+        model.addAttribute("allUsers", userService.findAll());
+        // ! *****************
+
+        // USER PROJECTS DATA
         model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
 
+        // PROCESS ERROR MSG
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
 
         return "home";
     }
 
+    /**
+     * @param model   : holder for model attributes
+     * @param "id"    : Project id (RequestParam)
+     * @param "error" : error (RequestParam)
+     * @return String : return the project file
+     */
     @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
@@ -86,7 +119,7 @@ public class PageController {
         String projectName = projectService.findById((Long) id).getName();
 
         // USER DATA
-        model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
+        model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
 
         // BOARD DATA
@@ -107,15 +140,23 @@ public class PageController {
 
         return "project";
     }
-/* method GET for profil page get user details */
+
+    /**
+     * @param model : holder for model attributes
+     * @param u     : User object
+     * @param error : error (RequestParam)
+     * @return String : return the profile file
+     */
     @GetMapping(value = "/home/profile")
     private String profile(Model model, User u,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
         Long userId = UserController.getCurrentUser().getId();
 
+        // USER DATA
         model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
 
+        // PROCESS ERROR MSG
         if (error.equals("password")) {
             model.addAttribute("user", UserController.getCurrentUser());
             model.addAttribute("error", "Passwords are not matching or Wrong previous password!");

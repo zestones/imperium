@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "projects")
-/* Project Table */
 public class Project {
 
     private String name;
@@ -25,7 +24,7 @@ public class Project {
     @Id
     @GeneratedValue
     private long id;
-/* Foreign Key into user table */
+
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id")

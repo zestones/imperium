@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-/* Access Table  */
 public class Access {
 
     private Boolean canEdit;
@@ -24,18 +23,20 @@ public class Access {
     @Id
     @GeneratedValue
     private Long id;
-/* Foreign Key into Table User */
+
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     private User user;
-/* Foreign Key into Table Project */
+
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_project", referencedColumnName = "id", nullable = false)
     private Project projects;
 
-/* methods set user Right, can read and can write */
+    /**
+     * @param read : the read access
+     */
     public void setAccess(Boolean read) {
         setCanEdit(!read);
         setCanRead(true);
