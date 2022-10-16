@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,10 +31,12 @@ public class TaskController {
         return "redirect:/home/open-project?id=" + id;
     }
 
-    @GetMapping(value = "/home/delete-task/{title}")
-    public String deleteTask(Task t) {
-        service.delete(t);
-        return "redirect:/home";
+    @GetMapping(value = "/home/delete-task/{idTask}/{idProjet}")
+    public String deleteTask(Task t, @PathVariable Long idTask, @PathVariable Long idProjet) {
+        System.out.println("HERE: " + t);
+        // Long id = t.getBoard().getProject().getId();
+        service.deleteById(idTask);
+        return "redirect:/home/open-project?id=" + idProjet;
     }
 
 }
