@@ -53,10 +53,8 @@ public class UserController {
         return "authentification/logIn";
     }
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/UserController.java
-    //Need to be checked: Will not need password again to update other user infos
+    // Need to be checked: Will not need password again to update other user infos
 
-=======
     /**
      * @param model : holder for model attributes
      * @param u     : User object
@@ -64,7 +62,6 @@ public class UserController {
      * @param pwd2  : the confirmation of the password
      * @return String : redirect to PageController
      */
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/UserController.java
     @PostMapping(value = "/home/profile/process-profil")
     public String updateUser(Model model, User u, String pwd1, String pwd2) {
 

@@ -85,36 +85,27 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
-        String jobtitle =UserController.getCurrentUser().getJobtitle();
-        Long id= UserController.getCurrentUser().getId();
-=======
+        String jobtitle = UserController.getCurrentUser().getJobtitle();
+        Long id = UserController.getCurrentUser().getId();
+
         // USER DATA
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
+        model.addAttribute("firstname", UserController.getCurrentUser().getFirstname());
+        model.addAttribute("lastname", UserController.getCurrentUser().getLastname());
+        model.addAttribute("jobtitle", jobtitle);
 
         // ! **** For Dev ****
         model.addAttribute("allUsers", userService.findAll());
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
-        model.addAttribute("firstname",UserController.getCurrentUser().getFirstname());
-        model.addAttribute("lastname",UserController.getCurrentUser().getLastname());
-        model.addAttribute("jobtitle", jobtitle);
-
-        model.addAttribute("myProjects", projectService.findProjectByUserId(id));
-        if (projectService.findProjectByUserId(id).isEmpty()){
-            model.addAttribute("noProjects", "No project found !");
-        }
-     
-   
-=======
         // ! *****************
 
         // USER PROJECTS DATA
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
+        model.addAttribute("myProjects", projectService.findProjectByUserId(id));
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
+
+        if (projectService.findProjectByUserId(id).isEmpty())
+            model.addAttribute("noProjects", "No project found !");
 
         // PROCESS ERROR MSG
         if (!error.equals("no-error"))
@@ -137,12 +128,8 @@ public class PageController {
         String projectName = projectService.findById((Long) id).getName();
 
         // USER DATA
-<<<<<<< imperium/src/main/java/com/imperium/imperium/controller/PageController.java
-        model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
-=======
         model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
->>>>>>> imperium/src/main/java/com/imperium/imperium/controller/PageController.java
 
         // BOARD DATA
         model.addAttribute("boards", boardService.findBoardsByProjectId(id));
