@@ -1,1 +1,2 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar
+# web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar
+web: bin/start-nginx java $JAVA_OPTS -Dserver.port=$APP_PORT -jar target/*.jar

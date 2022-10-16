@@ -8,14 +8,14 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServerFactory implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
+public class ServerFactoryConfig implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
     private final int httpPort;
     private final int httpsPort;
 
     // Retrieve port value from application properties file
     @Autowired
-    ServerFactory(
+    ServerFactoryConfig(
             @Value("${server.http.port}") int httpPort,
             @Value("${server.https.port}") int httpsPort) {
         this.httpPort = httpPort;
@@ -31,7 +31,7 @@ public class ServerFactory implements WebServerFactoryCustomizer<TomcatServletWe
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
 
-        // Set http Port
+        // Set the http Port
         connector.setPort(httpPort);
         connector.setSecure(false);
 
