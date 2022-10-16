@@ -43,6 +43,8 @@ public class UserController {
         return "authentification/logIn";
     }
 
+    //Need to be checked: Will not need password again to update other user infos
+
     @PostMapping(value = "/home/profile/process-profil")
     public String updateUser(Model model, User u, String pwd1, String pwd2) {
 

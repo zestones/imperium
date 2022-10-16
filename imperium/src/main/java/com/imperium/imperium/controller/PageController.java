@@ -62,13 +62,19 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
+        String jobtitle =UserController.getCurrentUser().getJobtitle();
+        Long id= UserController.getCurrentUser().getId();
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
         model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("firstname",UserController.getCurrentUser().getFirstname());
+        model.addAttribute("lastname",UserController.getCurrentUser().getLastname());
+        model.addAttribute("jobtitle", jobtitle);
 
-        model.addAttribute("myProjects", projectService.findProjectByUserId(UserController.getCurrentUser().getId()));
-        if (projectService.findProjectByUserId(UserController.getCurrentUser().getId()).isEmpty()){
+        model.addAttribute("myProjects", projectService.findProjectByUserId(id));
+        if (projectService.findProjectByUserId(id).isEmpty()){
             model.addAttribute("noProjects", "No project found !");
         }
+     
    
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
@@ -89,7 +95,6 @@ public class PageController {
 
         // USER DATA
         model.addAttribute("isOwner", (projectService.getProjectOwner(id).getId().equals(userId)));
-        model.addAttribute("username", UserController.getCurrentUser().getUsername());
 
         // BOARD DATA
         model.addAttribute("boards", boardService.findBoardsByProjectId(id));

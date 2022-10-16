@@ -109,7 +109,16 @@ h1:hover span:nth-child(3) {
 }
 
 h1:hover span {
-  color: #fff;
+  color: rgb(219, 219, 219);
   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
 }
 
+.navbar-brand{
+  text-transform: uppercase;
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-size :30px;
+  padding-left:15px;
+
+}

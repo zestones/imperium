@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-    private String lastname, firstname, username, password;
+    private String lastname, firstname,jobtitle, photo, username, password;
+    
 
     @Id
     @GeneratedValue
