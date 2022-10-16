@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .successHandler(handler);
     // * Custom failure handler
     // http.formLogin().failureHandler(handler);
-    // * Redirect http request to https
+    // ! Redirect http request to https
     http
         .portMapper().http(httpPort).mapsTo(httpsPort)
         .and()
