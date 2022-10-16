@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.imperium.imperium.model.Project;
 import com.imperium.imperium.service.project.ProjectService;
 
-/* Controller class for Project page */
 @Controller
 public class ProjectController {
 
     @Autowired
     ProjectService service;
-/* method for create new project, check if doesnt exist, set the user role and redirect into create project html page */
+
+    /**
+     * @param model : holder for model attributes
+     * @param p     : Project object
+     * @return String : redirect PageController
+     */
     @PostMapping(value = "/home/create-project")
     private String creatProject(Model model, Project p) {
 
@@ -30,12 +34,21 @@ public class ProjectController {
 
         return "redirect:/home?error=name";
     }
-/* method for redirect into actual project link to the user Id */
+
+    /**
+     * @param id    : Project id (PathVariable)
+     * @param model : holder for model attributes
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/open-project/{id}")
     private String openProject(@PathVariable Long id, Model model) {
         return "redirect:/home/open-project?id=" + id;
     }
-/* method for delete a project check if user have right by its Id */
+
+    /**
+     * @param name : Project name property (PathVariable)
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/delete-project/{name}")
     private String deleteProject(@PathVariable String name) {
 

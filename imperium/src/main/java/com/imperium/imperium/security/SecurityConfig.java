@@ -36,6 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     this.httpsPort = httpsPort;
   }
 
+  /**
+   * @param http
+   * @throws Exception
+   */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
@@ -59,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .successHandler(handler);
     // * Custom failure handler
     // http.formLogin().failureHandler(handler);
-    // ! Redirect http request to https
+    // * Redirect http request to https
     http
         .portMapper().http(httpPort).mapsTo(httpsPort)
         .and()
@@ -73,11 +77,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().anyRequest().denyAll();
   }
 
+  /**
+   * @return AuthenticationManager
+   * @throws Exception
+   */
   @Bean
   public AuthenticationManager authManager() throws Exception {
     return this.authenticationManager();
   }
 
+  /**
+   * @param auth : AuthenticationManagerBuilder
+   * @throws Exception
+   */
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(userDetailsService.encoder);
