@@ -32,9 +32,8 @@ public class TaskController {
     }
 
     @GetMapping(value = "/home/delete-task/{idTask}/{idProjet}")
-    public String deleteTask(Task t, @PathVariable Long idTask, @PathVariable Long idProjet) {
-        System.out.println("HERE: " + t);
-        // Long id = t.getBoard().getProject().getId();
+    public String deleteTask(@PathVariable Long idTask, @PathVariable Long idProjet) {
+
         service.deleteById(idTask);
         return "redirect:/home/open-project?id=" + idProjet;
     }
