@@ -284,14 +284,14 @@
                         Assign
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li data-th-each="u : ${allUsers}" class="w-100">
+                        <li data-th-each="c : ${contributor}" class="w-100">
                           <a
-                            data-th-href="@{/home/assign-task/{idTask}/{idUser}/{idProject} (idTask=${t.id},idUser=${u.id},idProject=${id})}"
+                            data-th-href="@{/home/assign-task/{idTask}/{idUser}/{idProject} (idTask=${t.id},idUser=${c.id},idProject=${id})}"
                             class="nav-link px-0"
                           >
                             <span
                               class="d-none d-sm-inline"
-                              data-th-text="${u.username}"
+                              data-th-text="${c.username}"
                             ></span>
                           </a>
                         </li>
