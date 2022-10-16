@@ -10,6 +10,7 @@ import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
+/* Controller class for access methods */
 @Controller
 public class AccessController {
     @Autowired
@@ -20,7 +21,7 @@ public class AccessController {
 
     @Autowired
     ProjectService projectService;
-
+/* methods POST check if User Id can shared between user what right he have (read, write) redirect into open project html page */
     @PostMapping(value = "/home/share-project/{id}")
     private String shareProject(@PathVariable Long id, Access a, String username) {
 

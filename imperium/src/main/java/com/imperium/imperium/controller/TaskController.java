@@ -12,6 +12,7 @@ import com.imperium.imperium.model.Task;
 import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.task.TaskService;
 
+/* Controller class for the task manager methods */
 @Controller
 public class TaskController {
 
@@ -20,7 +21,7 @@ public class TaskController {
 
     @Autowired
     BoardService boardService;
-
+/* method for new task into project call boardService class for set into board, save and redirect into open project html page */
     @PostMapping(value = "/home/create-task")
     public String createTask(Model model, Task t, @RequestParam("idBoard") Long idBoard) {
 
@@ -30,7 +31,7 @@ public class TaskController {
 
         return "redirect:/home/open-project?id=" + id;
     }
-
+/* method for task deletion call service class and deleteById method, redirect into open project html page */
     @GetMapping(value = "/home/delete-task/{idTask}/{idProjet}")
     public String deleteTask(@PathVariable Long idTask, @PathVariable Long idProjet) {
 

@@ -16,6 +16,8 @@ import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
 
+
+/* Main Controller class, most of the getmapping get here */
 @Controller
 public class PageController {
 
@@ -33,19 +35,19 @@ public class PageController {
 
     @Autowired
     TaskService taskService;
-
+/* method for auto log-out when user is into index page call userService class method */
     @GetMapping(value = { "/", "/index" })
     public String indexPage(HttpServletRequest request, HttpServletResponse response) {
         userService.autologout(request, response);
 
         return "index";
     }
-
+/* method for after PostMapping method, redirect into index html page after click into log-out bouton */
     @GetMapping(value = "/home/logout")
     private String logoutPage() {
         return "redirect:/";
     }
-
+/* method GET redirect into authentication/signIn  */
     @GetMapping(value = "/signIn")
     private String signInPage() {
         return "authentification/signIn";
@@ -58,7 +60,7 @@ public class PageController {
 
         return "authentification/logIn";
     }
-
+/* method GET for home page get the user configuration, project name and redirect into home html page */
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
@@ -105,7 +107,7 @@ public class PageController {
 
         return "project";
     }
-
+/* method GET for profil page get user details */
     @GetMapping(value = "/home/profile")
     private String profile(Model model, User u,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
