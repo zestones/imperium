@@ -278,7 +278,7 @@
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li data-th-each="u : ${allUsers}" class="w-100">
                           <a
-                            data-th-href="@{/home/assignTask/{idTask}/{idUser} (idTask=${t.id},idUser=${u.id})}"
+                            data-th-href="@{/home/assign-task/{idTask}/{idUser}/{idProject} (idTask=${t.id},idUser=${u.id},idProject=${id})}"
                             class="nav-link px-0"
                           >
                             <span

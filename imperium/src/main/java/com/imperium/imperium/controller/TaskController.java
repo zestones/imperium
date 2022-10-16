@@ -1,5 +1,8 @@
 package com.imperium.imperium.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.Task;
+import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.board.BoardService;
 import com.imperium.imperium.service.task.TaskService;
+import com.imperium.imperium.service.user.UserService;
 
 @Controller
 public class TaskController {
@@ -20,6 +25,9 @@ public class TaskController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    UserService userService;
 
     /**
      * @param model   : holder for model attributes
@@ -49,4 +57,11 @@ public class TaskController {
         return "redirect:/home/open-project?id=" + idProjet;
     }
 
+    @GetMapping(value = "/home/assign-task/{idTask}/{idUser}/{idProject}")
+    public String AssignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
+        List<User> listOfUsers = new ArrayList<User>();
+        listOfUsers.add(userService.findById(idUser));
+        service.findById(idTask).setUser(listOfUsers);
+        return "redirect:/home/open-project?id=" + idProject;
+    }
 }
