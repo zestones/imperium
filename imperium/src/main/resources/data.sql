@@ -1,4 +1,5 @@
 INSERT INTO users (id, username, firstname, lastname, password) VALUES
-	(0, 'idriss', 'idriss', 'idriss', '$2b$14$pWzesjrRio2nva0r9770lOscUkqaA14vjskpty5DZkFZ8gomDiYYG'),
-	(1, 'ghilas', 'ghilas', 'ghilas', '$2b$14$QhM9dxgAlwaOQoY/ToaTgu.evNnda1lRLGwpW1sJ.bQZ9XywF/2wa'),
-	(2, 'mohamed', 'mohamed', 'mohamed', '$2b$14$djPE3duQhVLnKbWCyouLqeVi.Vyn7ePuitTD61LYcnNvdwWpjxJJ2');
+	(0, 'ok', 'ok', 'ok', '$2b$14$l03Kat1.fH.ROjrCL956NuPB7oqGJYAC376DEHKMijfb72u0lKYRS'),
+	(1, 'idriss', 'idriss', 'idriss', '$2b$14$24D2IASiGzsk2CXFJa.S1uu293WzPw9FRJxVVNKclk1HydIUmxUia'),
+	(2, 'zestones', 'zestones', 'zestones', '$2b$14$QnSwLs7PmMBczcV0WntOi.WkKOEcz7Bn.HLFph69xGXzF2C9zaHee'),
+	(3, 'mamio', 'mamio', 'mamio', '$2b$14$MTqgd9d6EbAOzTCKlk4C0uyXWxSjYtyW3efDS8CIE/qlgIxuqLEfi');
