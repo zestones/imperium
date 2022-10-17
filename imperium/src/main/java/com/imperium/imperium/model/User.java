@@ -32,8 +32,10 @@ public class User {
         if (photos == null || id == null)
             return null;
 
-        return "/src/user-photos/" + id + "/" + photos;
+        photos = "icon.png";
+        return "/src/main/resources/static/user-photos/" + photos;
     }
+    // private Blob photo;
 
     @Id
     @GeneratedValue

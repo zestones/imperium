@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   /************************************ */
-  public void addResourceHandlers(SecurityConfig securityConfig, ResourceHandlerRegistry registry) {
+
+  public void addResourceHandlers(SecurityConfig securityConfig,
+      ResourceHandlerRegistry registry) {
     securityConfig.exposeDirectory("user-photos", registry);
   }
 
@@ -53,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     if (dirName.startsWith("../"))
       dirName = dirName.replace("../", "");
 
-    registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
+    registry.addResourceHandler("/" + dirName +
+        "/**").addResourceLocations("file:/" + uploadPath + "/");
   }
 
   /*******************************************
@@ -65,7 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers("/", "/index", "/css/**", "/img/**", "/img/icon/**", "/signIn",
+        .antMatchers("/", "/index", "/css/**", "/img/**", "/img/icon/**", "/signIn", "/user-photos/**",
+            "user-photos/1/**",
             "/h2-console/**")
         .permitAll()
         .antMatchers("/home", "/home/**").authenticated()

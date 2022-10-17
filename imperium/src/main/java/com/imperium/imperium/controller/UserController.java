@@ -61,53 +61,59 @@ public class UserController {
 
     // Need to be checked: Will not need password again to update other user infos
 
-    /**
-     * @param model : holder for model attributes
-     * @param u     : User object
-     * @param pwd1  : the new password
-     * @param pwd2  : the confirmation of the password
-     * @return String : redirect to PageController
-     */
-    /*
-     * @PostMapping(value = "/home/profile/process-profil")
-     * public String updateUser(Model model, User u, String pwd1, String pwd2) {
-     * 
-     * if (!service.canUpdate(u, getCurrentUser()))
-     * return "redirect:/home/profile?error=username";
-     * 
-     * u.setId(getCurrentUser().getId());
-     * 
-     * String pwd;
-     * if (service.canUpdatePassword(u, pwd1, pwd2))
-     * pwd = service.encodePassword(pwd2);
-     * else if (u.getPassword().equals(""))
-     * pwd = getCurrentUser().getPassword();
-     * else
-     * return "redirect:/home/profile?error=password";
-     * 
-     * u.setPassword(pwd);
-     * service.update(u);
-     * setCurrentUser(service.findById(u.getId()));
-     * 
-     * return "redirect:/home/profile";
-     * }
-     */
+    // /**
+    // * @param model : holder for model attributes
+    // * @param u : User object
+    // * @param pwd1 : the new password
+    // * @param pwd2 : the confirmation of the password
+    // * @return String : redirect to PageController
+    // */
+
+    // @PostMapping(value = "/home/profile/process-profil")
+    // public String updateUser(Model model, User u, String pwd1, String pwd2) {
+
+    // if (!service.canUpdate(u, getCurrentUser()))
+    // return "redirect:/home/profile?error=username";
+
+    // u.setId(getCurrentUser().getId());
+
+    // String pwd;
+    // if (service.canUpdatePassword(u, pwd1, pwd2))
+    // pwd = service.encodePassword(pwd2);
+    // else if (u.getPassword().equals(""))
+    // pwd = getCurrentUser().getPassword();
+    // else
+    // return "redirect:/home/profile?error=password";
+
+    // u.setPassword(pwd);
+    // service.update(u);
+    // setCurrentUser(service.findById(u.getId()));
+
+    // return "redirect:/home/profile";
+    // }
+
     @PostMapping(value = "/home/profile/process-profil")
     public RedirectView updateUser(Model model, User u, String pwd1, String pwd2,
             @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         if (!service.canUpdate(u, getCurrentUser()))
             return new RedirectView("/home/profil/home/profile?error=username", true);
+        System.out.println("************1- NOT PASS***************");
 
         u.setId(getCurrentUser().getId());
 
+        System.out.println("************PASS***************");
         String fileName = org.springframework.util.StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        System.out.println("************2- NOT PASS***************");
+
         u.setPhotos(fileName);
+        System.out.println("************PASS PHOTO SET***************");
 
         // User savedUser = urepo.save(u);
-        String uploadDir = "src/user-photos/" + getCurrentUser().getId();
-
+        String uploadDir = "src/main/resources/templates/user-photos/icon.png";
+        System.out.println("************PASS STRING SET***************");
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        System.out.println("************3- NOT PASS***************");
 
         String pwd;
         if (service.canUpdatePassword(u, pwd1, pwd2))
@@ -118,8 +124,14 @@ public class UserController {
             return new RedirectView("/home/profil/home/profile?error=username", true);
 
         u.setPassword(pwd);
+        System.out.println("************PASS***************");
+
         service.update(u);
+        // service.updateAll(u, multipartFile);
+        System.out.println("************ PASS***************");
+
         setCurrentUser(service.findById(u.getId()));
+        System.out.println("************PASS***************");
 
         return new RedirectView("/home/profile", true);
     }

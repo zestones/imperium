@@ -55,11 +55,23 @@
           <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center">
-                <img
+                <!-- <img
                   data-th-src="@{${user.photosImagePath} } "
                   width="190"
                   height="190"
-                />
+                /> -->
+                <th:block data-th-each="path: ${user}">
+                  <div class="col-sm-3">
+                    <img
+                      th:src="${path.PhotosImagePath} "
+                      width="200px"
+                      height="200px"
+                      alt="hello ca marche pas"
+                    />
+                    <div>photos - [[${path.photos}]]</div>
+                    <div>PATH - ([[${path.photosImagePath}]])</div>
+                  </div>
+                </th:block>
                 <h5 class="my-3" data-th-text="${user.username}"></h5>
                 <div class="d-flex justify-content-center mb-2">
                   <a data-th-href="@{/home/logout}">
