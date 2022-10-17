@@ -1,5 +1,8 @@
 package com.imperium.imperium.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,6 +93,13 @@ public class PageController {
         String jobtitle = UserController.getCurrentUser().getJobtitle();
         Long id = UserController.getCurrentUser().getId();
 
+                
+        LocalDate currentDate = LocalDate.now();
+        Month m = currentDate.getMonth();
+        int dom = currentDate.getDayOfMonth(); 
+        model.addAttribute("month", m);
+        model.addAttribute("day", dom);
+
         // USER DATA
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
         model.addAttribute("firstname", UserController.getCurrentUser().getFirstname());
@@ -102,6 +112,8 @@ public class PageController {
 
         // USER PROJECTS DATA
         model.addAttribute("myProjects", projectService.findProjectByUserId(id));
+        int nbr_projects = projectService.findProjectByUserId(id).size();
+        model.addAttribute("nbrprojects", nbr_projects);
         model.addAttribute("sharedProjects",
                 projectService.getArrayProjectByArrayidProject(
                         accessService.findIdProjectSharedWithUserId(UserController.getCurrentUser().getId())));
@@ -122,9 +134,12 @@ public class PageController {
      * @param "error" : error (RequestParam)
      * @return String : return the project file
      */
-    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
+    @GetMapping(value = {"/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
+        
+
 
         Long userId = UserController.getCurrentUser().getId();
         String projectName = projectService.findById(id).getName();
