@@ -12,7 +12,7 @@ right = 'a'
 original_stdout = sys.stdout
 with open(file, right) as f:
     sys.stdout = f
-    print ("INSERT INTO users (id, username, firstname, lastname, password) VALUES")
+    print ("INSERT INTO users (username, firstname, lastname, password) VALUES")
     sys.stdout = original_stdout
 
 id = 0
@@ -42,7 +42,7 @@ while 1 :
         
         with open(file, right) as f:
             sys.stdout = f
-            print ("\t(" + str(id) + ", \'" + username + "\', \'" + username + "\', \'" + username + "\', " + hashed_pwd + ")", end='')
+            print ("\t(\'" + username + "\', \'" + username + "\', \'" + username + "\', " + hashed_pwd + ")", end='')
             sys.stdout = original_stdout
         id += 1
     else :

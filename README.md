@@ -26,6 +26,8 @@ Tous les sources du projet sont disponibles sur gitlab. Vous pouvez donc clone l
 
 `https://gitlab.com/remiemonet/2022-pwa-a.git`
 
+Les sources se trouvent dans le dossier imperium. Les ressources telles que les images utilisées pour rédiger se readme se trouvent dans le dossier docs, dans lequelle on pourra également retrouver les éléments de design constitue notre application.
+
 # Exécution du projet
 
 Le projet peut également être executé via le terminal en suivant ces quelques étapes:
@@ -49,8 +51,8 @@ L'architechture de notre projet utilise le motif d'architecture MVC (**Modèle-v
 
 À ce point du projet nous sommes en capacité de schématiser les relations de notre application comme suit:
 
-<img src="docs/img/architechture.png"
-    alt="Schéma des intéractionS entre les packages de l'application."
+<img src="docs/img/archi/architechture.png"
+    alt="Schéma des intéractions entre les packages de l'application."
     style="text-align: center;" />
 
 </br>
