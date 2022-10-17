@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
 .header-error {
     width: 50%;
     margin: 0 auto;
@@ -220,7 +221,7 @@ body{
 .svgbtnplus{
   color :#004ca3;
   display:inline;
-  margin-left:700px;
+  margin-left:750px;
   
 }
 .svgbtnmoon{
@@ -228,7 +229,10 @@ body{
   margin-left: 10px;
 
 }
-
+.svgbtnnotification{
+  display:inline;
+  margin-left: 10px;
+}
 #contentProjects{
   background-color: white;
   border-radius: 20px;

@@ -62,3 +62,20 @@ body{
 #projectsharedTitle{
     margin-top:40px;
 }
+
+.shareButton{
+  position:relative;
+  margin-left: 800px;
+  margin-top: -25px;
+  margin-right:10px;
+}
+.AddList{
+  margin-top: -25px;
+  position:relative;
+  
+}
+
+
+.Share{
+  border-radius: 20px;
+}

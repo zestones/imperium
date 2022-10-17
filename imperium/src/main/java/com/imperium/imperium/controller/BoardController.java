@@ -31,7 +31,6 @@ public class BoardController {
 
         b.setProject(projectService.findById(id));
         service.save(b);
-
         return "redirect:/home/create-board?id=" + id;
     }
 
