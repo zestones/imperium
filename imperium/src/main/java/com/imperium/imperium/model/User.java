@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,11 +21,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-    private String lastname, firstname,jobtitle, photo, username, password;
-    
+    private String lastname, firstname, jobtitle, photo, username, password;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ElementCollection(fetch = FetchType.EAGER)

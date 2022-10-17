@@ -226,8 +226,11 @@
               <!-- displays users -->
               <h3 id="projectsharedTitle">All subscribed users</h3>
 
-              <div class="container" data-th-each="u : ${allUsers}">
-                <div class="card card--user-profile">
+              <div class="container">
+                <div
+                  class="card card--user-profile"
+                  data-th-each="u : ${allUsers}"
+                >
                   <div class="card-body" style="height: 100px">
                     <figure>
                       <table>

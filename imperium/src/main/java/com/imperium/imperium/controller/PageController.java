@@ -129,7 +129,10 @@ public class PageController {
         Long userId = UserController.getCurrentUser().getId();
         String projectName = projectService.findById(id).getName();
 
+        // ! **** For Dev ****
         model.addAttribute("allUsers", userService.findAll());
+        // ! *****************
+
         // USER DATA
         model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
         model.addAttribute("username", UserController.getCurrentUser().getUsername());

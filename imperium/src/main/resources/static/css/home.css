@@ -9,9 +9,11 @@
     display: flex;
 }
 
+
 #card {
     margin: 10px;
-   
+    display: flex;
+    justify-content: column; 
 }
 
 .card-body {
