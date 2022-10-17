@@ -227,7 +227,7 @@
               <td>
               <div class="projectsStatus">
                  <h2>[[ ${nbrprojects} ]]</h2>
-                <h6 >Total Projects</h6><nobr>
+                <h6 >Total Projects</h6> <nobr>
            
               </div>
 
@@ -282,29 +282,24 @@
               </div>
 
               <h3 id="projectsharedTitle">Project shared with me</h3>
-              <div class="container cards">
-                <div
-                  class="card"
-                  id="card"
-                  style="width: 15rem"
-                  data-th-each="p : ${sharedProjects} "
-                >
-                  <img
-                    src="/img/default.png"
-                    class="card-img-top"
-                    alt="image project"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title" data-th-text="${p.name}"></h5>
-                    <h3 data-th-text="${p.category}"></h3>
+               <div data-th-each="p : ${sharedProjects} " class="divfig">
+                <figure class="snip1533">
+                  <figcaption style="display: inline-block">
+                    <h3
+                      style="margin-bottom: 10px"
+                      data-th-text="${p.name}"
+                    ></h3>
+                    <h6 style="margin-bottom:30px;"data-th-text="${p.category}"></h6>
                     <a
                       data-th-href="@{/home/open-project/{id} (id=${p.id})}"
-                      class="btn btn-primary"
+                      class="draw"
+                      id="button"
                       >Open</a
                     >
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               </div>
+
               <!-- displays users -->
               <h3 id="projectsharedTitle">All subscribed users</h3>
 

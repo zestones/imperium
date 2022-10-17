@@ -1,6 +1,5 @@
 package com.imperium.imperium.controller;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -93,10 +92,9 @@ public class PageController {
         String jobtitle = UserController.getCurrentUser().getJobtitle();
         Long id = UserController.getCurrentUser().getId();
 
-                
         LocalDate currentDate = LocalDate.now();
         Month m = currentDate.getMonth();
-        int dom = currentDate.getDayOfMonth(); 
+        int dom = currentDate.getDayOfMonth();
         model.addAttribute("month", m);
         model.addAttribute("day", dom);
 
@@ -134,12 +132,9 @@ public class PageController {
      * @param "error" : error (RequestParam)
      * @return String : return the project file
      */
-    @GetMapping(value = {"/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
+    @GetMapping(value = { "/home/create-project", "/home/open-project", "/home/create-board", "/home/create-task" })
     private String openProject(Model model, @RequestParam(value = "id", defaultValue = "error") Long id,
             @RequestParam(value = "error", defaultValue = "no-error") String error) {
-
-        
-
 
         Long userId = UserController.getCurrentUser().getId();
         String projectName = projectService.findById(id).getName();
