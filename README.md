@@ -11,6 +11,12 @@ Notre application offre à l'utilisateur la possibilité de créer des tableaux 
 Le projet Imperium est déployé sur _Heroku_.
 
 De fait, il est accessible à l'adresse suivante: <a href="https://imperiums.herokuapp.com/" target="_blank">Imperium.co</a>
+Si vous décider de tester le projet en ligne vous pourrez vous connecter avec le compte suivant :
+
+**username :** pwa  
+**password :** pwa  
+
+Pour tester le projet en local suivez les étapes ci-dessous.
 
 ## Récupération des sources
 
