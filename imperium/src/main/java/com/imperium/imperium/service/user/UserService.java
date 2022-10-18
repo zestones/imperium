@@ -212,4 +212,9 @@ public class UserService implements IUserService, UserDetailsService {
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), u.getRoles());
     }
 
+    /* photo */
+    public User saveImage(User u) {
+        return uRepo.save(u);
+    }
+
 }

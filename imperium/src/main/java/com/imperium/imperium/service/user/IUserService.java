@@ -23,4 +23,6 @@ public interface IUserService {
 
     void autologout(HttpServletRequest request, HttpServletResponse response);
 
+    User saveImage(User u);
+
 }

@@ -11,8 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,24 +24,16 @@ import lombok.NoArgsConstructor;
 public class User {
     private String lastname, firstname, jobtitle, username, password;
 
-    @Column(nullable = true, length = 64)
-    private String photos;
-
-    @Transient
-    public String getPhotosImagePath() {
-        if (photos == null || id == null)
-            return null;
-
-        photos = "icon.png";
-        return "/src/main/resources/static/user-photos/" + photos;
-    }
-    // private Blob photo;
-
     @Id
     @GeneratedValue
     private Long id;
 
+    @Lob
+    @Column(name = "ImagePhoto")
+    private byte[] ImagePhoto;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+
 }

@@ -1,8 +1,5 @@
 package com.imperium.imperium.security;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.imperium.imperium.service.user.UserService;
 
@@ -26,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Inject
   UserService userDetailsService;
 
-  @Inject
+  @Autowired
   SecurityHandler handler;
 
   private final int httpPort;
@@ -43,22 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   /************************************ */
 
-  public void addResourceHandlers(SecurityConfig securityConfig,
-      ResourceHandlerRegistry registry) {
-    securityConfig.exposeDirectory("user-photos", registry);
-  }
-
-  void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
-    Path uploadDir = Paths.get(dirName);
-    String uploadPath = uploadDir.toFile().getAbsolutePath();
-
-    if (dirName.startsWith("../"))
-      dirName = dirName.replace("../", "");
-
-    registry.addResourceHandler("/" + dirName +
-        "/**").addResourceLocations("file:/" + uploadPath + "/");
-  }
-
   /*******************************************
    */
   /**
@@ -68,8 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers("/", "/index", "/css/**", "/img/**", "/img/icon/**", "/signIn", "/user-photos/**",
-            "user-photos/1/**",
+        .antMatchers("/", "/index", "/css/**", "/img/**", "/img/icon/**", "/signIn",
             "/h2-console/**")
         .permitAll()
         .antMatchers("/home", "/home/**").authenticated()

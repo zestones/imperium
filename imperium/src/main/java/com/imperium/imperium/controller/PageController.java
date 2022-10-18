@@ -3,11 +3,16 @@ package com.imperium.imperium.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.access.AccessService;
@@ -164,6 +169,10 @@ public class PageController {
         // USER DATA
         model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+
+        // USER IMAGE DATA
+        User uImage = UserController.getCurrentUser();
+        model.addAttribute("uImage", uImage);
 
         // PROCESS ERROR MSG
         if (error.equals("password")) {
