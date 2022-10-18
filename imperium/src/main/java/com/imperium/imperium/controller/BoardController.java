@@ -34,8 +34,14 @@ public class BoardController {
         return "redirect:/home/create-board?id=" + id;
     }
 
+    /**
+     * @param idBoard  : Board id property (PathVariable)
+     * @param idProjet : Project id property (PathVariable)
+     * @return String : redirect to PageController
+     */
     @GetMapping(value = "/home/delete-board/{idBoard}/{idProjet}")
     public String deleteBoard(@PathVariable Long idBoard, @PathVariable Long idProjet) {
+
         service.deleteById(idBoard);
         return "redirect:/home/open-project?id=" + idProjet;
     }
