@@ -22,7 +22,7 @@ body{
 }
 
 .card-body {
-    position: right;
+    position: relative;
     padding-bottom:-20px;
  
 }
@@ -78,4 +78,9 @@ body{
 
 .Share{
   border-radius: 20px;
+}
+
+#deleteBoard{
+  display: relative;
+  margin-left:90%;
 }
