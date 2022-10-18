@@ -47,4 +47,10 @@ public class BoardService implements IBoardService {
     public void save(Board p) {
         bRepo.save(p);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        bRepo.deleteById(id);
+    }
+
 }
