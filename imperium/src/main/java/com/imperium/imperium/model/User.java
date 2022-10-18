@@ -1,5 +1,6 @@
 package com.imperium.imperium.model;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +32,11 @@ public class User {
     @Lob
     @Column(name = "ImagePhoto")
     private byte[] ImagePhoto;
+
+    @Transient
+    public String getPhotosImagePath() {
+        return "/home/profile/" + getId();
+    }
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

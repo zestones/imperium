@@ -56,8 +56,12 @@
             <div class="card mb-4">
               <div class="card-body text-center">
                 <!-- image slot -->
-
-                <form
+                <img
+                  th:src="@{${user.photosImagePath} }"
+                  width="200px"
+                  height="200px"
+                />
+                <!-- <form
                   class="form-horizontal"
                   th:action="@{/home/profile/image-process}"
                   th:object="${uImage}"
@@ -66,23 +70,12 @@
                 >
                   <label class="col-sm-2 control-label"> Photo</label>
                   <div class="col-sm-10">
-                    <input
-                      name="file"
-                      type="file"
-                      value="upload"
-                      class="form-control"
-                      th:field="*{ImagePhoto}"
-                    />
+                    
                   </div>
                   <div class="row">
                     <button class="btn btn-default">Save</button>
                   </div>
-                  <img
-                    data-th-href="@{uImage.ImagePhoto} "
-                    width="200px"
-                    height="200px"
-                  />
-                </form>
+                </form> -->
 
                 <!-- image slot -->
                 <h5 class="my-3" data-th-text="${user.username}"></h5>
@@ -104,7 +97,8 @@
                 <form
                   data-th-action="@{/home/profile/process-profil}"
                   data-th-object="${user}"
-                  method="POST"
+                  method="post"
+                  enctype="multipart/form-data"
                 >
                   <div class="row">
                     <div class="col-sm-3">
@@ -221,11 +215,14 @@
                   </div>
                   <hr />
                   <a>
-                    <!-- <input
+                    <input
+                      name="file"
                       type="file"
-                      name="image"
-                      accept="image/png, image/jpeg"
-                    /> -->
+                      value="upload"
+                      class="form-control"
+                      accept="image/png"
+                      th:field="*{ImagePhoto}"
+                    />
                     <button type="submit" class="btn btn-primary">
                       Update
                     </button></a
