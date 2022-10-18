@@ -242,16 +242,20 @@
             <td data-th-each="b : ${boards}">
               <div class="card" style="width: 25rem; display: inline-block" ;>
                 <div class="card-body">
+                  <a
+                    data-th-href="@{/home/delete-board/{idBoard}/{idProjet} (idBoard=${b.id},idProjet=${id})}"
+                    class="btn-close"
+                    id="deleteBoard"
+                  >
+                    <button
+                      type="button"
+                      class="btn-close"
+                      aria-label="Close"
+                    ></button>
+                  </a>
                   <h5 class="card-title" data-th-text="${b.title}">
                     Card title
                   </h5>
-                  <a
-                    data-th-href="@{/home/delete-board/{idBoard}/{idProjet} (idBoard=${b.id},idProjet=${id})}"
-                    class="btn btn-danger"
-                    id="deleteTask"
-                  >
-                    <span class="bi bi-trash"></span>
-                  </a>
 
                   <!-- DISPLAY TASK -->
                   <div
