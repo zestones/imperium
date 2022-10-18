@@ -11,4 +11,6 @@ public interface ITaskService {
   void deleteById(Long id);
 
   ArrayList<Task> findTaskByProjectId(Long id);
+
+  Task findById(Long id);
 }

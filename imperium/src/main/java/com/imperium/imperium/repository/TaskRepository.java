@@ -14,4 +14,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             + "b.id_project = p.id AND"
             + " p.id = :id", nativeQuery = true)
     ArrayList<Task> findTaskByProjectId(Long id);
+
+    Task findTaskById(Long id);
 }

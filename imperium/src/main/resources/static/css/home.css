@@ -1,17 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
 .header-error {
     width: 50%;
     margin: 0 auto;
+}
+
+body{
+  background-color: #f3f6fd;
+  font-family:'DM Sans', sans-serif;
 }
 
 .cards {
     display: flex;
 }
 
+
 #card {
     margin: 10px;
-   
+    display: flex;
+    justify-content: column; 
 }
 
 .card-body {
@@ -21,7 +29,7 @@
 }
 
 .newProjectLink{
-  color:#8a51a5;
+  color:#096c86;
   font-weight: bold;
 }
 
@@ -40,14 +48,21 @@
     white-space: nowrap;
     display:inline;
     display:inline;
+    color:black;
 }
 .welcometext{
     display:inline;
+    color:black;
+}
+.WelText{
+  color:black;
+  size :16px;
 }
 #welcomebox{
-    background-color: #8a51a5;
-    height:90px;
-    color:rgb(236, 236, 236);
+    background-color: white;
+    height:50px;
+    color: black;
+    border-radius: 20px;
 }
 
 .snip1533 {
@@ -64,8 +79,8 @@
   text-align: center;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 5px;
-  border-top: 5px solid #8a51a5;
+  border-radius: 20px;
+  border-top: 5px solid #313348;
 }
 
 
@@ -79,7 +94,7 @@
   background-color: #fff;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  color: #8a51a5;
+  color: #096c86;
   content: "\F197";
   font-family: 'FontAwesome';
   font-size: 32px;
@@ -148,7 +163,7 @@
   }
   
   .draw:hover {
-    color: #8a51a5;
+    color: #096c86;
   }
 
 
@@ -159,15 +174,15 @@
   }
 
   .draw:hover::before {
-    border-top-color: #8a51a5; 
-    border-right-color: #8a51a5;
+    border-top-color: #e9e7fd; 
+    border-right-color: #096c86;
     transition:
       width 0.10s ease-out, 
       height 0.25s ease-out 0.10s;
   }
 
   .draw:hover::after {
-    border-bottom-color: #8a51a5;
+    border-bottom-color: #096c86;
     border-left-color: a;
     transition:
       border-color 0s ease-out 0.5s,
@@ -202,4 +217,64 @@
 
 .avatar__meta{
     padding-left:20px;
+}
+.svgbtnplus{
+  color :#004ca3;
+  display:inline;
+  margin-left:750px;
+  
+}
+.svgbtnmoon{
+  display:inline;
+  margin-left: 10px;
+
+}
+.svgbtnnotification{
+  display:inline;
+  margin-left: 10px;
+}
+#contentProjects{
+  background-color: white;
+  border-radius: 20px;
+  margin-top:30px;
+}
+
+#userCard{
+  width: 30%;
+  margin: 10px;
+  display: inline-block;
+}
+.date{
+  display: inline;
+}
+#dateStyle{
+  margin-left: 80%;
+  font-size: 17px;
+  color:#3c3c3c;
+  font-weight: bold;
+}
+
+#NoProjects{
+  margin-top:20px;
+}
+
+h6{
+  color:grey;
+  
+}
+.projectsStatus{
+  margin-left:360px;
+  margin-right:100px;
+  text-align:center;
+}
+.projectsStatus2{
+  margin-right:120px;
+  text-align:center;
+}
+.projectsStatus3{
+  text-align:center;
+}
+
+h2{
+  font-weight: bold;
 }

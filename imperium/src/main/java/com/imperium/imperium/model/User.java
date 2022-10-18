@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -23,10 +24,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
+<<<<<<< imperium/src/main/java/com/imperium/imperium/model/User.java
     private String lastname, firstname, jobtitle, username, password;
+=======
+    private String lastname, firstname, jobtitle, photo, username, password;
+>>>>>>> imperium/src/main/java/com/imperium/imperium/model/User.java
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob

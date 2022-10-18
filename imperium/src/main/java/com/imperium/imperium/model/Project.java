@@ -1,5 +1,7 @@
 package com.imperium.imperium.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +24,8 @@ public class Project {
     private String name;
     private String category;
     private double progress;
+    private Date startDate;
+    private Date dueDate;
 
     @Id
     @GeneratedValue

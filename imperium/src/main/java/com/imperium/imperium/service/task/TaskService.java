@@ -45,4 +45,8 @@ public class TaskService implements ITaskService {
     public void deleteById(Long id) {
         tRepo.deleteById(id);
     }
+
+    public Task findById(Long id) {
+        return tRepo.findTaskById(id);
+    }
 }

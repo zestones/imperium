@@ -11,4 +11,6 @@ public interface IBoardService {
     Board findBoardById(Long id);
 
     ArrayList<Board> findBoardsByProjectId(Long id);
+
+    void deleteById(Long id);
 }

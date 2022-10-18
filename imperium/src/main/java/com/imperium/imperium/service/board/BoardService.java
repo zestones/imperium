@@ -22,6 +22,7 @@ public class BoardService implements IBoardService {
      * @param id : Project id property
      * @return ArrayList<Board>
      */
+    @Override
     public ArrayList<Board> findBoardsByProjectId(Long id) {
         return bRepo.findBoardByProjectId(id);
     }
@@ -46,4 +47,10 @@ public class BoardService implements IBoardService {
     public void save(Board p) {
         bRepo.save(p);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        bRepo.deleteById(id);
+    }
+
 }
