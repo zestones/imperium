@@ -16,6 +16,7 @@
 		<java.version>11</java.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<spring.version>5.2.0.RELEASE</spring.version>
+		<sonar.organization>pwa-imperium</sonar.organization>
 	</properties>
 	<dependencies>
 		<dependency>
