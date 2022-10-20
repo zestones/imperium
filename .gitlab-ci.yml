@@ -26,9 +26,11 @@ cache:
 
 unit-test-job: # This job runs in the test stage.
   stage: test # It only starts when the job in the build stage completes successfully.
+  sast:
+    include:
+      - template: Security/SAST.gitlab-ci.yml # Static application security testing
   script:
     - echo "Running unit tests..."
-    - echo "Code coverage is 90%"
 
 lint-test-job: # This job also runs in the test stage.
   stage: test # It can run at the same time as unit-test-job (in parallel).
@@ -41,7 +43,7 @@ deploy-job: # This job runs in the deploy stage.
   environment: production
   image: maven:latest
   tags:
-      - docker
+    - docker
   script:
     - cd imperium/ && HEROKU_API_KEY="bd7f3db0-3ab2-4c2b-ae31-958920f6891a" mvn clean heroku:deploy
     - echo "Application successfully deployed."
