@@ -4,7 +4,6 @@ import java.beans.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,23 +23,18 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-<<<<<<< imperium/src/main/java/com/imperium/imperium/model/User.java
     private String lastname, firstname, jobtitle, username, password;
-=======
-    private String lastname, firstname, jobtitle, photo, username, password;
->>>>>>> imperium/src/main/java/com/imperium/imperium/model/User.java
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
-    @Column(name = "ImagePhoto")
-    private byte[] ImagePhoto;
+    private byte[] avatar;
 
     @Transient
-    public String getPhotosImagePath() {
-        return "/home/profile/" + getId();
+    public String getUserAvatar() {
+        return "/home/profile/user/" + getId() + "/avatar";
     }
 
     @ElementCollection(fetch = FetchType.EAGER)

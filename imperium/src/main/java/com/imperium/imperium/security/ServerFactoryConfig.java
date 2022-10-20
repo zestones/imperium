@@ -1,49 +1,54 @@
-package com.imperium.imperium.security;
+// package com.imperium.imperium.security;
 
-import org.apache.catalina.connector.Connector;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.stereotype.Component;
+// import org.apache.catalina.connector.Connector;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Value;
+// import
+// org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+// import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+// import org.springframework.stereotype.Component;
 
-@Component
-public class ServerFactoryConfig implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
+// ! CONFIGURE THE PORT REDIRECTION
 
-    private final int httpPort;
-    private final int httpsPort;
+// @Component
+// public class ServerFactoryConfig implements
+// WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
-    // Retrieve port value from application properties file
-    @Autowired
-    ServerFactoryConfig(
-            @Value("${server.http.port}") int httpPort,
-            @Value("${server.https.port}") int httpsPort) {
-        this.httpPort = httpPort;
-        this.httpsPort = httpsPort;
-    }
+// private final int httpPort;
+// private final int httpsPort;
 
-    /**
-     * @param factory
-     */
-    @Override
-    public void customize(TomcatServletWebServerFactory factory) {
-        factory.addAdditionalTomcatConnectors(redirectConnector());
-    }
+// // Retrieve port value from application properties file
+// @Autowired
+// ServerFactoryConfig(
+// @Value("${server.http.port}") int httpPort,
+// @Value("${server.https.port}") int httpsPort) {
+// this.httpPort = httpPort;
+// this.httpsPort = httpsPort;
+// }
 
-    /**
-     * @return Connector
-     */
-    private Connector redirectConnector() {
-        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setScheme("http");
+// /**
+// * @param factory
+// */
+// @Override
+// public void customize(TomcatServletWebServerFactory factory) {
+// factory.addAdditionalTomcatConnectors(redirectConnector());
+// }
 
-        // Set the http Port
-        connector.setPort(httpPort);
-        connector.setSecure(false);
+// /**
+// * @return Connector
+// */
+// private Connector redirectConnector() {
+// Connector connector = new
+// Connector("org.apache.coyote.http11.Http11NioProtocol");
+// connector.setScheme("http");
 
-        // Set the https Port
-        connector.setRedirectPort(httpsPort);
-        return connector;
-    }
+// // Set the http Port
+// connector.setPort(httpPort);
+// connector.setSecure(false);
 
-}
+// // Set the https Port
+// connector.setRedirectPort(httpsPort);
+// return connector;
+// }
+
+// }

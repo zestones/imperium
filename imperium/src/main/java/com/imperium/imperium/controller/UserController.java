@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.user.UserService;
@@ -24,6 +23,7 @@ public class UserController {
      */
     @PostMapping(value = "/signIn")
     public String signIn(Model model, User u) {
+
         String pwd = u.getPassword();
 
         if (service.isUserRegistered(u)) {
@@ -42,54 +42,35 @@ public class UserController {
     /**
      * @param model : holder for model attributes
      * @param u     : User object
+     * @param pwd1  : the new password
+     * @param pwd2  : the confirmation of the password
      * @return String : redirect to PageController
      */
-    @PostMapping(value = "/process-logIn")
-    public String logIn(Model model, User u) {
-        if (service.canConnect(u)) {
-            setCurrentUser(service.findByUsername(u.getUsername()));
-            return "redirect:/home";
-        }
-
-        return "authentification/logIn";
-    }
-
-    // Need to be checked: Will not need password again to update other user infos
-
-    // /**
-    // * @param model : holder for model attributes
-    // * @param u : User object
-    // * @param pwd1 : the new password
-    // * @param pwd2 : the confirmation of the password
-    // * @return String : redirect to PageController
-    // */
-
     @PostMapping(value = "/home/profile/process-profil")
-    public RedirectView updateUser(String pwd1, String pwd2, User u,
+    public String updateUser(String pwd1, String pwd2, User u,
             Model model) {
 
         if (!service.canUpdate(u, getCurrentUser()))
-            return new RedirectView("/home/profil/home/profile?error=username", true);
+            return "redirect:/home/profile?error=username";
 
         u.setId(getCurrentUser().getId());
-        // u.setFirstname(getCurrentUser().getFirstname());
-        // u.setUsername(getCurrentUser().getUsername());
-        // u.setLastname(getCurrentUser().getLastname());
-        u.setImagePhoto(getCurrentUser().getImagePhoto());
+        u.setAvatar(getCurrentUser().getAvatar());
 
-        /* PASSWORD UPLOAD */
+        // UPDATE THE PASSWORD
         String pwd;
         if (service.canUpdatePassword(u, pwd1, pwd2))
             pwd = service.encodePassword(pwd2);
         else if (u.getPassword().equals(""))
             pwd = getCurrentUser().getPassword();
         else
-            return new RedirectView("/home/profil/home/profile?error=username", true);
+            return "redirect:/home/profile?error=password";
 
         u.setPassword(pwd);
         service.update(u);
+
         setCurrentUser(service.findById(u.getId()));
-        return new RedirectView("/home/profile", true);
+
+        return "redirect:/home/profile";
     }
 
     /**

@@ -30,6 +30,9 @@
       href="/css/authentification/signin.css"
     />
 
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="/img/icon/favicon.ico" />
+
     <!-- TITLE -->
     <title>Imperium</title>
   </head>
@@ -57,55 +60,50 @@
       <!-- Header end -->
       <!-- Landing Page Begining -->
       <div class="card shadow p-3 mb-5 bg-white rounded">
-        <form
-          class="form"
-          method="post"
-          data-th-action="@{/process-logIn}"
-        >
+        <form class="form" method="post" data-th-action="@{/process-logIn}">
           <h2 class="form-login-h2">Log In</h2>
           <hr />
           <div class="alignform">
-          <div data-th-if="${error != null}">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              data-th-text="${error}"
-            ></div>
-          </div>
-          <p>
+            <div data-th-if="${error != null}">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                data-th-text="${error}"
+              ></div>
+            </div>
+            <p>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-control"
+                placeholder="Username"
+                required
+                autofocus
+              />
+            </p>
+            <p>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Password"
+                required
+              />
+            </p>
             <input
-              type="text"
-              id="username"
-              name="username"
-              class="form-control"
-              placeholder="Username"
-              required
-              autofocus
+              name="_csrf"
+              type="hidden"
+              value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
             />
-          </p>
-          <p>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              placeholder="Password"
-              required
-            />
-          </p>
-          <input
-            name="_csrf"
-            type="hidden"
-            value="58e0745e-d3fc-4a4c-a38f-803d8d8b1a0f"
-          />
-          <button class="custom-btn btn-LoginIn "  type="submit">
-            Login
-          </button>
-          <br />
-          <div class="signInText">
-            Not registered ? <a class="signInLink" href="/signIn"> Create an account </a>
+            <button class="custom-btn btn-LoginIn" type="submit">Login</button>
+            <br />
+            <div class="signInText">
+              Not registered ?
+              <a class="signInLink" href="/signIn"> Create an account </a>
+            </div>
           </div>
-        </div>
           <hr />
         </form>
       </div>
