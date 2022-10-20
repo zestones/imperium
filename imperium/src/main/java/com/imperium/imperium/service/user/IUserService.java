@@ -22,5 +22,4 @@ public interface IUserService {
     void autologin(String username, String password);
 
     void autologout(HttpServletRequest request, HttpServletResponse response);
-
 }

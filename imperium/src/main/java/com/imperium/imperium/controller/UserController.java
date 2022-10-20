@@ -23,6 +23,7 @@ public class UserController {
      */
     @PostMapping(value = "/signIn")
     public String signIn(Model model, User u) {
+
         String pwd = u.getPassword();
 
         if (service.isUserRegistered(u)) {
@@ -41,35 +42,21 @@ public class UserController {
     /**
      * @param model : holder for model attributes
      * @param u     : User object
-     * @return String : redirect to PageController
-     */
-    @PostMapping(value = "/process-logIn")
-    public String logIn(Model model, User u) {
-        if (service.canConnect(u)) {
-            setCurrentUser(service.findByUsername(u.getUsername()));
-            return "redirect:/home";
-        }
-
-        return "authentification/logIn";
-    }
-
-    // Need to be checked: Will not need password again to update other user infos
-
-    /**
-     * @param model : holder for model attributes
-     * @param u     : User object
      * @param pwd1  : the new password
      * @param pwd2  : the confirmation of the password
      * @return String : redirect to PageController
      */
     @PostMapping(value = "/home/profile/process-profil")
-    public String updateUser(Model model, User u, String pwd1, String pwd2) {
+    public String updateUser(String pwd1, String pwd2, User u,
+            Model model) {
 
         if (!service.canUpdate(u, getCurrentUser()))
             return "redirect:/home/profile?error=username";
 
         u.setId(getCurrentUser().getId());
+        u.setAvatar(getCurrentUser().getAvatar());
 
+        // UPDATE THE PASSWORD
         String pwd;
         if (service.canUpdatePassword(u, pwd1, pwd2))
             pwd = service.encodePassword(pwd2);
@@ -80,6 +67,7 @@ public class UserController {
 
         u.setPassword(pwd);
         service.update(u);
+
         setCurrentUser(service.findById(u.getId()));
 
         return "redirect:/home/profile";

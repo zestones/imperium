@@ -1,5 +1,6 @@
 package com.imperium.imperium.model;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,13 +23,22 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-    private String lastname, firstname, jobtitle, photo, username, password;
+    private String lastname, firstname, jobtitle, username, password;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
+    private byte[] avatar;
+
+    @Transient
+    public String getUserAvatar() {
+        return "/home/profile/user/" + getId() + "/avatar";
+    }
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+
 }

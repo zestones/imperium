@@ -1,7 +1,6 @@
 package com.imperium.imperium.controller;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,20 +88,14 @@ public class PageController {
     @GetMapping(value = "/home")
     private String homePage(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
 
-        String jobtitle = UserController.getCurrentUser().getJobtitle();
         Long id = UserController.getCurrentUser().getId();
 
-        LocalDate currentDate = LocalDate.now();
-        Month m = currentDate.getMonth();
-        int dom = currentDate.getDayOfMonth();
-        model.addAttribute("month", m);
-        model.addAttribute("day", dom);
+        LocalDate date = LocalDate.now();
+        model.addAttribute("month", date.getMonth());
+        model.addAttribute("day", date.getDayOfMonth());
 
         // USER DATA
-        model.addAttribute("username", UserController.getCurrentUser().getUsername());
-        model.addAttribute("firstname", UserController.getCurrentUser().getFirstname());
-        model.addAttribute("lastname", UserController.getCurrentUser().getLastname());
-        model.addAttribute("jobtitle", jobtitle);
+        model.addAttribute("user", UserController.getCurrentUser());
 
         // ! **** For Dev ****
         model.addAttribute("allUsers", userService.findAll());
@@ -144,6 +137,7 @@ public class PageController {
         // ! *****************
 
         // USER DATA
+        model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("isOwner", (projectService.findProjectOwner(id).getId().equals(userId)));
         model.addAttribute("username", UserController.getCurrentUser().getUsername());
 

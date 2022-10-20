@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.imperium.imperium.controller.UserController;
 import com.imperium.imperium.service.user.UserService;
 
+@Deprecated
 @Component
 public class SecurityHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 
@@ -51,4 +52,5 @@ public class SecurityHandler implements AuthenticationSuccessHandler, Authentica
         // TODO : ADD CUSTOM HANDLER
 
     }
+
 }
