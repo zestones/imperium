@@ -42,6 +42,9 @@ deploy-job: # This job runs in the deploy stage.
   image: maven:latest
   tags:
     - docker
-  script:
-    - cd imperium/ && HEROKU_API_KEY="bd7f3db0-3ab2-4c2b-ae31-958920f6891a" mvn clean heroku:deploy
-    - echo "Application successfully deployed."
+  only:
+    refs:
+      - main
+      script:
+        - cd imperium/ && HEROKU_API_KEY="bd7f3db0-3ab2-4c2b-ae31-958920f6891a" mvn clean heroku:deploy
+        - echo "Application successfully deployed."
