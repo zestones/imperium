@@ -40,7 +40,7 @@ public class ImageController {
     private String updateAvatar(byte[] avatar) {
 
         if (avatar.length == 0)
-            return "redirect:/home/profile";
+            return "redirect:/home/profile/account-settings";
 
         User u = UserController.getCurrentUser();
         u.setAvatar(avatar);
@@ -48,7 +48,7 @@ public class ImageController {
 
         UserController.setCurrentUser(userService.findById(u.getId()));
 
-        return "redirect:/home/profile";
+        return "redirect:/home/profile/account-settings";
     }
 
     /**

@@ -184,7 +184,16 @@ public class PageController {
             model.addAttribute("error", "Username already used.");
         }
 
-        return "profile";
+        return "user/profile";
+    }
+
+    @GetMapping(value = "/home/profile/account-settings")
+    private String userSetting(Model model) {
+
+        // USER DATA
+        model.addAttribute("user", UserController.getCurrentUser());
+
+        return "user/settings";
     }
 
 }
