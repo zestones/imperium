@@ -35,10 +35,9 @@
 }
 
 .btn-github {
-  background: black;
+  background: rgb(58, 58, 58);
   color: #ffffff;
 }
-
 
 .btn-twitter:hover,
 .btn-twitter:focus {
@@ -48,7 +47,7 @@
 
 .btn-stack-overflow:hover,
 .btn-stack-overflow:focus {
-  background: #e51e6b;
+  background: #d48a00;
   color: #ffffff;
 }
 
@@ -60,6 +59,6 @@
 
 .btn-github:hover,
 .btn-github:focus {
-  background: #bf3322;
+  background: #000000;
   color: #ffffff;
 }
