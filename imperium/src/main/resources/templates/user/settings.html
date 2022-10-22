@@ -66,7 +66,10 @@
                   <a data-th-href="@{/home}">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a data-th-href="@{/home/profile}">Profile</a>
+                  <a
+                    data-th-href="@{/home/profile/{username} (username=${user.username})}"
+                    >Profile</a
+                  >
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Account Settings
@@ -289,7 +292,7 @@
                 </form>
                 <form
                   id="cancel"
-                  data-th-action="@{/home/profile}"
+                  data-th-action="@{/home/profile/{username} (username=${user.username})}"
                   method="GET"
                 ></form>
                 <div>
