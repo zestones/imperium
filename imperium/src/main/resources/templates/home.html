@@ -29,7 +29,9 @@
     />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="/css/project-card.css" />
 
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="/img/icon/favicon.ico" />
@@ -46,7 +48,7 @@
             class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
           >
             <a
-              data-th-href="@{/home?username=} + ${user.username}"
+              data-th-href="@{/home}"
               class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
               <span class="title fs-5 d-none d-sm-inline">Dashboard</span>
@@ -298,7 +300,6 @@
                   </td>
                 </tr>
               </table>
-
               <div data-th-each="p : ${myProjects} " class="divfig">
                 <figure class="snip1533">
                   <figcaption style="display: inline-block">
@@ -313,21 +314,21 @@
                     <a
                       data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
                       class="draw"
-                      id="button"
+                      id="delete-btn"
                       onclick="return confirm('Are you sure you want to delete the project ?');"
                       >Delete</a
                     >
                     <a
                       data-th-href="@{/home/open-project/{id} (id=${p.id})}"
                       class="draw"
-                      id="button"
+                      id="open-btn"
                       >Open</a
                     >
                   </figcaption>
                 </figure>
               </div>
 
-              <div id="NoProjects" th:if="${noProjects}">
+              <div id="no-projects" th:if="${noProjects}">
                 No projects found !
               </div>
 
@@ -409,7 +410,6 @@
                 </div>
               </div>
             </div>
-
             <!-- new project Modal -->
             <div
               class="modal fade"

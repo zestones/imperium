@@ -23,7 +23,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @NoArgsConstructor
 public class User {
-    private String lastname, firstname, jobtitle, username, password;
+    private String lastname, firstname, password;
+    private String username, email, phoneNumber;
+    private String jobtitle, company, bio;
+
+    private String github, linkedin, twitter, stackOverflow;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

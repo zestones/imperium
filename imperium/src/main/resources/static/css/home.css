@@ -6,11 +6,6 @@
     margin: 0 auto;
 }
 
-body{
-  background-color: #f3f6fd;
-  font-family:'DM Sans', sans-serif;
-}
-
 .cards {
     display: flex;
 }
@@ -64,131 +59,6 @@ body{
     color: black;
     border-radius: 20px;
 }
-
-.snip1533 {
-    
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  color: #9e9e9e;
-  display: inline-block;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
-  margin: 35px 10px 10px;
-  max-width: 300px;
-  min-width: 250px;
-  position: relative;
-  text-align: center;
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 20px;
-  border-top: 5px solid #313348;
-}
-
-
-.snip1533 figcaption {
-  padding: 13% 10% 12%;
-}
-
-.snip1533 figcaption:before {
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  color: #096c86;
-  content: "\F197";
-  font-family: 'FontAwesome';
-  font-size: 32px;
-  font-style: normal;
-  left: 50%;
-  line-height: 60px;
-  position: absolute;
-  top: -30px;
-  width: 60px;
-}
-
-.snip1533 h3 {
-  color: #3c3c3c;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 24px;
-  margin: 10px 10px 5px;
-}
-
-
-
-#button {
-  background: none;
-  text-decoration: none;
-  border: 0;
-  box-sizing: border-box;
-  margin: 0.5em;
-  padding: 0.5em 1em;
-  box-shadow: inset 0 0 0 2px #004ca3;
-  color: #004ca3;
-  font-size: inherit;
-  font-weight: 700;
-  position: relative;
-  vertical-align: middle;
-  
-}
-  #button::before,
-  #button::after {
-    box-sizing: inherit;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-
-.draw {
-    transition: color 0.10s;
-}
-.draw::before,
-  .draw::after {
-    border: 2px solid transparent;
-    width: 0;
-    height: 0;
-  }
-
-  .draw::before {
-    top: 0;
-    left: 0;
-  }
-
-  
-  .draw::after {
-    bottom: 0;
-    right: 0;
-  }
-  
-  .draw:hover {
-    color: #096c86;
-  }
-
-
-  .draw:hover::before,
-  .draw:hover::after {
-    width: 100%;
-    height: 100%;
-  }
-
-  .draw:hover::before {
-    border-top-color: #e9e7fd; 
-    border-right-color: #096c86;
-    transition:
-      width 0.10s ease-out, 
-      height 0.25s ease-out 0.10s;
-  }
-
-  .draw:hover::after {
-    border-bottom-color: #096c86;
-    border-left-color: a;
-    transition:
-      border-color 0s ease-out 0.5s,
-      width 0.25s ease-out 0.5s,
-      height 0.25s ease-out 0.75s;
-  }
 
 .divfig{
     display: inline-block;
@@ -252,10 +122,6 @@ body{
   font-size: 17px;
   color:#3c3c3c;
   font-weight: bold;
-}
-
-#NoProjects{
-  margin-top:20px;
 }
 
 h6{

@@ -1,0 +1,123 @@
+/* ---------------------------------------------
+Table of contents
+------------------------------------------------
+00. LogIn/SignIn Style
+01. Index Corps
+
+
+--------------------------------------------- */
+
+
+/*------------------------------------------
+Login styles
+-----------------------------------------*/
+
+
+.toogle-wrapper {
+  text-align: right;
+}
+
+.toogle-form {
+  display: inline-block;
+  color: white
+}
+
+.form-signin-h2 {
+  color: white;
+
+}
+
+/*------------------------------------------
+Index Corps
+-----------------------------------------*/
+
+.sub-header-area {
+  position: fixed;
+  top: 40px;
+  left: 30%;
+  right: 30%;
+  z-index: 1;
+  height: 60px;
+  background-color: beige;
+  border-radius: 20px 20px 20px 20px;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(0, 0%, 100%);
+  font-size: 50px;
+  font-weight: bold;
+  font-family: monospace;
+  letter-spacing: 7px;
+  cursor: pointer;
+  height: 10vh;
+
+}
+
+h1 span {
+  transition: 0.8s ease-out;
+}
+
+h1:hover span:nth-child(1) {
+  margin-right: 5px;
+}
+
+h1:hover span:nth-child(1):after {
+  content: "MPERIUM";
+}
+
+h1:hover span:nth-child(2) {
+  margin-left: 30px;
+}
+
+h1:hover span:nth-child(2):after {
+  content: "AKE IT"
+}
+
+h1:hover span:nth-child(3) {
+  margin-left: 30px;
+}
+
+h1:hover span {
+  color: rgb(219, 219, 219);
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+}
+
+.navbar-brand{
+  text-transform: uppercase;
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	background-clip: text;
+  -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-size :30px;
+  padding-left:15px;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background: linear-gradient(-45deg, #f47b89, #cb5e99, #8a51a5, #004ca3);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
