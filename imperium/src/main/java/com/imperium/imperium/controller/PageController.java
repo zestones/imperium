@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.model.User;
@@ -166,13 +167,14 @@ public class PageController {
      * @param error : error (RequestParam)
      * @return String : return the profile file
      */
-    @GetMapping(value = "/home/profile")
-    private String profile(Model model) {
-        Long userId = UserController.getCurrentUser().getId();
+    @GetMapping(value = "/home/profile/{username}")
+    private String profile(Model model, @PathVariable String username) {
+        User u = userService.findByUsername(username);
 
         // USER DATA
-        model.addAttribute("user", UserController.getCurrentUser());
-        model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+        model.addAttribute("user", u);
+        model.addAttribute("myProjects", projectService.findProjectByUserId(u.getId()));
+        model.addAttribute("owner", username.equals(UserController.getCurrentUser().getUsername()));
 
         return "user/profile";
     }

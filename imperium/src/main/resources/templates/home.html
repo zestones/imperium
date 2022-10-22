@@ -143,9 +143,17 @@
                     >New project...</a
                   >
                 </li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li>
-                  <a class="dropdown-item" data-th-href="@{/home/profile}"
+                  <a
+                    class="dropdown-item"
+                    data-th-href="@{/home/profile/account-settings}"
+                    >Settings</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    data-th-href="@{/home/profile/{username} (username=${user.username})}"
                     >Profile</a
                   >
                 </li>
@@ -387,13 +395,11 @@
                             >
                               fullname
                             </h5>
-                            <div
-                              th:if="${#strings.isEmpty(u.jobtitle)}"
-                              data-th-if="${isOwner == true}"
-                            >
-                              Update your job title in
-                              <a data-th-href="@{/home/profile}"
-                                >your profile</a
+                            <div>
+                              <a
+                                data-th-href="@{/home/profile/{username}/ (username=${u.username})}"
+                              >
+                                See profile</a
                               >
                             </div>
                             <div
