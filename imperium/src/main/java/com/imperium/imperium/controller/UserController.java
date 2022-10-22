@@ -137,5 +137,4 @@ public class UserController {
     public static User getCurrentUser() {
         return user;
     }
-
 }

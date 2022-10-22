@@ -99,6 +99,32 @@
                       value="Edit profile"
                     />
                   </form>
+                  <form
+                    data-th-action="@{/home/profile/{username}/follow (username=${user.username})}"
+                    method="POST"
+                    style="z-index: 1; text-align: center; margin: -15px"
+                    data-th-if="${#lists.contains(userFollowingList, user) == false and owner == false}"
+                  >
+                    <input
+                      type="submit"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      value="Follow"
+                    />
+                  </form>
+                  <form
+                    data-th-action="@{/home/profile/{username}/unfollow (username=${user.username})}"
+                    method="POST"
+                    style="z-index: 1; text-align: center; margin: -15px"
+                    data-th-if="${#lists.contains(userFollowingList, user) == true and owner == false}"
+                  >
+                    <input
+                      type="submit"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      value="Unfollow"
+                    />
+                  </form>
                 </div>
                 <div class="ms-3" style="margin-top: 130px">
                   <h5>[[ ${user.firstname} + ' ' + ${user.lastname} ]]</h5>
@@ -108,16 +134,28 @@
               <div class="p-4 text-black" style="background-color: #f8f9fa">
                 <div class="d-flex justify-content-end text-center py-1">
                   <div>
-                    <p class="mb-1 h5">[[ ${myProjects.size()} ]]</p>
-                    <p class="small text-muted mb-0">Project</p>
+                    <a href="#recent-project" class="fill-div">
+                      <p class="mb-1 h5">[[ ${myProjects.size()} ]]</p>
+                      <p class="small text-muted mb-0">Project</p>
+                    </a>
                   </div>
                   <div class="px-3">
-                    <p class="mb-1 h5">?</p>
-                    <p class="small text-muted mb-0">Followers</p>
+                    <a
+                      data-th-href="@{/home/profile/{username}/follower (username=${user.username})}"
+                      class="fill-div"
+                    >
+                      <p class="mb-1 h5">[[ ${numberFollower} ]]</p>
+                      <p class="small text-muted mb-0">Followers</p>
+                    </a>
                   </div>
                   <div>
-                    <p class="mb-1 h5">?</p>
-                    <p class="small text-muted mb-0">Following</p>
+                    <a
+                      data-th-href="@{/home/profile/{username}/following (username=${user.username})}"
+                      class="fill-div"
+                    >
+                      <p class="mb-1 h5">[[ ${numberFollowing} ]]</p>
+                      <p class="small text-muted mb-0">Following</p>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -192,7 +230,9 @@
                 <div
                   class="d-flex justify-content-between align-items-center mb-4"
                 >
-                  <p class="lead fw-normal mb-0">Recent project</p>
+                  <p class="lead fw-normal mb-0" id="recent-project">
+                    Recent project
+                  </p>
                   <p class="mb-0">
                     <a href="#!" class="text-muted">Show all</a>
                   </p>

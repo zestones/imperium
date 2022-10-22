@@ -35,5 +35,4 @@ public class Task {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private List<User> users;
-
 }

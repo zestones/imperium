@@ -2,6 +2,7 @@ package com.imperium.imperium.model;
 
 import java.beans.Transient;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -36,13 +38,18 @@ public class User {
     @Lob
     private byte[] avatar;
 
-    @Transient
-    public String getUserAvatar() {
-        return "/home/profile/user/" + getId() + "/avatar";
-    }
+    @OneToMany(mappedBy = "following")
+    private List<Followers> following;
+
+    @OneToMany(mappedBy = "follower")
+    private List<Followers> followers;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
+    @Transient
+    public String getUserAvatar() {
+        return "/home/profile/user/" + getId() + "/avatar";
+    }
 }
