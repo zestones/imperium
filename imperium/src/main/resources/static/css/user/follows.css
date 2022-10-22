@@ -9,3 +9,15 @@
 .shadow {
     box-shadow: 0 10px 15px rgb(0 0 0 / 10%) !important;
 }
+
+a.fill-div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    text-decoration: none;
+}
+
+a.fill-div:hover {
+    box-shadow: 0 10px 15px rgb(0 0 0 / 10%);
+}
