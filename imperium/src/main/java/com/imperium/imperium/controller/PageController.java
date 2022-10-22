@@ -163,18 +163,25 @@ public class PageController {
 
     /**
      * @param model : holder for model attributes
-     * @param u     : User object
      * @param error : error (RequestParam)
      * @return String : return the profile file
      */
     @GetMapping(value = "/home/profile")
-    private String profile(Model model, User u,
-            @RequestParam(value = "error", defaultValue = "no-error") String error) {
+    private String profile(Model model) {
         Long userId = UserController.getCurrentUser().getId();
 
         // USER DATA
         model.addAttribute("user", UserController.getCurrentUser());
         model.addAttribute("myProjects", projectService.findProjectByUserId(userId));
+
+        return "user/profile";
+    }
+
+    @GetMapping(value = "/home/profile/account-settings")
+    private String userSetting(Model model, @RequestParam(value = "error", defaultValue = "no-error") String error) {
+
+        // USER DATA
+        model.addAttribute("user", UserController.getCurrentUser());
 
         // PROCESS ERROR MSG
         if (error.equals("password")) {
@@ -183,15 +190,6 @@ public class PageController {
         } else if (error.equals("username")) {
             model.addAttribute("error", "Username already used.");
         }
-
-        return "user/profile";
-    }
-
-    @GetMapping(value = "/home/profile/account-settings")
-    private String userSetting(Model model) {
-
-        // USER DATA
-        model.addAttribute("user", UserController.getCurrentUser());
 
         return "user/settings";
     }

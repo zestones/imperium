@@ -100,7 +100,7 @@
                 </div>
                 <div class="ms-3" style="margin-top: 130px">
                   <h5>[[ ${user.firstname} + ' ' + ${user.lastname} ]]</h5>
-                  <p>New York</p>
+                  <p>[[ ${user.username} ]]</p>
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa">
@@ -123,12 +123,7 @@
                 <div class="mb-5">
                   <p class="lead fw-normal mb-1">About me</p>
                   <div class="p-4" style="background-color: #f8f9fa">
-                    <p>
-                      Hello Lorem ipsum dolor sit amet consectetur adipisicing
-                      elit. Ipsum similique, tempore minima officiis dolorum
-                      quidem facere quae quasi qui, veritatis vitae. Perferendis
-                      facilis harum sequi tenetur? Aperiam dolore itaque ipsa?
-                    </p>
+                    <p>[[ ${user.bio} ]]</p>
                   </div>
                 </div>
                 <p class="lead fw-normal mb-1">Information</p>
@@ -137,15 +132,15 @@
                     class="p-4 profile-infos"
                     style="background-color: #f8f9fa"
                   >
-                    <p><strong>Email :</strong> [[ ${user.username} ]]</p>
-                    <p><strong>Mobile :</strong> [[ ${user.username} ]]</p>
-                    <p><strong>Location :</strong> [[ ${user.username} ]]</p>
+                    <p><strong>Email :</strong> [[ ${user.email} ]]</p>
+                    <p><strong>Mobile :</strong> [[ ${user.phoneNumber} ]]</p>
+                    <p><strong>Company :</strong> [[ ${user.company} ]]</p>
                   </div>
                   <div
                     class="p-4 profile-infos"
                     style="background-color: #f8f9fa"
                   >
-                    <p><strong>Job : </strong> [[ ${user.jobtitle} ]]</p>
+                    <p><strong>Jobtitle : </strong> [[ ${user.jobtitle} ]]</p>
                     <p><strong>Languages : </strong></p>
                     <p><strong>blabla : </strong></p>
                   </div>

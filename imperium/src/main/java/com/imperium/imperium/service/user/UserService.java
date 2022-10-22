@@ -52,8 +52,8 @@ public class UserService implements IUserService, UserDetailsService {
      * @param current : current User object
      * @return Boolean
      */
-    public Boolean canUpdate(User u, User current) {
-        return u.getUsername().equals(current.getUsername()) || !isUserRegistered(u);
+    public Boolean canUpdate(String username, User current) {
+        return username.equals(current.getUsername()) || !isUserRegistered(username);
     }
 
     /**
@@ -62,9 +62,9 @@ public class UserService implements IUserService, UserDetailsService {
      * @param pwd2 : the confirmation
      * @return Boolean
      */
-    public Boolean canUpdatePassword(User u, String pwd1, String pwd2) {
-        return !u.getPassword().equals("") && pwd1.equals(pwd2)
-                && arePasswordMatching(u.getPassword(), findById(u.getId()).getPassword());
+    public Boolean canUpdatePassword(Long id, String oldPwd, String pwd1, String pwd2) {
+        return !oldPwd.equals("") && pwd1.equals(pwd2)
+                && arePasswordMatching(oldPwd, findById(id).getPassword());
     }
 
     /**
@@ -82,6 +82,14 @@ public class UserService implements IUserService, UserDetailsService {
      */
     public Boolean isUserRegistered(User u) {
         return (uRepo.findByUsername(u.getUsername()) != null);
+    }
+
+    /**
+     * @param u : User username property
+     * @return Boolean
+     */
+    public Boolean isUserRegistered(String u) {
+        return (uRepo.findByUsername(u) != null);
     }
 
     /********************************
@@ -141,6 +149,11 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public void update(User u) {
         uRepo.save(u);
+    }
+
+    @Override
+    public void delete(User u) {
+        uRepo.delete(u);
     }
 
     /********************************
