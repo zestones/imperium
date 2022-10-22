@@ -192,6 +192,8 @@ public class PageController {
         // FOLLOWER / FOLLOWING
         model.addAttribute("numberFollowing", followersService.findIdUserFollowing(u.getId()).size());
         model.addAttribute("numberFollower", followersService.findIdUserFollower(u.getId()).size());
+        model.addAttribute("userFollowingList", userService.getArrayUserByArrayidUser(
+                followersService.findIdUserFollowing(UserController.getCurrentUser().getId())));
 
         return "user/profile";
     }

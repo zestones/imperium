@@ -103,13 +103,26 @@
                     data-th-action="@{/home/profile/{username}/follow (username=${user.username})}"
                     method="POST"
                     style="z-index: 1; text-align: center; margin: -15px"
-                    data-th-if="${owner == false}"
+                    data-th-if="${#lists.contains(userFollowingList, user) == false and owner == false}"
                   >
                     <input
                       type="submit"
                       class="btn btn-outline-dark"
                       data-mdb-ripple-color="dark"
                       value="Follow"
+                    />
+                  </form>
+                  <form
+                    data-th-action="@{/home/profile/{username}/unfollow (username=${user.username})}"
+                    method="POST"
+                    style="z-index: 1; text-align: center; margin: -15px"
+                    data-th-if="${#lists.contains(userFollowingList, user) == true and owner == false}"
+                  >
+                    <input
+                      type="submit"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      value="Unfollow"
                     />
                   </form>
                 </div>

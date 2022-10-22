@@ -161,6 +161,17 @@ public class UserController {
         return "redirect:/home/profile/{currentUsername}/" + tab.toLowerCase();
     }
 
+    @PostMapping(value = "/home/profile/{username}/unfollow")
+    private String unfollowUser(@PathVariable String username) {
+
+        User u = service.findByUsername(username);
+        Followers f = followersService.findByIdFollowersAndIdFollowing(u.getId(), getCurrentUser().getId());
+
+        followersService.delete(f);
+
+        return "redirect:/home/profile/{username}";
+    }
+
     /**
      * @param u : User object
      */
