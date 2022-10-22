@@ -3,12 +3,9 @@ package com.imperium.imperium.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.imperium.imperium.model.Followers;
 import com.imperium.imperium.model.User;
-import com.imperium.imperium.service.followers.FollowersService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
@@ -16,9 +13,6 @@ public class UserController {
 
     @Autowired
     private UserService service;
-
-    @Autowired
-    private FollowersService followersService;
 
     private static User user;
 
@@ -130,48 +124,6 @@ public class UserController {
         return "redirect:/home/profile/account-settings";
     }
 
-    @PostMapping(value = "/home/profile/{username}/follow")
-    private String followUser(@PathVariable String username) {
-        User u = service.findByUsername(username);
-
-        followersService.save(new Followers(getCurrentUser(), u));
-
-        return "redirect:/home/profile/{username}";
-    }
-
-    @PostMapping(value = "/home/profile/{currentUsername}/follow/{username}/{tab}")
-    private String followPageUser(@PathVariable String currentUsername, @PathVariable String username,
-            @PathVariable String tab) {
-        User u = service.findByUsername(username);
-
-        followersService.save(new Followers(getCurrentUser(), u));
-
-        return "redirect:/home/profile/{currentUsername}/" + tab.toLowerCase();
-    }
-
-    @PostMapping(value = "/home/profile/{currentUsername}/unfollow/{username}/{tab}")
-    private String unfollowPageUser(@PathVariable String currentUsername, @PathVariable String username,
-            @PathVariable String tab) {
-
-        User u = service.findByUsername(username);
-        Followers f = followersService.findByIdFollowersAndIdFollowing(u.getId(), getCurrentUser().getId());
-
-        followersService.delete(f);
-
-        return "redirect:/home/profile/{currentUsername}/" + tab.toLowerCase();
-    }
-
-    @PostMapping(value = "/home/profile/{username}/unfollow")
-    private String unfollowUser(@PathVariable String username) {
-
-        User u = service.findByUsername(username);
-        Followers f = followersService.findByIdFollowersAndIdFollowing(u.getId(), getCurrentUser().getId());
-
-        followersService.delete(f);
-
-        return "redirect:/home/profile/{username}";
-    }
-
     /**
      * @param u : User object
      */
@@ -185,5 +137,4 @@ public class UserController {
     public static User getCurrentUser() {
         return user;
     }
-
 }
