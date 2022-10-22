@@ -27,6 +27,8 @@ public class User {
     private String username, email, phoneNumber;
     private String jobtitle, company, bio;
 
+    private String github, linkedin, twitter, stackOverflow;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

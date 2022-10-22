@@ -151,6 +151,9 @@ public class UserService implements IUserService, UserDetailsService {
         uRepo.save(u);
     }
 
+    /**
+     * @param u : User object
+     */
     @Override
     public void delete(User u) {
         uRepo.delete(u);

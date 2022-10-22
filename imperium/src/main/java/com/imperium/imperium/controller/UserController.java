@@ -39,6 +39,10 @@ public class UserController {
         return "redirect:/home";
     }
 
+    /**
+     * @param u : User object
+     * @return String : redirect to PageController
+     */
     @PostMapping(value = "/home/profile/settings/update-account")
     private String updateAccount(User u) {
 
@@ -79,6 +83,10 @@ public class UserController {
         return "redirect:/home/profile/account-settings";
     }
 
+    /**
+     * @param username : User username property
+     * @return String : reditrect to PageController
+     */
     @PostMapping(value = "/home/profile/settings/update-username")
     private String updateUsername(String username) {
         if (!service.canUpdate(username, getCurrentUser()))
@@ -90,10 +98,30 @@ public class UserController {
         return "redirect:/home/profile/account-settings";
     }
 
+    /**
+     * @return String : redirect to PageController
+     */
     @PostMapping(value = "/home/profile/settings/delete-account")
     private String deleteAccount() {
         service.delete(getCurrentUser());
         return "redirect:/";
+    }
+
+    /**
+     * @param u : User object
+     * @return String : redirect to PageController
+     */
+    @PostMapping(value = "/home/profile/settings/update-social-media")
+    private String updateSocialMedia(User u) {
+
+        getCurrentUser().setGithub(u.getGithub());
+        getCurrentUser().setLinkedin(u.getLinkedin());
+        getCurrentUser().setTwitter(u.getTwitter());
+        getCurrentUser().setStackOverflow(u.getStackOverflow());
+
+        service.update(getCurrentUser());
+
+        return "redirect:/home/profile/account-settings";
     }
 
     /**

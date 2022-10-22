@@ -51,7 +51,12 @@ textarea {
     display: none;
 }
 
-.delete-title {
-    color: red;
-    font-weight: bold;
+.social-network {
+    display: flex;
+    width: 75%;
+    margin: 25px;
+}
+
+.social-network-container {
+    margin-top: 55px;
 }

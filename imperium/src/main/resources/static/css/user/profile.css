@@ -6,3 +6,60 @@
 .profile-infos {
   width: 100%;  
 }
+
+.social-media-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn.btn-social-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin-left: 30px;
+}
+
+.btn-twitter {
+  background: #2caae1;
+  color: #ffffff;
+}
+
+.btn-stack-overflow {
+  background: #ffa500;
+  color: #ffffff;
+}
+
+.btn-linkedin {
+  background: #0177b5;
+  color: #ffffff;
+}
+
+.btn-github {
+  background: black;
+  color: #ffffff;
+}
+
+
+.btn-twitter:hover,
+.btn-twitter:focus {
+  background: #1b8dbf;
+  color: #ffffff;
+}
+
+.btn-stack-overflow:hover,
+.btn-stack-overflow:focus {
+  background: #e51e6b;
+  color: #ffffff;
+}
+
+.btn-linkedin:hover,
+.btn-linkedin:focus {
+  background: #015682;
+  color: #ffffff;
+}
+
+.btn-github:hover,
+.btn-github:focus {
+  background: #bf3322;
+  color: #ffffff;
+}

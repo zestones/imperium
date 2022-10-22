@@ -33,6 +33,10 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/css/user/settings.css" />
@@ -152,6 +156,18 @@
                 </a>
                 <a
                   class="nav-link"
+                  id="social-media-tab"
+                  data-toggle="pill"
+                  href="#social-media"
+                  role="tab"
+                  aria-controls="social-media"
+                  aria-selected="false"
+                >
+                  <i class="bi bi-share text-center mr-1"></i>
+                  Social Network
+                </a>
+                <a
+                  class="nav-link"
                   id="security-tab"
                   data-toggle="pill"
                   href="#security"
@@ -173,18 +189,6 @@
                 >
                   <i class="fa fa-tv text-center mr-1"></i>
                   Application
-                </a>
-                <a
-                  class="nav-link"
-                  id="notification-tab"
-                  data-toggle="pill"
-                  href="#notification"
-                  role="tab"
-                  aria-controls="notification"
-                  aria-selected="false"
-                >
-                  <i class="fa fa-bell text-center mr-1"></i>
-                  Notification
                 </a>
               </div>
             </div>
@@ -448,56 +452,91 @@
               </div>
               <div
                 class="tab-pane fade"
-                id="notification"
+                id="social-media"
                 role="tabpanel"
-                aria-labelledby="notification-tab"
+                aria-labelledby="social-media-tab"
               >
-                <h3 class="mb-4">Notification Settings</h3>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="notification1"
-                    />
-                    <label class="form-check-label" for="notification1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Dolorum accusantium accusamus, neque cupiditate quis
-                    </label>
+                <h3 class="mb-4">Social Network</h3>
+                <form
+                  id="social-network-form"
+                  method="POST"
+                  data-th-action="@{/home/profile/settings/update-social-media}"
+                >
+                  <div class="form-group social-network-container">
+                    <!-- LINKEDIN -->
+                    <div class="social-network">
+                      <label for="linkedin">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-linkedin"></i>
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        name="linkedin"
+                        class="form-control"
+                        id="linkedin"
+                        placeholder="Enter your linkedIn address"
+                        data-th-value="${user.linkedin}"
+                      />
+                    </div>
+                    <!-- TWITTER -->
+                    <div class="social-network">
+                      <label for="twitter">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-twitter"></i>
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        name="twitter"
+                        class="form-control"
+                        id="twitter"
+                        placeholder="Enter your twitter address"
+                        data-th-value="${user.twitter}"
+                      />
+                    </div>
+                    <!-- GITHUB -->
+                    <div class="social-network">
+                      <label for="github">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-github"></i>
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        name="github"
+                        class="form-control"
+                        id="github"
+                        placeholder="Enter your github address"
+                        data-th-value="${user.github}"
+                      />
+                    </div>
+                    <div class="social-network">
+                      <label for="stack-overflow">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-stack-overflow"></i>
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        name="stackOverflow"
+                        class="form-control"
+                        id="stack-overflow"
+                        placeholder="Enter your stack overflow address"
+                        data-th-value="${user.stackOverflow}"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="notification2"
-                    />
-                    <label class="form-check-label" for="notification2">
-                      hic nesciunt repellat perferendis voluptatum totam porro
-                      eligendi.
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="notification3"
-                    />
-                    <label class="form-check-label" for="notification3">
-                      commodi fugiat molestiae tempora corporis. Sed dignissimos
-                      suscipit
-                    </label>
-                  </div>
-                </div>
+                </form>
                 <div>
-                  <button class="btn btn-primary">Update</button>
-                  <button class="btn btn-light">Cancel</button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    form="social-network-form"
+                  >
+                    Update
+                  </button>
+                  <button class="btn btn-light" form="cancel">Cancel</button>
                 </div>
               </div>
             </div>
