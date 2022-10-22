@@ -1,0 +1,11 @@
+.card-user {
+    padding: 15px;
+    border: 2px solid #6b4b78;
+    border-radius: 10px;
+    box-shadow: 10px 15px 15px rgb(0 0 0 / 10%) !important;
+    margin: 10px;
+}
+
+.shadow {
+    box-shadow: 0 10px 15px rgb(0 0 0 / 10%) !important;
+}

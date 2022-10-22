@@ -190,11 +190,8 @@ public class PageController {
         model.addAttribute("owner", username.equals(UserController.getCurrentUser().getUsername()));
 
         // FOLLOWER / FOLLOWING
-        model.addAttribute("numberFollowing",
-                followersService.findIdUserFollowing(UserController.getCurrentUser().getId()).size());
-
-        model.addAttribute("numberFollower",
-                followersService.findIdUserFollower(UserController.getCurrentUser().getId()).size());
+        model.addAttribute("numberFollowing", followersService.findIdUserFollowing(u.getId()).size());
+        model.addAttribute("numberFollower", followersService.findIdUserFollower(u.getId()).size());
 
         return "user/profile";
     }
@@ -207,7 +204,6 @@ public class PageController {
 
         // PROCESS ERROR MSG
         if (error.equals("password")) {
-            model.addAttribute("user", UserController.getCurrentUser());
             model.addAttribute("error", "Passwords are not matching or Wrong previous password!");
         } else if (error.equals("username")) {
             model.addAttribute("error", "Username already used.");
@@ -216,4 +212,39 @@ public class PageController {
         return "user/settings";
     }
 
+    @GetMapping(value = "/home/profile/{username}/follower")
+    private String profileFollower(Model model, @PathVariable String username) {
+        User u = userService.findByUsername(username);
+
+        // NAV TAB
+        model.addAttribute("tab", "Follower");
+
+        // USER DATA
+        model.addAttribute("user", u);
+
+        // FOLLOWER
+        model.addAttribute("follower",
+                userService.getArrayUserByArrayidUser(
+                        followersService.findIdUserFollower(u.getId())));
+
+        return "user/follows";
+    }
+
+    @GetMapping(value = "/home/profile/{username}/following")
+    private String profileFollowing(Model model, @PathVariable String username) {
+        User u = userService.findByUsername(username);
+
+        // NAV TAB
+        model.addAttribute("tab", "Following");
+
+        // USER DATA
+        model.addAttribute("user", u);
+
+        // FOLLOWER
+        model.addAttribute("follower",
+                userService.getArrayUserByArrayidUser(
+                        followersService.findIdUserFollowing(u.getId())));
+
+        return "user/follows";
+    }
 }
