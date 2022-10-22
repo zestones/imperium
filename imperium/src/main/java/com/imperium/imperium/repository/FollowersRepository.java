@@ -17,4 +17,8 @@ public interface FollowersRepository extends CrudRepository<Followers, Long> {
             "WHERE u.id = f.id_following " +
             "AND f.id_follower = :userId", nativeQuery = true)
     ArrayList<Long> findIdUserFollower(Long userId);
+
+    @Query(value = "SELECT * FROM FOLLOWERS WHERE id_follower = :idFollowers AND id_following = :idFollowing", nativeQuery = true)
+    Followers findByIdFollowersAndIdFollowing(Long idFollowers, Long idFollowing);
+
 }

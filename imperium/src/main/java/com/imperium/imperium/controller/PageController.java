@@ -221,9 +221,12 @@ public class PageController {
 
         // USER DATA
         model.addAttribute("user", u);
+        model.addAttribute("currentUser", UserController.getCurrentUser());
+        model.addAttribute("userFollowingList", userService.getArrayUserByArrayidUser(
+                followersService.findIdUserFollowing(UserController.getCurrentUser().getId())));
 
         // FOLLOWER
-        model.addAttribute("follower",
+        model.addAttribute("follow",
                 userService.getArrayUserByArrayidUser(
                         followersService.findIdUserFollower(u.getId())));
 
@@ -239,9 +242,12 @@ public class PageController {
 
         // USER DATA
         model.addAttribute("user", u);
+        model.addAttribute("currentUser", UserController.getCurrentUser());
+        model.addAttribute("userFollowingList", userService.getArrayUserByArrayidUser(
+                followersService.findIdUserFollowing(UserController.getCurrentUser().getId())));
 
         // FOLLOWER
-        model.addAttribute("follower",
+        model.addAttribute("follow",
                 userService.getArrayUserByArrayidUser(
                         followersService.findIdUserFollowing(u.getId())));
 

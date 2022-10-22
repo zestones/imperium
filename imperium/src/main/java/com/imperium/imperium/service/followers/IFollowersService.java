@@ -8,7 +8,12 @@ public interface IFollowersService {
 
     void save(Followers f);
 
-    ArrayList<Long> findIdUserFollowing(Long userId);
+    void delete(Followers f);
 
     ArrayList<Long> findIdUserFollower(Long userId);
+
+    ArrayList<Long> findIdUserFollowing(Long userId);
+
+    Followers findByIdFollowersAndIdFollowing(Long idFollowers, Long idFollowing);
+
 }

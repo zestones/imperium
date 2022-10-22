@@ -136,7 +136,29 @@ public class UserController {
 
         followersService.save(new Followers(getCurrentUser(), u));
 
-        return "redirect:/home";
+        return "redirect:/home/profile/{username}";
+    }
+
+    @PostMapping(value = "/home/profile/{currentUsername}/follow/{username}/{tab}")
+    private String followPageUser(@PathVariable String currentUsername, @PathVariable String username,
+            @PathVariable String tab) {
+        User u = service.findByUsername(username);
+
+        followersService.save(new Followers(getCurrentUser(), u));
+
+        return "redirect:/home/profile/{currentUsername}/" + tab.toLowerCase();
+    }
+
+    @PostMapping(value = "/home/profile/{currentUsername}/unfollow/{username}/{tab}")
+    private String unfollowPageUser(@PathVariable String currentUsername, @PathVariable String username,
+            @PathVariable String tab) {
+
+        User u = service.findByUsername(username);
+        Followers f = followersService.findByIdFollowersAndIdFollowing(u.getId(), getCurrentUser().getId());
+
+        followersService.delete(f);
+
+        return "redirect:/home/profile/{currentUsername}/" + tab.toLowerCase();
     }
 
     /**

@@ -28,11 +28,23 @@ public class FollowersService implements IFollowersService {
         return fRepo.findIdUserFollower(userId);
     }
 
+    @Override
+    public Followers findByIdFollowersAndIdFollowing(Long idFollowers, Long idFollowing) {
+        return fRepo.findByIdFollowersAndIdFollowing(idFollowers, idFollowing);
+    }
+
     /********************************
      ** UPDATE DB
      ********************************/
 
+    @Override
     public void save(Followers f) {
         fRepo.save(f);
     }
+
+    @Override
+    public void delete(Followers f) {
+        fRepo.delete(f);
+    }
+
 }

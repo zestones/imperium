@@ -74,7 +74,7 @@
                 <h1>[[ ${tab} ]]</h1>
                 <div
                   class="d-flex flex-row justify-content-between align-items-center card-user"
-                  data-th-each="f : ${follower}"
+                  data-th-each="f : ${follow}"
                 >
                   <div class="d-flex flex-row align-items-center">
                     <p data-th-if="${f.avatar == null}">
@@ -83,6 +83,7 @@
                         alt="Generic placeholder image"
                         class="rounded-circle shadow"
                         width="55"
+                        height="55"
                       />
                     </p>
                     <p data-th-if="${f.avatar != null}">
@@ -91,6 +92,7 @@
                         alt="Generic placeholder image"
                         class="rounded-circle shadow"
                         width="55"
+                        height="55"
                       />
                     </p>
                     <div class="d-flex flex-column align-items-start ml-2">
@@ -100,12 +102,36 @@
                     </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mt-2">
-                    <button
-                      class="btn btn-outline-primary btn-sm"
-                      type="button"
+                    <div
+                      data-th-if="${#lists.contains(userFollowingList, f) == false and currentUser.username != f.username}"
                     >
-                      Follow
-                    </button>
+                      <form
+                        data-th-action="@{/home/profile/{currentUsername}/follow/{username}/{tab} (currentUsername=${user.username}, username=${f.username}, tab=${tab})}"
+                        method="POST"
+                      >
+                        <button
+                          class="btn btn-outline-primary btn-sm"
+                          type="submit"
+                        >
+                          Follow
+                        </button>
+                      </form>
+                    </div>
+                    <div
+                      data-th-if="${#lists.contains(userFollowingList, f) and currentUser.username != f.username}"
+                    >
+                      <form
+                        data-th-action="@{/home/profile/{currentUsername}/unfollow/{username}/{tab} (currentUsername=${user.username}, username=${f.username}, tab=${tab})}"
+                        method="POST"
+                      >
+                        <button
+                          class="btn btn-outline-primary btn-sm"
+                          type="submit"
+                        >
+                          Unfollow
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
