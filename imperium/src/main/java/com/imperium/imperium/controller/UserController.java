@@ -3,9 +3,12 @@ package com.imperium.imperium.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.imperium.imperium.model.Followers;
 import com.imperium.imperium.model.User;
+import com.imperium.imperium.service.followers.FollowersService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
@@ -13,6 +16,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private FollowersService followersService;
 
     private static User user;
 
@@ -122,6 +128,15 @@ public class UserController {
         service.update(getCurrentUser());
 
         return "redirect:/home/profile/account-settings";
+    }
+
+    @PostMapping(value = "/home/profile/{username}/follow")
+    private String followUser(@PathVariable String username) {
+        User u = service.findByUsername(username);
+
+        followersService.save(new Followers(getCurrentUser(), u));
+
+        return "redirect:/home";
     }
 
     /**

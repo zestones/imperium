@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.board.BoardService;
+import com.imperium.imperium.service.followers.FollowersService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.task.TaskService;
 import com.imperium.imperium.service.user.UserService;
@@ -37,6 +38,9 @@ public class PageController {
 
     @Autowired
     TaskService taskService;
+
+    @Autowired
+    FollowersService followersService;
 
     /**
      * @param request  : provide request information for HTTP servlets
@@ -113,6 +117,15 @@ public class PageController {
         if (projectService.findProjectByUserId(id).isEmpty())
             model.addAttribute("noProjects", "No project found !");
 
+        // FOLLOWERS / FOLLOWINGS
+        model.addAttribute("following",
+                userService.getArrayUserByArrayidUser(
+                        followersService.findIdUserFollowing(UserController.getCurrentUser().getId())));
+
+        model.addAttribute("follower",
+                userService.getArrayUserByArrayidUser(
+                        followersService.findIdUserFollower(UserController.getCurrentUser().getId())));
+
         // PROCESS ERROR MSG
         if (!error.equals("no-error"))
             model.addAttribute("error", "You Already have a project with the same name");
@@ -175,6 +188,13 @@ public class PageController {
         model.addAttribute("user", u);
         model.addAttribute("myProjects", projectService.findProjectByUserId(u.getId()));
         model.addAttribute("owner", username.equals(UserController.getCurrentUser().getUsername()));
+
+        // FOLLOWER / FOLLOWING
+        model.addAttribute("numberFollowing",
+                followersService.findIdUserFollowing(UserController.getCurrentUser().getId()).size());
+
+        model.addAttribute("numberFollower",
+                followersService.findIdUserFollower(UserController.getCurrentUser().getId()).size());
 
         return "user/profile";
     }

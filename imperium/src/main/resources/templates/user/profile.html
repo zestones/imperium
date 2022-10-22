@@ -99,6 +99,19 @@
                       value="Edit profile"
                     />
                   </form>
+                  <form
+                    data-th-action="@{/home/profile/{username}/follow/ (username=${user.username})}"
+                    method="POST"
+                    style="z-index: 1; text-align: center; margin: -15px"
+                    data-th-if="${owner == false}"
+                  >
+                    <input
+                      type="submit"
+                      class="btn btn-outline-dark"
+                      data-mdb-ripple-color="dark"
+                      value="Follow"
+                    />
+                  </form>
                 </div>
                 <div class="ms-3" style="margin-top: 130px">
                   <h5>[[ ${user.firstname} + ' ' + ${user.lastname} ]]</h5>
@@ -112,11 +125,11 @@
                     <p class="small text-muted mb-0">Project</p>
                   </div>
                   <div class="px-3">
-                    <p class="mb-1 h5">?</p>
+                    <p class="mb-1 h5">[[ ${numberFollower} ]]</p>
                     <p class="small text-muted mb-0">Followers</p>
                   </div>
                   <div>
-                    <p class="mb-1 h5">?</p>
+                    <p class="mb-1 h5">[[ ${numberFollowing} ]]</p>
                     <p class="small text-muted mb-0">Following</p>
                   </div>
                 </div>
