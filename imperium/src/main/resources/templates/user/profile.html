@@ -249,19 +249,21 @@
                           style="margin-bottom: 30px"
                           data-th-text="${p.category}"
                         ></h6>
-                        <a
-                          data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
-                          class="draw"
-                          id="delete-btn"
-                          onclick="return confirm('Are you sure you want to delete the project ?');"
-                          >Delete</a
-                        >
-                        <a
-                          data-th-href="@{/home/open-project/{id} (id=${p.id})}"
-                          class="draw"
-                          id="open-btn"
-                          >Open</a
-                        >
+                        <div data-th-if="${owner}">
+                          <a
+                            data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
+                            class="draw"
+                            id="delete-btn"
+                            onclick="return confirm('Are you sure you want to delete the project ?');"
+                            >Delete</a
+                          >
+                          <a
+                            data-th-href="@{/home/open-project/{id} (id=${p.id})}"
+                            class="draw"
+                            id="open-btn"
+                            >Open</a
+                          >
+                        </div>
                       </figcaption>
                     </figure>
                   </div>
