@@ -262,7 +262,7 @@
               <!-- HEADER BOARD -->
               <div class="board-header">
                 <a
-                  data-th-href="@{/home/delete-board/{idBoard}/{idProjet} (idBoard=${b.id},idProjet=${id})}"
+                  data-th-href="@{/home/delete-board/{idBoard}/{idProjet} (idBoard=${b.id}, idProjet=${id})}"
                   class="delete-board"
                 >
                   <button
@@ -277,7 +277,8 @@
                   <button
                     type="submit"
                     class="btn btn-dark create-task"
-                    onclick="openCreateTask()"
+                    data-th-value="${b.id}"
+                    onclick="openCreateTask(this.value)"
                   >
                     <span class="bi bi-plus-square fa-lg"></span>
                   </button>
@@ -287,8 +288,11 @@
 
               <!-- BOARD BODY -->
               <div class="board-body">
-                <!-- CREATE TASK -->
-                <div id="create-task-container" class="create-task-container">
+                <!-- FORM CREATE TASK -->
+                <div
+                  data-th-id="'create-task-container' + ${b.id}"
+                  class="create-task-container"
+                >
                   <div class="create-task">
                     <p class="create-task-title">Title</p>
                     <form
@@ -321,7 +325,8 @@
                       <button
                         id="cancel-create-task"
                         class="btn btn-light"
-                        onclick="closeCreateTask()"
+                        data-th-value="${b.id}"
+                        onclick="closeCreateTask(this.value)"
                       >
                         Cancel
                       </button>
@@ -338,7 +343,9 @@
                   <div class="task">
                     <!-- TASK HEADER -->
                     <div class="task-header">
-                      <p data-th-text="${t.title}"></p>
+                      <a data-bs-toggle="modal" data-bs-target="#updateTask">
+                        <p data-th-text="${t.title}"></p>
+                      </a>
                       <!-- DROPDOWN TASK OPTION -->
                       <div class="task-option">
                         <a
@@ -437,7 +444,7 @@
               </div>
             </div>
 
-            <!-- NEW LIST MODAL -->
+            <!-- NEW BOARD MODAL -->
             <div
               class="modal fade"
               id="listModal"
@@ -493,7 +500,7 @@
               </div>
             </div>
 
-            <!-- SHARE BOARD MODAL -->
+            <!-- SHARE PROJECT MODAL -->
             <div
               class="modal fade"
               id="shareModal"
@@ -591,6 +598,62 @@
                           name="name"
                           placeholder="Project name"
                           id="project"
+                        />
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          Create
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- UPDATE TASK MODAL -->
+            <div
+              class="modal fade"
+              id="updateTask"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                      Create a list
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      method="POST"
+                      data-th-action="@{/home/create-board/{id} (id=${id})}"
+                    >
+                      <div class="mb-3">
+                        <label for="list" class="form-label">List name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="title"
+                          placeholder="List title"
+                          id="list"
                         />
                       </div>
                       <div class="modal-footer">

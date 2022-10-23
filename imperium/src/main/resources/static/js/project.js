@@ -12,10 +12,10 @@ function drop(ev) {
     ev.currentTarget.appendChild(document.getElementById(data));
 }
 
-function openCreateTask() {
-   document.getElementById('create-task-container').style.display = "block";
+function openCreateTask(val) {
+   document.getElementById('create-task-container' + val).style.display = "block";
 }
 
-function closeCreateTask() {
-   document.getElementById('create-task-container').style.display = "none";
+function closeCreateTask(val) {
+   document.getElementById('create-task-container' + val).style.display = "none";
 }
