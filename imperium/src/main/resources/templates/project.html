@@ -375,17 +375,12 @@
                           <li>
                             <a class="dropdown-item" href="#">Another action</a>
                           </li>
-                          <li>
-                            <a class="dropdown-item" href="#"
-                              >Something else here</a
-                            >
-                          </li>
                         </ul>
                       </div>
                     </div>
                     <div class="task-footer">
                       <!-- DROPDOWN ASSIGN TASK -->
-                      <!-- <div class="dropdown">
+                      <div class="dropdown">
                         <button
                           class="btn btn-secondary dropdown-toggle"
                           type="button"
@@ -411,7 +406,7 @@
                             </a>
                           </li>
                         </ul>
-                      </div> -->
+                      </div>
                       <!-- DISPLAY CONTRIBUTOR -->
                       <ul class="task-contributor">
                         <li data-th-each="c : ${t.users}" class="w-100">
@@ -639,7 +634,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">
-                      Create a list
+                      Task details
                     </h5>
                     <button
                       type="button"
@@ -649,12 +644,9 @@
                     ></button>
                   </div>
                   <div class="modal-body">
-                    <form
-                      method="POST"
-                      data-th-action="@{/home/create-board/{id} (id=${id})}"
-                    >
+                    <form method="POST">
                       <div class="mb-3">
-                        <label for="list" class="form-label">List name</label>
+                        <label for="list" class="form-label">Title</label>
                         <input
                           type="text"
                           class="form-control"

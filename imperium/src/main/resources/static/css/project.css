@@ -189,6 +189,8 @@
 .task-footer {
   display: flex;
   justify-content: right;
+  position: relative;
+  top: 20px;
 }
 
 .task-contributor {
