@@ -8,6 +8,8 @@ public interface ITaskService {
 
   void save(Task t);
 
+  void delete(Task t);
+
   void deleteById(Long id);
 
   ArrayList<Task> findTaskByProjectId(Long id);

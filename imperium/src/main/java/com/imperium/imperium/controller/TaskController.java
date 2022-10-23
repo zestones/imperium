@@ -28,6 +28,8 @@ public class TaskController {
     @Autowired
     UserService userService;
 
+    private static Task task;
+
     /**
      * @param model   : holder for model attributes
      * @param t       : Task object
@@ -53,6 +55,7 @@ public class TaskController {
     public String deleteTask(@PathVariable Long idTask, @PathVariable Long idProjet) {
 
         service.deleteById(idTask);
+
         return "redirect:/home/open-project?id=" + idProjet;
     }
 
@@ -68,11 +71,30 @@ public class TaskController {
 
         Task t = service.findById(idTask);
         List<User> contributors = t.getUsers();
-
+        System.out.println(t.getUsers());
         contributors.add(userService.findById(idUser));
         t.setUsers(contributors);
         service.save(t);
 
         return "redirect:/home/open-project?id=" + idProject;
+    }
+
+    @GetMapping(value = "/home/unassign-task/{idTask}/{idUser}/{idProject}")
+    public String unassignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
+
+        Task t = service.findById(idTask);
+        List<User> contributors = t.getUsers();
+        contributors.remove(userService.findById(idUser));
+        t.setUsers(contributors);
+        service.save(t);
+        return "redirect:/home/open-project?id=" + idProject;
+    }
+
+    public static void setCurrentTask(Task t) {
+        task = t;
+    }
+
+    public static Task getCurrentTask() {
+        return task;
     }
 }
