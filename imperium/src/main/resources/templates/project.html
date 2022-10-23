@@ -287,7 +287,11 @@
               <hr class="hr-5" />
 
               <!-- BOARD BODY -->
-              <div class="board-body">
+              <div
+                class="board-body"
+                ondrop="drop(event)"
+                ondragover="allowDrop(event)"
+              >
                 <!-- FORM CREATE TASK -->
                 <div
                   data-th-id="'create-task-container' + ${b.id}"
@@ -339,6 +343,9 @@
                   class="task-container"
                   data-th-each="t : ${tasks}"
                   data-th-if="${t.board.id == b.id}"
+                  data-th-id="${t.id}"
+                  draggable="true"
+                  ondragstart="drag(event)"
                 >
                   <div class="task">
                     <!-- TASK HEADER -->

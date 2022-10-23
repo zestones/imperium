@@ -41,8 +41,6 @@ public class TaskController {
         service.save(t);
         Long id = t.getBoard().getProject().getId();
 
-        System.out.println(t.toString());
-
         return "redirect:/home/open-project?id=" + id;
     }
 
