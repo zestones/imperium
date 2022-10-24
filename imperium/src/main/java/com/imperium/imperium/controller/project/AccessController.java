@@ -43,6 +43,6 @@ public class AccessController {
             return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
         }
 
-        return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName() + "&error=username";
+        return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName() + "?error=username";
     }
 }
