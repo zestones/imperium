@@ -1,4 +1,4 @@
-package com.imperium.imperium.controller;
+package com.imperium.imperium.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
