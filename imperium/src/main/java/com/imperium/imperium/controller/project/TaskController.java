@@ -78,15 +78,17 @@ public class TaskController {
         return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
     }
 
-    @GetMapping(value = "/home/unassign-task/{idTask}/{idUser}/{idProject}")
-    public String unassignUserTask(@PathVariable Long idTask, @PathVariable Long idUser, @PathVariable Long idProject) {
+    @GetMapping(value = "/home/project/unassign-task/{idTask}/{idUser}")
+    public String unassignUserTask(@PathVariable Long idTask, @PathVariable Long idUser) {
 
         Task t = service.findById(idTask);
         List<User> contributors = t.getUsers();
         contributors.remove(userService.findById(idUser));
         t.setUsers(contributors);
         service.save(t);
-        return "redirect:/home/open-project?id=" + idProject;
+        
+        Project p = service.findById(idTask).getBoard().getProject();
+        return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
     }
 
 }

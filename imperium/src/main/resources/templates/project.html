@@ -402,6 +402,33 @@
                           </li>
                         </ul>
                       </div>
+                      <div class="dropdown">
+                        <button
+                          class="btn btn-secondary dropdown-toggle"
+                          type="button"
+                          id="dropdownMenu2"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          Unassign
+                        </button>
+                        <ul
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownMenu2"
+                        >
+                          <li data-th-each="c : ${user}" class="w-100">
+                            <a
+                              data-th-href="@{/home/project/unassign-task/{idTask}/{idUser} (idTask=${t.id},idUser=${c.id})}"
+                              class="nav-link px-0"
+                            >
+                              <span
+                                class="d-none d-sm-inline"
+                                data-th-text="${c.username}"
+                              ></span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                       <!-- DISPLAY CONTRIBUTOR -->
                       <ul class="task-contributor">
                         <li data-th-each="c : ${t.users}" class="w-100">
@@ -433,30 +460,6 @@
                               />
                             </a>
                           </p>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenu2"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Unassign
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li data-th-each="c : ${user}" class="w-100">
-                          <a
-                            data-th-href="@{/home/unassign-task/{idTask}/{idUser}/{idProject} (idTask=${t.id},idUser=${c.id},idProject=${id})}"
-                            class="nav-link px-0"
-                          >
-                            <span
-                              class="d-none d-sm-inline"
-                              data-th-text="${c.username}"
-                            ></span>
-                          </a>
                         </li>
                       </ul>
                     </div>
