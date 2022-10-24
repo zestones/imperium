@@ -33,6 +33,6 @@ public class Task {
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_users", referencedColumnName = "id")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private List<User> users;
 }
