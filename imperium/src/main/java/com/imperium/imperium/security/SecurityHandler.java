@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.imperium.imperium.controller.UserController;
+import com.imperium.imperium.controller.user.UserController;
 import com.imperium.imperium.service.user.UserService;
 
 @Deprecated

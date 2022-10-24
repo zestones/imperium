@@ -80,7 +80,7 @@
                 >
                   <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/project/{username}/{projectName} (username=${p.user.username}, projectName=${p.name})}"
                       class="nav-link px-4"
                     >
                       <span
@@ -320,14 +320,14 @@
                       data-th-text="${p.category}"
                     ></h6>
                     <a
-                      data-th-href="@{/home/delete-project/{name} (name=${p.name})}"
+                      data-th-href="@{/home/project/delete-project/{name} (name=${p.name})}"
                       class="draw"
                       id="delete-btn"
                       onclick="return confirm('Are you sure you want to delete the project ?');"
                       >Delete</a
                     >
                     <a
-                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/project/{username}/{projectName} (username=${p.user.username}, projectName=${p.name})}"
                       class="draw"
                       id="open-btn"
                       >Open</a
@@ -353,7 +353,7 @@
                       data-th-text="${p.category}"
                     ></h6>
                     <a
-                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/project/{username}/{projectName} (username=${p.user.username}, projectName=${p.name})}"
                       class="draw"
                       id="button"
                       >Open</a
@@ -442,7 +442,7 @@
                   <div class="modal-body">
                     <form
                       method="POST"
-                      data-th-action="@{/home/create-project}"
+                      data-th-action="@{/home/project/{username}/create-project (username=${user.username})}"
                     >
                       <div class="mb-3">
                         <label for="project" class="form-label"

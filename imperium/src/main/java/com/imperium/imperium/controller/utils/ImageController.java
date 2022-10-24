@@ -1,4 +1,4 @@
-package com.imperium.imperium.controller;
+package com.imperium.imperium.controller.utils;
 
 import javax.servlet.ServletException;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import com.imperium.imperium.controller.user.UserController;
 import com.imperium.imperium.model.User;
 import com.imperium.imperium.service.user.UserService;
 

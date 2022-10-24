@@ -1,4 +1,4 @@
-package com.imperium.imperium.controller;
+package com.imperium.imperium.controller.project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imperium.imperium.model.Access;
+import com.imperium.imperium.model.Project;
 import com.imperium.imperium.service.access.AccessService;
 import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
@@ -28,8 +29,9 @@ public class AccessController {
      * @param username : User username property
      * @return String : redirect to PageController
      */
-    @PostMapping(value = "/home/share-project/{id}")
+    @PostMapping(value = "/home/project/share-project/{id}")
     private String shareProject(@PathVariable Long id, Access a, String username) {
+        Project p = projectService.findById(id);
 
         if (service.canShareProject(userService.findByUsername(username), projectService.findProjectOwner(id), id)) {
 
@@ -38,9 +40,9 @@ public class AccessController {
             a.setAccess(a.getCanRead());
 
             service.save(a);
-            return "redirect:/home/open-project?id=" + id;
+            return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
         }
 
-        return "redirect:/home/open-project?id=" + id + "&error=username";
+        return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName() + "?error=username";
     }
 }
