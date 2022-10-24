@@ -78,7 +78,7 @@
                 >
                   <li data-th-each="p : ${myProjects}" class="w-100">
                     <a
-                      data-th-href="@{/home/open-project/{id} (id=${p.id})}"
+                      data-th-href="@{/home/project/{username}/{projectName} (username=${p.user.username}, projectName=${p.name})}"
                       class="nav-link px-4"
                     >
                       <span
@@ -262,7 +262,7 @@
               <!-- HEADER BOARD -->
               <div class="board-header">
                 <a
-                  data-th-href="@{/home/delete-board/{idBoard}/{idProjet} (idBoard=${b.id}, idProjet=${id})}"
+                  data-th-href="@{/home/project/delete-board/{idBoard}/{idProjet} (idBoard=${b.id}, idProjet=${id})}"
                   class="delete-board"
                 >
                   <button
@@ -301,7 +301,7 @@
                     <p class="create-task-title">Title</p>
                     <form
                       id="create-task-form"
-                      data-th-action="@{/home/create-task}"
+                      data-th-action="@{/home/project/create-task/{idBoard} (idBoard=${b.id})}"
                       method="post"
                     >
                       <input
@@ -310,11 +310,6 @@
                         placeholder="Task Name"
                         name="title"
                         required
-                      />
-                      <input
-                        type="hidden"
-                        name="idBoard"
-                        data-th-value="${b.id}"
                       />
                       <br />
                     </form>
@@ -366,7 +361,7 @@
                           <li>
                             <a
                               class="dropdown-item"
-                              data-th-href="@{/home/delete-task/{idTask}/{idProjet} (idTask=${t.id},idProjet=${id})}"
+                              data-th-href="@{/home/project/delete-task/{idTask} (idTask=${t.id})}"
                             >
                               <span class="bi bi-trash"></span>
                               Remove Task</a
@@ -396,7 +391,7 @@
                         >
                           <li data-th-each="c : ${contributor}" class="w-100">
                             <a
-                              data-th-href="@{/home/assign-task/{idTask}/{idUser}/{idProject} (idTask=${t.id},idUser=${c.id},idProject=${id})}"
+                              data-th-href="@{/home/project/assign-task/{idTask}/{idUser} (idTask=${t.id},idUser=${c.id})}"
                               class="nav-link px-0"
                             >
                               <span
@@ -472,7 +467,7 @@
                   <div class="modal-body">
                     <form
                       method="POST"
-                      data-th-action="@{/home/create-board/{id} (id=${id})}"
+                      data-th-action="@{/home/project/create-board/{id} (id=${id})}"
                     >
                       <div class="mb-3">
                         <label for="list" class="form-label">List name</label>
@@ -525,7 +520,7 @@
                     ></button>
                   </div>
                   <form
-                    data-th-action="@{/home/share-project/{id}/ (id=${id})}"
+                    data-th-action="@{/home/project/share-project/{id}/ (id=${id})}"
                     method="POST"
                   >
                     <div class="modal-body" id="modal-body-share-project">
@@ -588,7 +583,7 @@
                   <div class="modal-body">
                     <form
                       method="POST"
-                      data-th-action="@{/home/create-project}"
+                      data-th-action="@{/home/project/{username}/create-project (username=${user.username})}"
                     >
                       <div class="mb-3">
                         <label for="project" class="form-label"
