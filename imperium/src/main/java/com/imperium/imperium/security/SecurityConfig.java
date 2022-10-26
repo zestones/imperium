@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/", "/index", "/css/**", "/js/**", "/img/**", "/img/icon/**", "/signIn",
             "/h2-console/**")
         .permitAll()
-        .antMatchers("/home", "/home/**").authenticated()
+        .antMatchers("/home", "/home/**", "/api/**").authenticated()
         .and()
         .formLogin()
         .loginPage("/logIn")
@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // ! Allow access to the h2-console
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");
-    http.csrf().ignoringAntMatchers("/h2-console", "/h2-console/**");
+    http.csrf().ignoringAntMatchers("/h2-console", "/h2-console/**", "/api/**");
     http.headers().frameOptions().sameOrigin();
 
     http.authorizeRequests().anyRequest().denyAll();
