@@ -44,4 +44,11 @@ public class RESTController {
         return pservice.findProjectByUserId(id);
     }
 
+    /*
+     * for use :
+     * - login into /home
+     * - tap in search bar : /api/user/1
+     * - or : /api/alluser
+     * - or : /api/project/1
+     */
 }
