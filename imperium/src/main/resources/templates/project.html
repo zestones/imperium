@@ -300,7 +300,7 @@
                   <div class="create-task">
                     <p class="create-task-title">Title</p>
                     <form
-                      id="create-task-form"
+                      data-th-id="'create-task-form' + ${b.id}"
                       data-th-action="@{/home/project/create-task/{idBoard} (idBoard=${b.id})}"
                       method="post"
                     >
@@ -317,7 +317,7 @@
                       <button
                         type="submit"
                         class="btn btn-primary btn-create-task"
-                        form="create-task-form"
+                        data-th-form="'create-task-form' + ${b.id}"
                       >
                         Create task
                       </button>
