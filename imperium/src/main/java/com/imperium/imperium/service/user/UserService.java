@@ -1,6 +1,7 @@
 package com.imperium.imperium.service.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -226,5 +227,10 @@ public class UserService implements IUserService, UserDetailsService {
         }
 
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), u.getRoles());
+    }
+
+
+    public List<User> search(String keyword){
+        return uRepo.search(keyword);
     }
 }

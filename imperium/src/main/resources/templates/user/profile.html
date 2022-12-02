@@ -41,9 +41,14 @@
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="/img/icon/favicon.ico" />
 
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript" th:src="@{/js/profile.js}"></script>
+
+
     <title>Imperium</title>
   </head>
   <body>
+    
     <section class="h-100 main-container">
       <div class="container py-5 h-100">
         <div class="row">
@@ -56,10 +61,28 @@
                 <li class="breadcrumb-item active" aria-current="page">
                   Profile
                 </li>
+                <li>
+                  <form
+                  method="post"
+                  data-th-action="@{/home/profile/search}"
+                  >
+                  <table>
+                    <tr>
+                      <td>
+                        <input name="keyword" type="search" class="searchBar form-control" placeholder="Search" required/>
+                      </td>
+                      <td><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></td>
+                    </tr>
+                  </table>
+                    
+                    
+                </form>
+                </li>
               </ol>
             </nav>
           </div>
         </div>
+        
 
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-lg-9 col-xl-11">
