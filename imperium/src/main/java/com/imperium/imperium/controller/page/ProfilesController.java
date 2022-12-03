@@ -18,7 +18,7 @@ import com.imperium.imperium.service.project.ProjectService;
 import com.imperium.imperium.service.user.UserService;
 
 @Controller
-public class ProfileController {
+public class ProfilesController {
 
     @Autowired
     UserService userService;
@@ -29,7 +29,7 @@ public class ProfileController {
     @Autowired
     FollowersService followersService;
 
-    private List<User> searchedUsers = new ArrayList<>(); 
+    private List<User> searchedUsers = new ArrayList<>();
 
     /**
      * @param model    : holder for model attributes
@@ -40,10 +40,7 @@ public class ProfileController {
     private String profile(Model model, @PathVariable String username) {
         User u = userService.findByUsername(username);
 
-       
-
-
-        //SEARCHED USERS
+        // SEARCHED USERS
         model.addAttribute("usersFound", searchedUsers);
 
         // USER DATA
@@ -133,13 +130,12 @@ public class ProfileController {
         return "user/follows";
     }
 
-   
     @PostMapping("/home/profile/search")
-    public String searchUsers(Model model, @RequestParam("keyword") String keyword){
-        searchedUsers =  userService.search(keyword);
+    public String searchUsers(Model model, @RequestParam("keyword") String keyword) {
+        searchedUsers = userService.search(keyword);
         model.addAttribute("usersFound", searchedUsers);
-        System.out.println("*********"+searchedUsers);
-        return "redirect:/home/profile/"+UserController.getCurrentUser().getUsername();
+        System.out.println("*********" + searchedUsers);
+        return "redirect:/home/profile/" + UserController.getCurrentUser().getUsername();
     }
 
 }
