@@ -1,0 +1,27 @@
+body {
+    background-color: #f3f6fd;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.main-container {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background: linear-gradient(-45deg, #f47b89, #cb5e99, #8a51a5, #004ca3);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

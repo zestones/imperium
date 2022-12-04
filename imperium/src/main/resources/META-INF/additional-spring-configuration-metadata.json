@@ -1,12 +1,19 @@
-{"properties": [
-  {
-    "name": "server.http.port",
-    "type": "java.lang.String",
-    "description": "value of the HTTP port"
-  },
-  {
-    "name": "server.https.port",
-    "type": "java.lang.String",
-    "description": "value of the HTTPS port"
-  }
-]}
+{
+  "properties": [
+    {
+      "name": "server.http.port",
+      "type": "java.lang.String",
+      "description": "value of the HTTP port"
+    },
+    {
+      "name": "server.https.port",
+      "type": "java.lang.String",
+      "description": "value of the HTTPS port"
+    },
+    {
+      "name": "frontend.http.url",
+      "type": "java.lang.String",
+      "description": "A description for 'frontend.http.url'"
+    }
+  ]
+}

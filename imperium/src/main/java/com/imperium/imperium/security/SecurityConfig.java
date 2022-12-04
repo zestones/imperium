@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
         .antMatchers("/", "/index", "/css/**", "/js/**", "/img/**", "/img/icon/**", "/signIn",
-            "/h2-console/**", "/api", "/api/**")
+            "/h2-console/**", "/api", "/api/**", "/home/profile/user/**")
         .permitAll()
         .antMatchers("/home", "/home/**", "/api/**").authenticated()
         .and()
@@ -75,7 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");
     http.csrf().ignoringAntMatchers("/h2-console", "/h2-console/**", "/api/**");
     http.headers().frameOptions().sameOrigin();
-
     http.authorizeRequests().anyRequest().denyAll();
   }
 
