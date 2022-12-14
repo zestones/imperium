@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-multiple-template-root -->
 <template>
     <div class="rounded-top text-white d-flex flex-row" style="background-color: #15004e; height: 200px">
         <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
@@ -13,16 +14,16 @@
             
             <form action="http://localhost:8080/home/profile/account-settings" method="GET"
                 style="z-index: 1; text-align: center; margin: -15px" v-if="owner == true">
-                <input type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" value="Edit profile" />
+                <input type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" value="Edit profile" @click="refreshDataFromServer()"/>
             </form>
             <form :action="'http://localhost:8080/home/profile/' + visited.username + '/follow'" method="POST"
                 style="z-index: 1; text-align: center; margin: -15px"
-                v-if="following == true && owner == false">
+                v-if="following == false && owner == false">
                 <input type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" value="Follow" />
             </form>
-            <form :action="'/home/profile/' + visited.username + '/unfollow'" method="POST"
+            <form :action="'http://localhost:8080/home/profile/' + visited.username + '/unfollow'" method="POST"
                 style="z-index: 1; text-align: center; margin: -15px"
-                v-if="following == false && owner == false">
+                v-if="following == true && owner == false">
                 <input type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" value="Unfollow" />
             </form>
         </div>
@@ -31,51 +32,96 @@
             <p>{{visited.username}}</p>
         </div>
     </div>
+    <div class="p-4 text-black" style="background-color: #f8f9fa">
+        <div class="d-flex justify-content-end text-center py-1">
+            <div>
+                <a href="#recent-project" class="fill-div">
+                    <p class="mb-1 h5">10</p>
+                    <p class="small text-muted mb-0">Project</p>
+                </a>
+            </div>
+            <div class="px-3">
+                <a :href="'http://localhost:8080/home/profile/'+ visited.username +'/follower'" class="fill-div">
+                    <p class="mb-1 h5">{{numberFollower}}</p>
+                    <p class="small text-muted mb-0">Followers</p>
+                </a>
+            </div>
+            <div>
+                <a :href="'http://localhost:8080/home/profile/' + visited.username + '/following'" class="fill-div">
+                    <p class="mb-1 h5">{{numberFollowing}}</p>
+                    <p class="small text-muted mb-0">Following</p>
+                </a>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 
 export default {
     name: 'ProfileHeader',
     mounted: function () {
+        this.loadVisitedUser()
+        this.loadCurrentUser()
+        this.loadNumberFollow()
         this.loadData()
     },
     props: {
-        visited: {},
         id: Number,
         owner: Boolean,
         idVisited: Number
     },
     data: () => ({
+        visited: {},
         following: Boolean,
-        current: {}
-    }),
+        current: {},
+        numberFollower: Number,
+        numberFollowing: Number,
+    }), 
     methods: {
         loadData: async function () {
 
-            let res2 = await fetch('/api/users/' + this.id) // hard coded :(, not HATEOAS
-            let body2 = await res2.json()
-            this.current = body2            
-
-            let res = await fetch('http://localhost:8080/api/users/' + this.idVisited + '/followers/', { credentials: 'include' }) // hard coded :(, not HATEOAS
+            let res = await fetch('http://localhost:8080/api/users/' + this.id + '/following/', { credentials: 'include' }) // hard coded :(, not HATEOAS
             let body = await res.json()
             let arr = body._embedded.followerses
 
             this.following = false
             for (let i = 0; i < arr.length; i++) {
-                let r = await fetch(arr[i]._links.following.href, { credentials: 'include' }) // hard coded :(, not HATEOAS
+                console.log(arr[i]._links.follower.href)
+                let r = await fetch(arr[i]._links.follower.href, { credentials: 'include' }) // hard coded :(, not HATEOAS
                 let b = await r.json()
-                console.log()
-                this.following = (b.username == this.current.username)
 
-                console.log("----")
-                console.log(b.username)
-                console.log("===")
-                console.log(this.current.username)
-
+                this.following = (b.username == this.visited.username)
                 if (this.following == true) { break }
             }
-            console.log(this.following)
         },
+        loadCurrentUser: async function () {
+            let res = await fetch('/api/users/' + this.id) // hard coded :(, not HATEOAS
+            let body = await res.json()
+            this.current = body
+        },
+        loadVisitedUser: async function () {
+            let res2 = await fetch('/api/users/' + this.idVisited) // hard coded :(, not HATEOAS
+            let body2 = await res2.json()
+            this.visited = body2
+        },
+        loadNumberFollow: async function () {
+            let res = await fetch('http://localhost:8080/api/users/' + this.idVisited + '/following/', { credentials: 'include' }) // hard coded :(, not HATEOAS
+            let body = await res.json()
+            let arr = body._embedded.followerses
+
+            this.numberFollowing = arr.length
+
+            let res2 = await fetch('http://localhost:8080/api/users/' + this.idVisited + '/followers/', { credentials: 'include' }) // hard coded :(, not HATEOAS
+            let body2 = await res2.json()
+            let arr2 = body2._embedded.followerses
+            this.numberFollower = arr2.length
+        },  
+        refreshListFromServer: async function () {
+            this.visited = {}
+            this.current = {}
+            this.following = Boolean
+            this.loadData()
+        }
     }
 }
 
