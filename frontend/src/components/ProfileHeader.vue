@@ -36,7 +36,7 @@
         <div class="d-flex justify-content-end text-center py-1">
             <div>
                 <a href="#recent-project" class="fill-div">
-                    <p class="mb-1 h5">10</p>
+                    <p class="mb-1 h5">{{projects.length}}</p>
                     <p class="small text-muted mb-0">Project</p>
                 </a>
             </div>
@@ -54,15 +54,33 @@
             </div>
         </div>
     </div>
+    <div class="card-body p-4 text-black">
+        <UserBio :bio="visited.bio" />
+        <UserInfos :user="visited" />
+        <UserMedia :user="visited" />
+        <UserProjects :user="visited" :owner="owner" :projects="projects" />
+    </div>
 </template>
 <script>
 
+import UserInfos from "./UserInfos.vue"
+import UserBio from "./UserBio.vue"
+import UserMedia from "./UserMedia.vue"
+import UserProjects from "./UserProjects"
+
 export default {
     name: 'ProfileHeader',
-    mounted: function () {
+    components: {
+        UserBio,
+        UserInfos,
+        UserMedia,
+        UserProjects
+    },
+    beforeMount: function () {
         this.loadVisitedUser()
         this.loadCurrentUser()
         this.loadNumberFollow()
+        this.loadUserProjects()
         this.loadData()
     },
     props: {
@@ -76,6 +94,7 @@ export default {
         current: {},
         numberFollower: Number,
         numberFollowing: Number,
+        projects: []
     }), 
     methods: {
         loadData: async function () {
@@ -86,7 +105,6 @@ export default {
 
             this.following = false
             for (let i = 0; i < arr.length; i++) {
-                console.log(arr[i]._links.follower.href)
                 let r = await fetch(arr[i]._links.follower.href, { credentials: 'include' }) // hard coded :(, not HATEOAS
                 let b = await r.json()
 
@@ -115,7 +133,22 @@ export default {
             let body2 = await res2.json()
             let arr2 = body2._embedded.followerses
             this.numberFollower = arr2.length
-        },  
+        },
+        loadUserProjects: async function () {
+            let res = await fetch('http://localhost:8080/api/projects/', { credentials: 'include' }) // hard coded :(, not HATEOAS
+            let body = await res.json()
+            let arr = body._embedded.projects
+
+            for (let i = 0; i < arr.length; i++) {
+                console.log(arr[i]._links.user.href)
+                let r = await fetch(arr[i]._links.user.href, { credentials: 'include' }) // hard coded :(, not HATEOAS
+                let b = await r.json()
+
+                if ((b.username == this.visited.username)) { 
+                    this.projects.push(arr[i])
+                 }
+            }
+        },
         refreshListFromServer: async function () {
             this.visited = {}
             this.current = {}

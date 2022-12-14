@@ -1,5 +1,7 @@
 package com.imperium.imperium.security;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.imperium.imperium.service.user.UserService;
 
@@ -73,9 +78,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // ! Allow access to the h2-console
     http.authorizeRequests().antMatchers("/h2-console", "/h2-console/**");
-    http.csrf().ignoringAntMatchers("/h2-console", "/h2-console/**", "/api/**");
+    http.csrf().ignoringAntMatchers("/h2-console", "/h2-console/**", "/api/**", "/home/profile", "home/profile/**");
+    http.cors().and().csrf().disable();
     http.headers().frameOptions().sameOrigin();
     http.authorizeRequests().anyRequest().denyAll();
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   /**
