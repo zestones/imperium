@@ -246,7 +246,7 @@
   border: 1px solid white;
 }
 
-.task-title:hover {
+.task-title:hover, .closebtn:hover {
   cursor: pointer;
   color: blue;
 }
@@ -312,7 +312,17 @@
   margin-top: 10px;
 }
 
+.form-control {
+  margin-bottom: 15px;
+}
+
+.description {
+  height: 150px;
+  resize: vertical;  
+}
+
 .btn-update {
+  margin-top: 15px;
   border: none;
   color: #fff;
   margin-left:0%;
@@ -321,4 +331,98 @@
   background-color: #888;
   display: flex;
   margin: 0 auto;
+}
+
+.dropbtn {
+  background-color: #53566e;
+  color: white;
+  font-size: 16px;
+  border: none;
+  width: 80%;
+  height: 40px;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.dropbtn:hover {
+  background-color: #6c6f83;
+}
+
+.dropdown-content input[id^='search-input'] {
+  box-sizing: border-box;
+  background-image: url('../img/icon/search-icon.png');
+  background-size: 25px 25px;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+.dropdown-content input[id^='search-input']:focus {outline: 3px solid #ddd;}
+
+.dropdown-assignee {
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+  width: 80%;
+  margin-top: 240px;
+  border-radius: 25px 25px 10px 10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-assignee a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.assign-data-user {
+  color: black;
+}
+.user-infos {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-username {
+  color: grey;
+  font-size: small;
+  font-weight: lighter;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.user-data > p {
+  margin: 0;
+}
+
+.user-infos > .task-avatar {
+  width: 35px;
+  height: 35px;
+}
+.unassign-data-user {
+  background-color: red;
 }

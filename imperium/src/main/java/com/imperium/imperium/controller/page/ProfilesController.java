@@ -20,7 +20,6 @@ public class ProfilesController {
     private final String frontendVueJS;
 
     // Retrieve url value from application properties file
-    @Autowired
     ProfilesController(
             @Value("${frontend.http.url}") String frontendVueJS) {
         this.frontendVueJS = frontendVueJS;

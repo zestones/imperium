@@ -86,8 +86,26 @@ public class TaskController {
         contributors.remove(userService.findById(idUser));
         t.setUsers(contributors);
         service.save(t);
-        
+
         Project p = service.findById(idTask).getBoard().getProject();
+        return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
+    }
+
+    /**
+     * @param model   : holder for model attributes
+     * @param t       : Task object
+     * @param idBoard : Board id property (RequestParam)
+     * @return String : redirect to PageController
+     */
+    @PostMapping(value = "/home/project/update-task/{idTask}")
+    public String updateTask(Model model, Task t, @PathVariable Long idTask) {
+
+        Task task = service.findById(idTask);
+        task.setTitle(t.getTitle());
+        task.setDescription(t.getDescription());
+        service.save(t);
+
+        Project p = task.getBoard().getProject();
         return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
     }
 
