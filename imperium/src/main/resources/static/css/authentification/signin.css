@@ -60,7 +60,7 @@ button {
     letter-spacing: 4px;
 
   }
-  .custom-btn {
+.custom-btn {
     width: 300px;
     height: 40px;
     color: #fff;
@@ -73,31 +73,31 @@ button {
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
-     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-     7px 7px 20px 0px rgba(0,0,0,.1),
-     4px 4px 5px 0px rgba(0,0,0,.1);
-     outline: none;
-     text-shadow:2px 2px 5px #747474;
-     margin-bottom:10px;
-     margin-top: 10px;
-     
-  }
-  
-  .btn-signIn {
-    border: none;
-    color: #000;
-    margin-left:0%;
-    text-transform: uppercase;
-    margin-bottom:-10px;
-  }
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    text-shadow:2px 2px 5px #747474;
+    margin-bottom:10px;
+    margin-top: 10px;
+    
+}
 
-  .btn-LoginIn{
+.btn-signIn {
     border: none;
     color: #000;
     margin-left:0%;
     text-transform: uppercase;
     margin-bottom:-10px;
-  }
+}
+
+.btn-LoginIn{
+    border: none;
+    color: #000;
+    margin-left:0%;
+    text-transform: uppercase;
+    margin-bottom:-10px;
+}
 
 
 .signInLink{

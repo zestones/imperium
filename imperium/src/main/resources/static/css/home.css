@@ -22,6 +22,14 @@
     padding-bottom:-20px;
  
 }
+.home-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+}
 
 .newProjectLink{
   color:#096c86;
@@ -38,31 +46,10 @@
 #caret-down{
   padding-left:90px;
 }
-.fullname{
-    font-weight:bold;
-    white-space: nowrap;
-    display:inline;
-    display:inline;
-    color:black;
-}
-.welcometext{
-    display:inline;
-    color:black;
-}
-.WelText{
-  color:black;
-  size :16px;
-}
-#welcomebox{
-    background-color: white;
-    height:50px;
-    color: black;
-    border-radius: 20px;
-}
 
 .divfig{
-    display: inline-block;
-     margin-left:10px;
+  display: inline-block;
+  margin-left:10px;
 
 }
 #projectsharedTitle{
@@ -88,21 +75,20 @@
 .avatar__meta{
     padding-left:20px;
 }
-.svgbtnplus{
-  color :#004ca3;
-  display:inline;
-  margin-left:750px;
-  
-}
-.svgbtnmoon{
-  display:inline;
-  margin-left: 10px;
 
+.more-btn, .notif-btn, .dark-mode-btn {
+  color :#004ca3;
+  margin: 5px;
 }
-.svgbtnnotification{
-  display:inline;
-  margin-left: 10px;
+
+.more-btn:hover, .notif-btn:hover, .dark-mode-btn:hover {
+  font-size: 20px;
 }
+
+.nav-btn {
+  display: flex;
+}
+
 #contentProjects{
   background-color: white;
   border-radius: 20px;
@@ -114,14 +100,19 @@
   margin: 10px;
   display: inline-block;
 }
-.date{
-  display: inline;
+
+.infos-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
-#dateStyle{
-  margin-left: 80%;
+
+.date {
+  display: flex;
   font-size: 17px;
   color:#3c3c3c;
   font-weight: bold;
+
 }
 
 h6{
