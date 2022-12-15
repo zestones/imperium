@@ -179,88 +179,91 @@
             ></div>
           </div>
           <div class="welcome">
-            <div id="welcomebox" class="content p-3">
-              <p class="welcometext">Hello</p>
-              <div class="fullname">
-                [[ ${user.firstname} ]] [[ ${user.lastname} ]]
-              </div>
-              <p class="welcometext">
-                , here you can manage all your projects !
+            <div class="content p-3 home-navbar">
+              <p>
+                Hello
+                <strong>[[ ${user.firstname} ]] [[ ${user.lastname} ]]</strong>,
+                here you can manage all your projects !
               </p>
-              <a
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-                class="newProjectLink"
-                title="Add New Project"
-              >
-                <p class="svgbtnplus">
-                  <svg
-                    version="1.1"
-                    id="Capa_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    width="25px"
-                    height="25px"
-                    viewBox="0 0 400 400"
-                    style="enable-background: new 0 0 30 30"
-                    xml:space="preserve"
-                  >
-                    <path
-                      d="M199.995,0C89.716,0,0,89.72,0,200c0,110.279,89.716,200,199.995,200C310.277,400,400,310.279,400,200
+              <div class="nav-btn">
+                <a
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                  class="newProjectLink"
+                  title="Add New Project"
+                >
+                  <p class="more-btn">
+                    <svg
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      width="25px"
+                      height="25px"
+                      viewBox="0 0 400 400"
+                      style="enable-background: new 0 0 30 30"
+                      xml:space="preserve"
+                    >
+                      <path
+                        d="M199.995,0C89.716,0,0,89.72,0,200c0,110.279,89.716,200,199.995,200C310.277,400,400,310.279,400,200
                       C400,89.72,310.277,0,199.995,0z M199.995,373.77C104.182,373.77,26.23,295.816,26.23,200c0-95.817,77.951-173.77,173.765-173.77
                       c95.817,0,173.772,77.953,173.772,173.77C373.769,295.816,295.812,373.77,199.995,373.77z"
-                    />
-                    <path
-                      d="M279.478,186.884h-66.363V120.52c0-7.243-5.872-13.115-13.115-13.115s-13.115,5.873-13.115,13.115v66.368h-66.361
+                      />
+                      <path
+                        d="M279.478,186.884h-66.363V120.52c0-7.243-5.872-13.115-13.115-13.115s-13.115,5.873-13.115,13.115v66.368h-66.361
                       c-7.242,0-13.115,5.873-13.115,13.115c0,7.243,5.873,13.115,13.115,13.115h66.358v66.362c0,7.242,5.872,13.114,13.115,13.114
                       c7.242,0,13.115-5.872,13.115-13.114v-66.365h66.367c7.241,0,13.114-5.873,13.114-13.115
                       C292.593,192.757,286.72,186.884,279.478,186.884z"
-                    />
-                  </svg>
-                </p>
-                <p title="Switch Theme" class="svgbtnmoon">
-                  <svg
-                    margin-left="8px"
-                    width="25px"
-                    height="25px"
-                    version="1.1"
-                    id="Capa_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 49.739 49.739"
-                    style="enable-background: new 0 0 49.739 49.739"
-                    xml:space="preserve"
-                  >
-                    <path
-                      d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268
+                      />
+                    </svg>
+                  </p>
+                </a>
+                <a href="">
+                  <p title="Switch Theme" class="dark-mode-btn">
+                    <svg
+                      margin-left="8px"
+                      width="25px"
+                      height="25px"
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 49.739 49.739"
+                      style="enable-background: new 0 0 49.739 49.739"
+                      xml:space="preserve"
+                    >
+                      <path
+                        d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268
                       c-1.479,5.459-0.899,11.25,1.633,16.306c2.75,5.493,7.476,9.587,13.305,11.526c5.831,1.939,12.065,1.492,17.559-1.258v0
                       c0.25-0.125,0.492-0.258,0.734-0.391l2.061-1.13l-0.585,2.252c-1.863,6.873-6.577,12.639-12.933,15.822
                       C32.639,48.039,28.825,48.888,25.068,48.889z M12.002,4.936c-9.413,6.428-12.756,18.837-7.54,29.253
                       c5.678,11.34,19.522,15.945,30.864,10.268c5.154-2.582,9.136-7.012,11.181-12.357c-5.632,2.427-11.882,2.702-17.752,0.748
                       c-6.337-2.108-11.473-6.557-14.463-12.528C11.899,15.541,11.11,10.16,12.002,4.936z"
-                    />
-                  </svg>
-                </p>
-                <p class="svgbtnnotification">
-                  <svg
-                    width="25px"
-                    height="25px"
-                    version="1.1"
-                    id="Capa_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 611.999 611.999"
-                    style="enable-background: new 0 0 611.999 611.999"
-                    xml:space="preserve"
-                  >
-                    <path
-                      d="M570.107,500.254c-65.037-29.371-67.511-155.441-67.559-158.622v-84.578c0-81.402-49.742-151.399-120.427-181.203
+                      />
+                    </svg>
+                  </p>
+                </a>
+                <a href="">
+                  <p class="notif-btn">
+                    <svg
+                      width="25px"
+                      height="25px"
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 611.999 611.999"
+                      style="enable-background: new 0 0 611.999 611.999"
+                      xml:space="preserve"
+                    >
+                      <path
+                        d="M570.107,500.254c-65.037-29.371-67.511-155.441-67.559-158.622v-84.578c0-81.402-49.742-151.399-120.427-181.203
                       C381.969,34,347.883,0,306.001,0c-41.883,0-75.968,34.002-76.121,75.849c-70.682,29.804-120.425,99.801-120.425,181.203v84.578
                       c-0.046,3.181-2.522,129.251-67.561,158.622c-7.409,3.347-11.481,11.412-9.768,19.36c1.711,7.949,8.74,13.626,16.871,13.626
                       h164.88c3.38,18.594,12.172,35.892,25.619,49.903c17.86,18.608,41.479,28.856,66.502,28.856
@@ -271,20 +274,21 @@
                       M143.97,341.736v-84.685c0-89.343,72.686-162.029,162.031-162.029s162.031,72.686,162.031,162.029v84.826
                       c0.023,2.596,0.427,29.879,7.303,63.465H136.663C143.543,371.724,143.949,344.393,143.97,341.736z M306.001,577.485
                       c-26.341,0-49.33-18.992-56.709-44.246h113.416C355.329,558.493,332.344,577.485,306.001,577.485z"
-                    />
-                    <path
-                      d="M306.001,119.235c-74.25,0-134.657,60.405-134.657,134.654c0,9.531,7.727,17.258,17.258,17.258
+                      />
+                      <path
+                        d="M306.001,119.235c-74.25,0-134.657,60.405-134.657,134.654c0,9.531,7.727,17.258,17.258,17.258
                       c9.531,0,17.258-7.727,17.258-17.258c0-55.217,44.923-100.139,100.142-100.139c9.531,0,17.258-7.727,17.258-17.258
                       C323.259,126.96,315.532,119.235,306.001,119.235z"
-                    />
-                  </svg>
-                </p>
-              </a>
+                      />
+                    </svg>
+                  </p>
+                </a>
+              </div>
             </div>
             <div id="contentProjects" class="content rounded-6 p-3">
-              <div class="date" style="display: inline">
-                <h3 class="date">Projects</h3>
-                <p class="date" id="dateStyle">[[ ${month} ]], [[${day}]]</p>
+              <div class="infos-header">
+                <h3>Projects</h3>
+                <p class="date">[[ ${month} ]], [[${day}]]</p>
               </div>
               <table>
                 <tr>

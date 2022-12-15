@@ -25,41 +25,46 @@
 #caret-down{
   padding-left:90px;
 }
+
 .fullname{
     font-weight:bold;
     white-space: nowrap;
     display:inline;
     display:inline;
 }
+
 .welcometext{
-    display:inline;
+    display: inline;
 }
-#welcomebox{
+
+.project-option-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: white;
-  height:50px;
   color: black;
   border-radius: 20px;
 }
 
-
-#projectsharedTitle{
-    margin-top:40px;
+.project-options {
+  display: flex;
+}
+.project-name {
+  margin: 5px;
+  margin-left: 15px;
+  font-weight: bolder;
 }
 
-.shareButton{
-  position:relative;
-  margin-left: 800px;
-  margin-top: -25px;
-  margin-right:10px;
-}
-.AddList{
-  margin-top: -25px;
-  position:relative;
-  
-}
-
-.Share{
+.share-icone {
   border-radius: 20px;
+}
+
+.board-btn:hover, .share-icone:hover {
+  font-size: 20px;
+}
+
+.share-btn, .board-btn {
+  margin: 5px;
 }
 
 /*****************
@@ -80,7 +85,9 @@
 .board-container {
   display: flex;
   background-color: #464968;
-  margin-top: 50px;
+  margin-top: 20px;
+  width: 100%;
+  height: 90%;
 }
 
 .board {
@@ -222,4 +229,205 @@
 .task-avatar {
   width: 25px;
   height: 25px;
+}
+
+ /** EDIT TASK MODAL **/
+.task-editor {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #313348;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  border: 1px solid white;
+}
+
+.task-title:hover, .closebtn:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.task-editor a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.task-editor a:hover {
+  color: #f1f1f1;
+}
+
+.task-editor .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.content-task-editor {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content-task-editor > h2 {
+  text-align: center;
+  color: white;
+}
+
+.edit-task-form {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+.content-task-editor > * {
+  color: white;
+}
+
+.custom-btn {
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  text-shadow:2px 2px 5px #747474;
+  margin-bottom:10px;
+  margin-top: 10px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.description {
+  height: 150px;
+  resize: vertical;  
+}
+
+.btn-update {
+  margin-top: 15px;
+  border: none;
+  color: #fff;
+  margin-left:0%;
+  text-transform: uppercase;
+  margin-bottom:-10px;
+  background-color: #888;
+  display: flex;
+  margin: 0 auto;
+}
+
+.dropbtn {
+  background-color: #53566e;
+  color: white;
+  font-size: 16px;
+  border: none;
+  width: 80%;
+  height: 40px;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.dropbtn:hover {
+  background-color: #6c6f83;
+}
+
+.dropdown-content input[id^='search-input'] {
+  box-sizing: border-box;
+  background-image: url('../img/icon/search-icon.png');
+  background-size: 25px 25px;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  border-radius: 25px 25px 10px 10px;
+}
+
+.dropdown-content input[id^='search-input']:focus {outline: 3px solid #ddd;}
+
+.dropdown-assignee {
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dropdown-body {
+  max-height: 280px;
+  overflow-y: scroll;
+}
+
+.dropdown-content {
+  min-width: 230px;
+  display: none;
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
+  z-index: 1;
+  width: 80%;
+  border-radius: 25px 25px 10px 10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  margin-top: 3px;
+}
+
+.dropdown-assignee a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.assign-data-user {
+  color: black;
+}
+.user-infos {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-username {
+  color: grey;
+  font-size: small;
+  font-weight: lighter;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.user-data > p {
+  margin: 0;
+}
+
+.user-infos > .task-avatar {
+  width: 35px;
+  height: 35px;
+}
+.unassign-data-user {
+  background-color: red;
 }

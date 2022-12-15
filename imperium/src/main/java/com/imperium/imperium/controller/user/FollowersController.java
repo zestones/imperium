@@ -73,7 +73,7 @@ public class FollowersController {
      */
     @PostMapping(value = "/home/profile/{username}/unfollow")
     private String unfollowUser(@PathVariable String username) {
-
+        System.out.println("============================ here");
         User u = service.findByUsername(username);
         Followers f = followersService.findByIdFollowersAndIdFollowing(u.getId(),
                 UserController.getCurrentUser().getId());

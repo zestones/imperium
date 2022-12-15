@@ -1,14 +1,11 @@
 package com.imperium.imperium.controller.page;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.imperium.imperium.controller.user.UserController;
@@ -20,6 +17,14 @@ import com.imperium.imperium.service.user.UserService;
 @Controller
 public class ProfilesController {
 
+    private final String frontendVueJS;
+
+    // Retrieve url value from application properties file
+    ProfilesController(
+            @Value("${frontend.http.url}") String frontendVueJS) {
+        this.frontendVueJS = frontendVueJS;
+    }
+
     @Autowired
     UserService userService;
 
@@ -29,8 +34,6 @@ public class ProfilesController {
     @Autowired
     FollowersService followersService;
 
-    private List<User> searchedUsers = new ArrayList<>();
-
     /**
      * @param model    : holder for model attributes
      * @param username : username property (PathVariable)
@@ -39,9 +42,6 @@ public class ProfilesController {
     @GetMapping(value = "/home/profile/{username}")
     private String profile(Model model, @PathVariable String username) {
         User u = userService.findByUsername(username);
-
-        // SEARCHED USERS
-        model.addAttribute("usersFound", searchedUsers);
 
         // USER DATA
         model.addAttribute("user", u);
@@ -54,7 +54,9 @@ public class ProfilesController {
         model.addAttribute("userFollowingList", userService.getArrayUserByArrayidUser(
                 followersService.findIdUserFollowing(UserController.getCurrentUser().getId())));
 
-        return "user/profile";
+        // return "/user/profile";
+        return "redirect:" + frontendVueJS + "?visited=" + u.getId() + "&current="
+                + UserController.getCurrentUser().getId();
     }
 
     /**
@@ -129,13 +131,4 @@ public class ProfilesController {
 
         return "user/follows";
     }
-
-    @PostMapping("/home/profile/search")
-    public String searchUsers(Model model, @RequestParam("keyword") String keyword) {
-        searchedUsers = userService.search(keyword);
-        model.addAttribute("usersFound", searchedUsers);
-        System.out.println("*********" + searchedUsers);
-        return "redirect:/home/profile/" + UserController.getCurrentUser().getUsername();
-    }
-
 }
