@@ -140,7 +140,6 @@ export default {
             let arr = body._embedded.projects
 
             for (let i = 0; i < arr.length; i++) {
-                console.log(arr[i]._links.user.href)
                 let r = await fetch(arr[i]._links.user.href, { credentials: 'include' }) // hard coded :(, not HATEOAS
                 let b = await r.json()
 

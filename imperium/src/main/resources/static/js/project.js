@@ -41,16 +41,15 @@ function toogleDropDown(val) {
   document.getElementById(val).classList.toggle("show");
 }
 
+// search username inside dropdown
 function filterFunction(val) {
-  console.log(val)
 
   var input, filter, ul, li, a, i;
   input = document.getElementById("search-input" + val);
   filter = input.value.toUpperCase();
 
   div = document.getElementById("assignee-dropdown" + val);
-  console.log(div)
-
+  
   a = div.getElementsByTagName("a");
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;

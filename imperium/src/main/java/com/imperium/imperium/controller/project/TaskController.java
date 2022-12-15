@@ -108,5 +108,4 @@ public class TaskController {
         Project p = task.getBoard().getProject();
         return "redirect:/home/project/" + p.getUser().getUsername() + "/" + p.getName();
     }
-
 }
