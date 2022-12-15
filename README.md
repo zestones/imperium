@@ -9,6 +9,7 @@ Notre application offre à l'utilisateur la possibilité de créer des tableaux 
 
 # Setup du projet
 
+```
  2022-pwa-a/
     ├── frontend/   → Module Frontend avec VueJS
     │   ├── src
@@ -17,7 +18,7 @@ Notre application offre à l'utilisateur la possibilité de créer des tableaux 
     └── imperium/   → Module Backend avec Spring Boot
         ├── src
         └── pom.xml
-
+```
 # Démarche pour tester le projet
 
 Le projet Imperium est déployé sur _Heroku_.
